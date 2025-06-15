@@ -303,6 +303,31 @@
             border: 1px solid #dee2e6;
         }
         
+        .speed-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .speed-main {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f8f9fa;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .speed-shortcut {
+            font-size: 9px;
+            color: #6c757d;
+            font-weight: 500;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
         .speed-label {
             font-size: 11px;
             color: #666;
@@ -394,6 +419,18 @@
             .speed-control {
                 padding: 4px 6px;
             }
+            
+            .speed-group {
+                gap: 3px;
+            }
+            
+            .speed-main {
+                padding: 4px 6px;
+            }
+            
+            .speed-shortcut {
+                font-size: 8px;
+            }
         }
     </style>
     <script src="https://www.youtube.com/iframe_api"></script>
@@ -444,18 +481,21 @@
                         
                         <div class="current-time" id="currentTime">00:00</div>
                         
-                        <div class="speed-control">
-                            <span class="speed-label">速度:</span>
-                            <select class="speed-select" id="speedSelect" onchange="changePlaybackRate()">
-                                <option value="0.25">0.25x</option>
-                                <option value="0.5">0.5x</option>
-                                <option value="0.75">0.75x</option>
-                                <option value="1" selected>1x</option>
-                                <option value="1.25">1.25x</option>
-                                <option value="1.5">1.5x</option>
-                                <option value="1.75">1.75x</option>
-                                <option value="2">2x</option>
-                            </select>
+                        <div class="speed-group">
+                            <div class="speed-main">
+                                <span class="speed-label">速度:</span>
+                                <select class="speed-select" id="speedSelect" onchange="changePlaybackRate()">
+                                    <option value="0.25">0.25x</option>
+                                    <option value="0.5">0.5x</option>
+                                    <option value="0.75">0.75x</option>
+                                    <option value="1" selected>1x</option>
+                                    <option value="1.25">1.25x</option>
+                                    <option value="1.5">1.5x</option>
+                                    <option value="1.75">1.75x</option>
+                                    <option value="2">2x</option>
+                                </select>
+                            </div>
+                            <div class="speed-shortcut">- + 鍵</div>
                         </div>
                     </div>
                 </div>
@@ -585,18 +625,21 @@
                     
                     <div class="current-time" id="currentTimeVertical">00:00</div>
                     
-                    <div class="speed-control">
-                        <span class="speed-label">速度:</span>
-                        <select class="speed-select" onchange="changePlaybackRate()">
-                            <option value="0.25">0.25x</option>
-                            <option value="0.5">0.5x</option>
-                            <option value="0.75">0.75x</option>
-                            <option value="1" selected>1x</option>
-                            <option value="1.25">1.25x</option>
-                            <option value="1.5">1.5x</option>
-                            <option value="1.75">1.75x</option>
-                            <option value="2">2x</option>
-                        </select>
+                    <div class="speed-group">
+                        <div class="speed-main">
+                            <span class="speed-label">速度:</span>
+                            <select class="speed-select" onchange="changePlaybackRate()">
+                                <option value="0.25">0.25x</option>
+                                <option value="0.5">0.5x</option>
+                                <option value="0.75">0.75x</option>
+                                <option value="1" selected>1x</option>
+                                <option value="1.25">1.25x</option>
+                                <option value="1.5">1.5x</option>
+                                <option value="1.75">1.75x</option>
+                                <option value="2">2x</option>
+                            </select>
+                        </div>
+                        <div class="speed-shortcut">- + 鍵</div>
                     </div>
                 </div>
             </div>
@@ -608,6 +651,78 @@
         let currentTime = 0;
         let timeUpdateInterval;
         let isVerticalMode = false; // 新增：檢視模式狀態
+        
+        // 可用的播放速度選項
+        const speedOptions = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
+        let currentSpeedIndex = 3; // 預設 1x 速度
+        
+        // 調整播放速度函數
+        function adjustSpeed(direction) {
+            if (!player) return;
+            
+            if (direction === 'up' && currentSpeedIndex < speedOptions.length - 1) {
+                currentSpeedIndex++;
+            } else if (direction === 'down' && currentSpeedIndex > 0) {
+                currentSpeedIndex--;
+            } else {
+                return; // 已達到最大或最小值
+            }
+            
+            const newSpeed = speedOptions[currentSpeedIndex];
+            
+            try {
+                player.setPlaybackRate(newSpeed);
+                
+                // 更新所有速度選擇器
+                const selects = document.querySelectorAll('.speed-select');
+                selects.forEach(select => {
+                    select.value = newSpeed;
+                });
+                
+                console.log(`速度調整至: ${newSpeed}x`);
+                
+                // 顯示速度改變提示
+                showSpeedNotification(newSpeed);
+                
+            } catch (error) {
+                console.error('設定播放速度失敗:', error);
+            }
+        }
+        
+        // 顯示速度改變提示
+        function showSpeedNotification(speed) {
+            // 創建或更新速度提示
+            let notification = document.getElementById('speedNotification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'speedNotification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(0, 0, 0, 0.8);
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 8px;
+                    font-size: 18px;
+                    font-weight: 600;
+                    z-index: 1000;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(notification);
+            }
+            
+            notification.textContent = `播放速度: ${speed}x`;
+            notification.style.opacity = '1';
+            
+            // 1秒後淡出
+            setTimeout(() => {
+                notification.style.opacity = '0';
+            }, 1000);
+        }
         
         // 切換檢視模式函數
         function toggleViewMode() {
@@ -739,6 +854,8 @@
             selects.forEach(select => {
                 if (document.activeElement === select) {
                     rate = parseFloat(select.value);
+                    // 更新當前速度索引
+                    currentSpeedIndex = speedOptions.indexOf(rate);
                     // 同步其他選擇器
                     selects.forEach(otherSelect => {
                         if (otherSelect !== select) {
@@ -785,7 +902,7 @@
         // 鍵盤快捷鍵支援
         document.addEventListener('keydown', function(event) {
             // 確保不在輸入框內
-            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.tagName === 'SELECT') {
                 return;
             }
             
@@ -801,6 +918,32 @@
                 case 'ArrowRight':
                     event.preventDefault();
                     seekRelative(2);
+                    break;
+                case 'Minus':
+                case 'NumpadSubtract':
+                    event.preventDefault();
+                    adjustSpeed('down');
+                    break;
+                case 'Equal':
+                case 'NumpadAdd':
+                    event.preventDefault();
+                    adjustSpeed('up');
+                    break;
+                case 'Digit0':
+                case 'Numpad0':
+                    event.preventDefault();
+                    // 重設為正常速度 1x
+                    currentSpeedIndex = 3;
+                    const normalSpeed = speedOptions[currentSpeedIndex];
+                    if (player) {
+                        player.setPlaybackRate(normalSpeed);
+                        const selects = document.querySelectorAll('.speed-select');
+                        selects.forEach(select => {
+                            select.value = normalSpeed;
+                        });
+                        showSpeedNotification(normalSpeed);
+                        console.log('速度重設為正常: 1x');
+                    }
                     break;
             }
         });
