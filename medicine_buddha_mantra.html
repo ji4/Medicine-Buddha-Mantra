@@ -439,15 +439,15 @@
     <div class="container">
         <div class="title">《藥師咒》梵字、羅馬拼音、漢文音譯及漢文義譯對照全文：</div>
         
-        <div class="main-content" id="mainContent">
+        <div class="main-content vertical-mode" id="mainContent">
             <!-- 左側：影片區域 -->
             <div class="left-section">
                 <div class="video-section">
                     <div class="section-title">
                         藥師佛心咒唱誦影片
                         <button class="view-toggle-btn" id="viewToggleBtn" onclick="toggleViewMode()">
-                            <span id="toggleIcon">📱</span>
-                            <span id="toggleText">垂直檢視</span>
+                            <span id="toggleIcon">🔄</span>
+                            <span id="toggleText">並排檢視</span>
                         </button>
                     </div>
                     
@@ -600,7 +600,7 @@
                 </div>
                 
                 <!-- 控制按鈕列在垂直模式時顯示在梵字下方 -->
-                <div class="video-controls vertical-mode-controls" id="videoControlsVertical" style="display: none;">
+                <div class="video-controls vertical-mode-controls" id="videoControlsVertical" style="display: flex;">
                     <div class="btn-group">
                         <button class="control-btn play-pause-btn" onclick="togglePlayPause()">
                             <span class="play-pause-icon">▶️</span>
@@ -650,7 +650,7 @@
         let isPlaying = false;
         let currentTime = 0;
         let timeUpdateInterval;
-        let isVerticalMode = false; // 新增：檢視模式狀態
+        let isVerticalMode = true; // 修改：預設為垂直檢視模式
         
         // 可用的播放速度選項
         const speedOptions = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
@@ -951,7 +951,7 @@
         // 頁面載入完成後的初始化
         document.addEventListener('DOMContentLoaded', function() {
             console.log('頁面已載入，等待 YouTube API...');
-            console.log('預設檢視模式：左右並排');
+            console.log('預設檢視模式：垂直佈局');
         });
     </script>
 </body>
