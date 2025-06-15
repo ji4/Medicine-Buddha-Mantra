@@ -171,6 +171,22 @@
             transform: none;
         }
         
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .btn-shortcut {
+            font-size: 9px;
+            color: #6c757d;
+            font-weight: 500;
+            text-align: center;
+            min-height: 12px;
+            opacity: 0.8;
+        }
+        
         .play-pause-btn {
             background: linear-gradient(135deg, #28a745, #20c997);
             font-size: 14px;
@@ -224,9 +240,10 @@
         .keyboard-hint {
             font-size: 10px;
             color: #6c757d;
-            margin-top: 5px;
+            margin-top: 8px;
             text-align: center;
             font-style: italic;
+            opacity: 0.8;
         }
         
         /* 響應式設計 */
@@ -240,6 +257,14 @@
                 padding: 6px 8px;
                 font-size: 11px;
                 min-width: 50px;
+            }
+            
+            .btn-shortcut {
+                font-size: 8px;
+            }
+            
+            .btn-group {
+                gap: 3px;
             }
             
             .play-pause-btn {
@@ -356,18 +381,27 @@
             
             <!-- 影片控制按鈕列 -->
             <div class="video-controls" id="videoControls" style="display: none;">
-                <button class="control-btn play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
-                    <span id="playPauseIcon">▶️</span>
-                    <span id="playPauseText">播放</span>
-                </button>
+                <div class="btn-group">
+                    <button class="control-btn play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
+                        <span id="playPauseIcon">▶️</span>
+                        <span id="playPauseText">播放</span>
+                    </button>
+                    <div class="btn-shortcut" id="playPauseShortcut">空白鍵</div>
+                </div>
                 
-                <button class="control-btn" onclick="seekRelative(-2)" title="倒退2秒 (←鍵)">
-                    ⏪ -2s
-                </button>
+                <div class="btn-group">
+                    <button class="control-btn" onclick="seekRelative(-2)">
+                        ⏪ -2s
+                    </button>
+                    <div class="btn-shortcut">← 鍵</div>
+                </div>
                 
-                <button class="control-btn" onclick="seekRelative(2)" title="前進2秒 (→鍵)">
-                    ⏩ +2s
-                </button>
+                <div class="btn-group">
+                    <button class="control-btn" onclick="seekRelative(2)">
+                        ⏩ +2s
+                    </button>
+                    <div class="btn-shortcut">→ 鍵</div>
+                </div>
                 
                 <div class="current-time" id="currentTime">00:00</div>
                 
@@ -387,7 +421,7 @@
             </div>
             
             <div class="keyboard-hint">
-                ⌨️ 快捷鍵：空白鍵=播放/暫停 | ← → =倒退/前進2秒
+                💡 提示：鍵盤快捷鍵已整合在按鈕上方
             </div>
             
             <div class="video-container">
@@ -450,13 +484,16 @@
         function updatePlayPauseButton() {
             const icon = document.getElementById('playPauseIcon');
             const text = document.getElementById('playPauseText');
+            const shortcut = document.getElementById('playPauseShortcut');
             
             if (isPlaying) {
                 icon.textContent = '⏸️';
                 text.textContent = '暫停';
+                shortcut.textContent = '空白鍵';
             } else {
                 icon.textContent = '▶️';
                 text.textContent = '播放';
+                shortcut.textContent = '空白鍵';
             }
         }
         
