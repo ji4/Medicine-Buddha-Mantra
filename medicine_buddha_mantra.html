@@ -100,6 +100,29 @@
             grid-template-columns: 1fr 1fr;
             gap: 30px;
             margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        /* 垂直檢視模式 */
+        .main-content.vertical-mode {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        /* 垂直模式下影片區域調整 */
+        .main-content.vertical-mode .left-section {
+            order: 1;
+        }
+        
+        .main-content.vertical-mode .right-section {
+            order: 2;
+        }
+        
+        /* 垂直模式下影片容器調整 */
+        .main-content.vertical-mode .video-container {
+            max-width: 600px;
+            margin: 0 auto 15px auto;
+            padding-bottom: 33.75%; /* 16:9 在較小寬度下的比例 */
         }
         
         .left-section {
@@ -130,6 +153,36 @@
             padding: 10px;
             border-radius: 6px;
             border: 2px solid #dee2e6;
+            position: relative;
+        }
+        
+        /* 檢視模式切換按鈕 */
+        .view-toggle-btn {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #17a2b8, #138496);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .view-toggle-btn:hover {
+            background: linear-gradient(135deg, #138496, #17a2b8);
+            transform: translateY(-50%) scale(1.05);
+        }
+        
+        .view-toggle-btn:active {
+            transform: translateY(-50%) scale(0.95);
         }
         
         .video-section {
@@ -287,8 +340,27 @@
         /* 響應式設計 */
         @media (max-width: 768px) {
             .main-content {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
                 gap: 20px;
+            }
+            
+            .main-content.vertical-mode .video-container {
+                max-width: 100%;
+                padding-bottom: 56.25%;
+            }
+            
+            .view-toggle-btn {
+                position: static;
+                transform: none;
+                margin-top: 8px;
+                align-self: center;
+            }
+            
+            .section-title {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
             }
             
             .video-controls {
@@ -325,11 +397,17 @@
     <div class="container">
         <div class="title">《藥師咒》梵字、羅馬拼音、漢文音譯及漢文義譯對照全文：</div>
         
-        <div class="main-content">
+        <div class="main-content" id="mainContent">
             <!-- 左側：影片區域 -->
             <div class="left-section">
                 <div class="video-section">
-                    <div class="section-title">藥師佛心咒唱誦影片</div>
+                    <div class="section-title">
+                        藥師佛心咒唱誦影片
+                        <button class="view-toggle-btn" id="viewToggleBtn" onclick="toggleViewMode()">
+                            <span id="toggleIcon">📱</span>
+                            <span id="toggleText">垂直檢視</span>
+                        </button>
+                    </div>
                     
                     <div class="video-container">
                         <div id="youtubePlayer"></div>
@@ -483,6 +561,30 @@
         let isPlaying = false;
         let currentTime = 0;
         let timeUpdateInterval;
+        let isVerticalMode = false; // 新增：檢視模式狀態
+        
+        // 切換檢視模式函數
+        function toggleViewMode() {
+            const mainContent = document.getElementById('mainContent');
+            const toggleIcon = document.getElementById('toggleIcon');
+            const toggleText = document.getElementById('toggleText');
+            
+            isVerticalMode = !isVerticalMode;
+            
+            if (isVerticalMode) {
+                // 切換到垂直模式
+                mainContent.classList.add('vertical-mode');
+                toggleIcon.textContent = '🔄';
+                toggleText.textContent = '並排檢視';
+                console.log('切換到垂直檢視模式');
+            } else {
+                // 切換到並排模式
+                mainContent.classList.remove('vertical-mode');
+                toggleIcon.textContent = '📱';
+                toggleText.textContent = '垂直檢視';
+                console.log('切換到並排檢視模式');
+            }
+        }
         
         // YouTube IFrame API 準備就緒時調用
         function onYouTubeIframeAPIReady() {
@@ -619,6 +721,7 @@
         // 頁面載入完成後的初始化
         document.addEventListener('DOMContentLoaded', function() {
             console.log('頁面已載入，等待 YouTube API...');
+            console.log('預設檢視模式：左右並排');
         });
     </script>
 </body>
