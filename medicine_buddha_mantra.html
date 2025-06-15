@@ -124,7 +124,134 @@
             height: 100%;
             border: none;
         }
+        
+        /* 影片控制區域 */
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin: 15px 0;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            min-width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+        
+        .control-btn:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            transform: translateY(-1px);
+        }
+        
+        .control-btn:active {
+            transform: translateY(0);
+        }
+        
+        .control-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .play-pause-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            font-size: 14px;
+            min-width: 80px;
+        }
+        
+        .play-pause-btn:hover {
+            background: linear-gradient(135deg, #20c997, #28a745);
+        }
+        
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f8f9fa;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .speed-label {
+            font-size: 11px;
+            color: #666;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .speed-select {
+            background: white;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 4px 6px;
+            font-size: 11px;
+            cursor: pointer;
+            min-width: 50px;
+        }
+        
+        .current-time {
+            background: #e9ecef;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-family: 'Consolas', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: #495057;
+            border: 1px solid #dee2e6;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .keyboard-hint {
+            font-size: 10px;
+            color: #6c757d;
+            margin-top: 5px;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .video-controls {
+                gap: 6px;
+                padding: 10px;
+            }
+            
+            .control-btn {
+                padding: 6px 8px;
+                font-size: 11px;
+                min-width: 50px;
+            }
+            
+            .play-pause-btn {
+                min-width: 70px;
+            }
+            
+            .speed-control {
+                padding: 4px 6px;
+            }
+        }
     </style>
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
     <div class="container">
@@ -226,15 +353,187 @@
         
         <div class="video-section">
             <div class="video-title">藥師佛心咒唱誦影片</div>
+            
+            <!-- 影片控制按鈕列 -->
+            <div class="video-controls" id="videoControls" style="display: none;">
+                <button class="control-btn play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
+                    <span id="playPauseIcon">▶️</span>
+                    <span id="playPauseText">播放</span>
+                </button>
+                
+                <button class="control-btn" onclick="seekRelative(-2)" title="倒退2秒 (←鍵)">
+                    ⏪ -2s
+                </button>
+                
+                <button class="control-btn" onclick="seekRelative(2)" title="前進2秒 (→鍵)">
+                    ⏩ +2s
+                </button>
+                
+                <div class="current-time" id="currentTime">00:00</div>
+                
+                <div class="speed-control">
+                    <span class="speed-label">速度:</span>
+                    <select class="speed-select" id="speedSelect" onchange="changePlaybackRate()">
+                        <option value="0.25">0.25x</option>
+                        <option value="0.5">0.5x</option>
+                        <option value="0.75">0.75x</option>
+                        <option value="1" selected>1x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="1.75">1.75x</option>
+                        <option value="2">2x</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="keyboard-hint">
+                ⌨️ 快捷鍵：空白鍵=播放/暫停 | ← → =倒退/前進2秒
+            </div>
+            
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/oayy63pHCAA" 
-                        title="Medicine Buddha Mantra" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                </iframe>
+                <div id="youtubePlayer"></div>
             </div>
         </div>
     </div>
+    <script>
+        let player;
+        let isPlaying = false;
+        let currentTime = 0;
+        let timeUpdateInterval;
+        
+        // YouTube IFrame API 準備就緒時調用
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtubePlayer', {
+                height: '100%',
+                width: '100%',
+                videoId: 'oayy63pHCAA',
+                playerVars: {
+                    'enablejsapi': 1,
+                    'rel': 0,
+                    'modestbranding': 1,
+                    'controls': 0, // 隱藏 YouTube 內建控制項
+                    'disablekb': 1, // 禁用 YouTube 內建鍵盤快捷鍵
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        function onPlayerReady(event) {
+            console.log('YouTube Player 已準備就緒');
+            document.getElementById('videoControls').style.display = 'flex';
+            startTimeUpdate();
+        }
+        
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                updatePlayPauseButton();
+            } else if (event.data == YT.PlayerState.PAUSED) {
+                isPlaying = false;
+                updatePlayPauseButton();
+            }
+        }
+        
+        function togglePlayPause() {
+            if (!player) return;
+            
+            if (isPlaying) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
+        
+        function updatePlayPauseButton() {
+            const icon = document.getElementById('playPauseIcon');
+            const text = document.getElementById('playPauseText');
+            
+            if (isPlaying) {
+                icon.textContent = '⏸️';
+                text.textContent = '暫停';
+            } else {
+                icon.textContent = '▶️';
+                text.textContent = '播放';
+            }
+        }
+        
+        function seekRelative(seconds) {
+            if (!player) return;
+            
+            try {
+                const currentTime = player.getCurrentTime();
+                const newTime = Math.max(0, currentTime + seconds);
+                player.seekTo(newTime, true);
+            } catch (error) {
+                console.error('跳轉失敗:', error);
+            }
+        }
+        
+        function changePlaybackRate() {
+            if (!player) return;
+            
+            const select = document.getElementById('speedSelect');
+            const rate = parseFloat(select.value);
+            
+            try {
+                player.setPlaybackRate(rate);
+                console.log('播放速度已設為:', rate + 'x');
+            } catch (error) {
+                console.error('設定播放速度失敗:', error);
+            }
+        }
+        
+        function startTimeUpdate() {
+            timeUpdateInterval = setInterval(() => {
+                if (player && typeof player.getCurrentTime === 'function') {
+                    try {
+                        currentTime = player.getCurrentTime();
+                        updateTimeDisplay();
+                    } catch (error) {
+                        // 忽略錯誤，繼續嘗試
+                    }
+                }
+            }, 1000);
+        }
+        
+        function updateTimeDisplay() {
+            const timeElement = document.getElementById('currentTime');
+            const minutes = Math.floor(currentTime / 60);
+            const seconds = Math.floor(currentTime % 60);
+            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            timeElement.textContent = timeString;
+        }
+        
+        // 鍵盤快捷鍵支援
+        document.addEventListener('keydown', function(event) {
+            // 確保不在輸入框內
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+                return;
+            }
+            
+            switch(event.code) {
+                case 'Space':
+                    event.preventDefault();
+                    togglePlayPause();
+                    break;
+                case 'ArrowLeft':
+                    event.preventDefault();
+                    seekRelative(-2);
+                    break;
+                case 'ArrowRight':
+                    event.preventDefault();
+                    seekRelative(2);
+                    break;
+            }
+        });
+        
+        // 頁面載入完成後的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('頁面已載入，等待 YouTube API...');
+        });
+    </script>
 </body>
 </html>
