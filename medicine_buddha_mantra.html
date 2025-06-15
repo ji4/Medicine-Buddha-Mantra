@@ -118,6 +118,11 @@
             order: 2;
         }
         
+        /* 垂直模式下將控制按鈕移到梵字下方 */
+        .main-content.vertical-mode .video-controls {
+            order: 3;
+        }
+        
         /* 垂直模式下影片容器調整 */
         .main-content.vertical-mode .video-container {
             max-width: 600px;
@@ -412,6 +417,47 @@
                     <div class="video-container">
                         <div id="youtubePlayer"></div>
                     </div>
+                    
+                    <!-- 控制按鈕列在並排模式時顯示在影片下方 -->
+                    <div class="video-controls" id="videoControls" style="display: none;">
+                        <div class="btn-group">
+                            <button class="control-btn play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
+                                <span id="playPauseIcon">▶️</span>
+                                <span id="playPauseText">播放</span>
+                            </button>
+                            <div class="btn-shortcut" id="playPauseShortcut">空白鍵</div>
+                        </div>
+                        
+                        <div class="btn-group">
+                            <button class="control-btn" onclick="seekRelative(-2)">
+                                ⏪ -2s
+                            </button>
+                            <div class="btn-shortcut">← 鍵</div>
+                        </div>
+                        
+                        <div class="btn-group">
+                            <button class="control-btn" onclick="seekRelative(2)">
+                                ⏩ +2s
+                            </button>
+                            <div class="btn-shortcut">→ 鍵</div>
+                        </div>
+                        
+                        <div class="current-time" id="currentTime">00:00</div>
+                        
+                        <div class="speed-control">
+                            <span class="speed-label">速度:</span>
+                            <select class="speed-select" id="speedSelect" onchange="changePlaybackRate()">
+                                <option value="0.25">0.25x</option>
+                                <option value="0.5">0.5x</option>
+                                <option value="0.75">0.75x</option>
+                                <option value="1" selected>1x</option>
+                                <option value="1.25">1.25x</option>
+                                <option value="1.5">1.5x</option>
+                                <option value="1.75">1.75x</option>
+                                <option value="2">2x</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -513,14 +559,14 @@
                     </div>
                 </div>
                 
-                <!-- 控制按鈕列移到梵字下方 -->
-                <div class="video-controls" id="videoControls" style="display: none;">
+                <!-- 控制按鈕列在垂直模式時顯示在梵字下方 -->
+                <div class="video-controls vertical-mode-controls" id="videoControlsVertical" style="display: none;">
                     <div class="btn-group">
-                        <button class="control-btn play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
-                            <span id="playPauseIcon">▶️</span>
-                            <span id="playPauseText">播放</span>
+                        <button class="control-btn play-pause-btn" onclick="togglePlayPause()">
+                            <span class="play-pause-icon">▶️</span>
+                            <span class="play-pause-text">播放</span>
                         </button>
-                        <div class="btn-shortcut" id="playPauseShortcut">空白鍵</div>
+                        <div class="btn-shortcut">空白鍵</div>
                     </div>
                     
                     <div class="btn-group">
@@ -537,11 +583,11 @@
                         <div class="btn-shortcut">→ 鍵</div>
                     </div>
                     
-                    <div class="current-time" id="currentTime">00:00</div>
+                    <div class="current-time" id="currentTimeVertical">00:00</div>
                     
                     <div class="speed-control">
                         <span class="speed-label">速度:</span>
-                        <select class="speed-select" id="speedSelect" onchange="changePlaybackRate()">
+                        <select class="speed-select" onchange="changePlaybackRate()">
                             <option value="0.25">0.25x</option>
                             <option value="0.5">0.5x</option>
                             <option value="0.75">0.75x</option>
@@ -584,6 +630,25 @@
                 toggleText.textContent = '垂直檢視';
                 console.log('切換到並排檢視模式');
             }
+            
+            // 更新控制按鈕顯示
+            updateControlsVisibility();
+        }
+        
+        // 更新控制按鈕顯示狀態
+        function updateControlsVisibility() {
+            const horizontalControls = document.getElementById('videoControls');
+            const verticalControls = document.getElementById('videoControlsVertical');
+            
+            if (isVerticalMode) {
+                // 垂直模式：顯示梵字下方的控制按鈕
+                horizontalControls.style.display = 'none';
+                verticalControls.style.display = 'flex';
+            } else {
+                // 並排模式：顯示影片下方的控制按鈕
+                horizontalControls.style.display = 'flex';
+                verticalControls.style.display = 'none';
+            }
         }
         
         // YouTube IFrame API 準備就緒時調用
@@ -608,7 +673,8 @@
         
         function onPlayerReady(event) {
             console.log('YouTube Player 已準備就緒');
-            document.getElementById('videoControls').style.display = 'flex';
+            // 顯示對應模式的控制按鈕
+            updateControlsVisibility();
             startTimeUpdate();
         }
         
@@ -633,19 +699,21 @@
         }
         
         function updatePlayPauseButton() {
-            const icon = document.getElementById('playPauseIcon');
-            const text = document.getElementById('playPauseText');
-            const shortcut = document.getElementById('playPauseShortcut');
+            // 更新兩個控制按鈕列中的播放/暫停按鈕
+            const icons = [document.getElementById('playPauseIcon'), ...document.querySelectorAll('.play-pause-icon')];
+            const texts = [document.getElementById('playPauseText'), ...document.querySelectorAll('.play-pause-text')];
             
-            if (isPlaying) {
-                icon.textContent = '⏸️';
-                text.textContent = '暫停';
-                shortcut.textContent = '空白鍵';
-            } else {
-                icon.textContent = '▶️';
-                text.textContent = '播放';
-                shortcut.textContent = '空白鍵';
-            }
+            icons.forEach(icon => {
+                if (icon) {
+                    icon.textContent = isPlaying ? '⏸️' : '▶️';
+                }
+            });
+            
+            texts.forEach(text => {
+                if (text) {
+                    text.textContent = isPlaying ? '暫停' : '播放';
+                }
+            });
         }
         
         function seekRelative(seconds) {
@@ -663,8 +731,22 @@
         function changePlaybackRate() {
             if (!player) return;
             
-            const select = document.getElementById('speedSelect');
-            const rate = parseFloat(select.value);
+            // 取得所有速度選擇器
+            const selects = document.querySelectorAll('.speed-select');
+            let rate = 1;
+            
+            // 找到被改變的選擇器
+            selects.forEach(select => {
+                if (document.activeElement === select) {
+                    rate = parseFloat(select.value);
+                    // 同步其他選擇器
+                    selects.forEach(otherSelect => {
+                        if (otherSelect !== select) {
+                            otherSelect.value = select.value;
+                        }
+                    });
+                }
+            });
             
             try {
                 player.setPlaybackRate(rate);
@@ -688,11 +770,16 @@
         }
         
         function updateTimeDisplay() {
-            const timeElement = document.getElementById('currentTime');
+            const timeElements = [document.getElementById('currentTime'), document.getElementById('currentTimeVertical')];
             const minutes = Math.floor(currentTime / 60);
             const seconds = Math.floor(currentTime % 60);
             const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            timeElement.textContent = timeString;
+            
+            timeElements.forEach(element => {
+                if (element) {
+                    element.textContent = timeString;
+                }
+            });
         }
         
         // 鍵盤快捷鍵支援
