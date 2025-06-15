@@ -13,7 +13,7 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             background-color: #e8e8e8;
             border: 3px solid #333;
@@ -94,8 +94,45 @@
             margin: 15px 0;
         }
         
+        /* 主要內容區域 - 左右對照 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .left-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .right-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mantra-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            border: 2px solid #dee2e6;
+        }
+        
         .video-section {
-            margin-top: 30px;
             text-align: center;
         }
         
@@ -114,6 +151,7 @@
             overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
         }
         
         .video-container iframe {
@@ -248,6 +286,11 @@
         
         /* 響應式設計 */
         @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
             .video-controls {
                 gap: 6px;
                 padding: 10px;
@@ -282,150 +325,156 @@
     <div class="container">
         <div class="title">《藥師咒》梵字、羅馬拼音、漢文音譯及漢文義譯對照全文：</div>
         
-        <div class="mantra-section">
-            <div class="word-group">
-                <div class="romanization"><span class="voiced">na</span> - <span class="voiced">mo</span></div>
-                <div class="chinese">禮敬</div>
-            </div>
-            
-            <div class="word-group">
-                <div class="romanization"><span class="voiced">bha</span> - <span class="voiced">ga</span> - <span class="voiced">va</span> - <span class="voiced-pronunciation">te</span></div>
-                <div class="chinese">世尊</div>
-            </div>
-            
-            <div class="word-group">
-                <div class="romanization"><span class="voiced">bhai</span> - <span class="voiceless">ṣa</span> - <span class="voiced">jya</span> - <span class="voiced">gu</span> - <span class="voiced">ru</span></div>
-                <div class="chinese">藥師</div>
-            </div>
-            
-            <div class="word-group">
-                <div class="romanization"><span class="voiced">vai</span> - <span class="voiced">ḍū</span> - <span class="voiced">rya</span></div>
-                <div class="chinese">琉璃</div>
-            </div>
-            
-            <div class="word-group">
-                <div class="romanization"><span class="voiceless">pra</span> - <span class="voiced">bhā</span></div>
-                <div class="chinese">光</div>
-            </div>
-        </div>
-        
-        <div class="mantra-section">
-            <div class="word-group">
-                <div class="romanization"><span class="voiced">rā</span> - <span class="voiced">jā</span> - <span class="voiced">ya</span></div>
-                <div class="chinese">王</div>
-            </div>
-            
-            <div class="word-group">
-                <div class="romanization"><span class="voiced-pronunciation">ta</span> - <span class="voiceless">thā</span> - <span class="voiced">ga</span> - <span class="voiced-pronunciation">tā</span> - <span class="voiced">ya</span></div>
-                <div class="chinese">如來</div>
-            </div>
-            
-            <div class="word-group">
-                <div class="romanization"><span class="voiced">ar</span> - <span class="voiceless">ha</span> - <span class="voiced-pronunciation">te</span></div>
-                <div class="chinese">應供</div>
-            </div>
-        </div>
-        
-        <div class="mantra-section">
-            <div class="word-group">
-                <div class="romanization"><span class="voiceless">sam</span> - <span class="voiced">yak</span> - <span class="voiceless">saṃ</span> - <span class="voiced">bu</span> - <span class="voiced">ddhā</span> - <span class="voiced">ya</span></div>
-                <div class="chinese">正等覺</div>
-            </div>
-            
-            <div class="word-group">
-                <div class="romanization"><span class="voiced-pronunciation">tad</span> - <span class="voiced">ya</span> - <span class="voiceless">thā</span></div>
-                <div class="chinese">即說咒曰：</div>
-            </div>
-        </div>
-        
-        <div class="separator"></div>
-        
-        <div class="mantra-section">
-            <div class="word-group">
-                <div class="romanization"><span class="voiced">oṃ</span></div>
-                <div class="chinese">嗡！</div>
-            </div>
-            
-            <div class="word-group">
-                <div class="romanization"><span class="voiced">bhai</span> - <span class="voiceless">ṣa</span> - <span class="voiced">jye</span></div>
-                <div class="chinese">藥！</div>
-            </div>
-            
-            <div class="word-group">
-                <div class="romanization"><span class="voiced">bhai</span> - <span class="voiceless">ṣa</span> - <span class="voiced">jye</span></div>
-                <div class="chinese">藥！</div>
-            </div>
-        </div>
-        
-        <div class="mantra-section">
-            <div class="word-group">
-                <div class="romanization"><span class="voiced">bhai</span> - <span class="voiceless">ṣa</span> - <span class="voiced">jya</span></div>
-                <div class="chinese">藥</div>
-            </div>
-            
-            <div class="word-group">
-                <div class="romanization"><span class="voiceless">sa</span> - <span class="voiced">mud</span> - <span class="voiced">ga</span> - <span class="voiced-pronunciation">te</span></div>
-                <div class="chinese">生起來！</div>
-            </div>
-            
-            <div class="word-group">
-                <div class="romanization"><span class="voiceless">svā</span> - <span class="voiceless">hā</span></div>
-                <div class="chinese">成就！</div>
-            </div>
-        </div>
-        
-        <div class="separator"></div>
-        
-        <div class="video-section">
-            <div class="video-title">藥師佛心咒唱誦影片</div>
-            
-            <!-- 影片控制按鈕列 -->
-            <div class="video-controls" id="videoControls" style="display: none;">
-                <div class="btn-group">
-                    <button class="control-btn play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
-                        <span id="playPauseIcon">▶️</span>
-                        <span id="playPauseText">播放</span>
-                    </button>
-                    <div class="btn-shortcut" id="playPauseShortcut">空白鍵</div>
-                </div>
-                
-                <div class="btn-group">
-                    <button class="control-btn" onclick="seekRelative(-2)">
-                        ⏪ -2s
-                    </button>
-                    <div class="btn-shortcut">← 鍵</div>
-                </div>
-                
-                <div class="btn-group">
-                    <button class="control-btn" onclick="seekRelative(2)">
-                        ⏩ +2s
-                    </button>
-                    <div class="btn-shortcut">→ 鍵</div>
-                </div>
-                
-                <div class="current-time" id="currentTime">00:00</div>
-                
-                <div class="speed-control">
-                    <span class="speed-label">速度:</span>
-                    <select class="speed-select" id="speedSelect" onchange="changePlaybackRate()">
-                        <option value="0.25">0.25x</option>
-                        <option value="0.5">0.5x</option>
-                        <option value="0.75">0.75x</option>
-                        <option value="1" selected>1x</option>
-                        <option value="1.25">1.25x</option>
-                        <option value="1.5">1.5x</option>
-                        <option value="1.75">1.75x</option>
-                        <option value="2">2x</option>
-                    </select>
+        <div class="main-content">
+            <!-- 左側：影片區域 -->
+            <div class="left-section">
+                <div class="video-section">
+                    <div class="section-title">藥師佛心咒唱誦影片</div>
+                    
+                    <div class="video-container">
+                        <div id="youtubePlayer"></div>
+                    </div>
                 </div>
             </div>
             
-            <div class="keyboard-hint">
-                💡 提示：鍵盤快捷鍵已整合在按鈕上方
-            </div>
-            
-            <div class="video-container">
-                <div id="youtubePlayer"></div>
+            <!-- 右側：梵字全文 -->
+            <div class="right-section">
+                <div class="mantra-content">
+                    <div class="section-title">梵字拼音對照</div>
+                    
+                    <div class="mantra-section">
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiced">na</span> - <span class="voiced">mo</span></div>
+                            <div class="chinese">禮敬</div>
+                        </div>
+                        
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiced">bha</span> - <span class="voiced">ga</span> - <span class="voiced">va</span> - <span class="voiced-pronunciation">te</span></div>
+                            <div class="chinese">世尊</div>
+                        </div>
+                        
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiced">bhai</span> - <span class="voiceless">ṣa</span> - <span class="voiced">jya</span> - <span class="voiced">gu</span> - <span class="voiced">ru</span></div>
+                            <div class="chinese">藥師</div>
+                        </div>
+                        
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiced">vai</span> - <span class="voiced">ḍū</span> - <span class="voiced">rya</span></div>
+                            <div class="chinese">琉璃</div>
+                        </div>
+                        
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiceless">pra</span> - <span class="voiced">bhā</span></div>
+                            <div class="chinese">光</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mantra-section">
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiced">rā</span> - <span class="voiced">jā</span> - <span class="voiced">ya</span></div>
+                            <div class="chinese">王</div>
+                        </div>
+                        
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiced-pronunciation">ta</span> - <span class="voiceless">thā</span> - <span class="voiced">ga</span> - <span class="voiced-pronunciation">tā</span> - <span class="voiced">ya</span></div>
+                            <div class="chinese">如來</div>
+                        </div>
+                        
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiced">ar</span> - <span class="voiceless">ha</span> - <span class="voiced-pronunciation">te</span></div>
+                            <div class="chinese">應供</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mantra-section">
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiceless">sam</span> - <span class="voiced">yak</span> - <span class="voiceless">saṃ</span> - <span class="voiced">bu</span> - <span class="voiced">ddhā</span> - <span class="voiced">ya</span></div>
+                            <div class="chinese">正等覺</div>
+                        </div>
+                        
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiced-pronunciation">tad</span> - <span class="voiced">ya</span> - <span class="voiceless">thā</span></div>
+                            <div class="chinese">即說咒曰：</div>
+                        </div>
+                    </div>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="mantra-section">
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiced">oṃ</span></div>
+                            <div class="chinese">嗡！</div>
+                        </div>
+                        
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiced">bhai</span> - <span class="voiceless">ṣa</span> - <span class="voiced">jye</span></div>
+                            <div class="chinese">藥！</div>
+                        </div>
+                        
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiced">bhai</span> - <span class="voiceless">ṣa</span> - <span class="voiced">jye</span></div>
+                            <div class="chinese">藥！</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mantra-section">
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiced">bhai</span> - <span class="voiceless">ṣa</span> - <span class="voiced">jya</span></div>
+                            <div class="chinese">藥</div>
+                        </div>
+                        
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiceless">sa</span> - <span class="voiced">mud</span> - <span class="voiced">ga</span> - <span class="voiced-pronunciation">te</span></div>
+                            <div class="chinese">生起來！</div>
+                        </div>
+                        
+                        <div class="word-group">
+                            <div class="romanization"><span class="voiceless">svā</span> - <span class="voiceless">hā</span></div>
+                            <div class="chinese">成就！</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 控制按鈕列移到梵字下方 -->
+                <div class="video-controls" id="videoControls" style="display: none;">
+                    <div class="btn-group">
+                        <button class="control-btn play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
+                            <span id="playPauseIcon">▶️</span>
+                            <span id="playPauseText">播放</span>
+                        </button>
+                        <div class="btn-shortcut" id="playPauseShortcut">空白鍵</div>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button class="control-btn" onclick="seekRelative(-2)">
+                            ⏪ -2s
+                        </button>
+                        <div class="btn-shortcut">← 鍵</div>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button class="control-btn" onclick="seekRelative(2)">
+                            ⏩ +2s
+                        </button>
+                        <div class="btn-shortcut">→ 鍵</div>
+                    </div>
+                    
+                    <div class="current-time" id="currentTime">00:00</div>
+                    
+                    <div class="speed-control">
+                        <span class="speed-label">速度:</span>
+                        <select class="speed-select" id="speedSelect" onchange="changePlaybackRate()">
+                            <option value="0.25">0.25x</option>
+                            <option value="0.5">0.5x</option>
+                            <option value="0.75">0.75x</option>
+                            <option value="1" selected>1x</option>
+                            <option value="1.25">1.25x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="1.75">1.75x</option>
+                            <option value="2">2x</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
