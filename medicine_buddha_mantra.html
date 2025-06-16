@@ -463,14 +463,21 @@
             <button class="control-btn" onclick="seekRelative(-2)">
                 ⏪ -2s
             </button>
-            <div class="btn-shortcut">← 鍵</div>
+            <div class="btn-shortcut">← 或 [ 鍵</div>
         </div>
         
         <div class="btn-group">
             <button class="control-btn" onclick="seekRelative(2)">
                 ⏩ +2s
             </button>
-            <div class="btn-shortcut">→ 鍵</div>
+            <div class="btn-shortcut">→ 或 ] 鍵</div>
+        </div>
+        
+        <div class="btn-group">
+            <button class="control-btn" onclick="resetAndPlay()">
+                🔄 重播
+            </button>
+            <div class="btn-shortcut">R 鍵</div>
         </div>
         
         <div class="current-time" id="currentTime">00:00</div>
@@ -800,6 +807,19 @@
             }
         }
         
+        // 新增重置播放函數
+        function resetAndPlay() {
+            if (!player) return;
+            
+            try {
+                player.seekTo(0, true);
+                player.playVideo();
+                console.log('重置並開始播放');
+            } catch (error) {
+                console.error('重置播放失敗:', error);
+            }
+        }
+        
         function changePlaybackRate() {
             if (!player) return;
             
@@ -865,6 +885,10 @@
                 case 'Space':
                     event.preventDefault();
                     togglePlayPause();
+                    break;
+                case 'KeyR':  // 新增 R 鍵
+                    event.preventDefault();
+                    resetAndPlay();
                     break;
                 case 'ArrowLeft':
                 case 'BracketLeft':
