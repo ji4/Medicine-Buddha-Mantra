@@ -221,35 +221,45 @@
             border: none;
         }
         
-        /* 影片控制區域 */
+        /* 影片控制區域 - 固定置頂 */
         .video-controls {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
-            margin: 15px 0;
-            padding: 12px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            gap: 6px;
+            padding: 8px 10px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             flex-wrap: wrap;
+        }
+        
+        /* 為固定控制欄增加頁面頂部間距 */
+        body {
+            padding-top: 60px;
         }
         
         .control-btn {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
+            padding: 6px 10px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             transition: all 0.2s ease;
-            min-width: 60px;
+            min-width: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 3px;
         }
         
         .control-btn:hover {
@@ -275,18 +285,18 @@
         }
         
         .btn-shortcut {
-            font-size: 9px;
+            font-size: 8px;
             color: #6c757d;
             font-weight: 500;
             text-align: center;
-            min-height: 12px;
+            min-height: 10px;
             opacity: 0.8;
         }
         
         .play-pause-btn {
             background: linear-gradient(135deg, #28a745, #20c997);
-            font-size: 14px;
-            min-width: 80px;
+            font-size: 11px;
+            min-width: 70px;
         }
         
         .play-pause-btn:hover {
@@ -296,10 +306,10 @@
         .speed-control {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             background: #f8f9fa;
-            padding: 6px 10px;
-            border-radius: 6px;
+            padding: 4px 8px;
+            border-radius: 4px;
             border: 1px solid #dee2e6;
         }
         
@@ -313,15 +323,15 @@
         .speed-main {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             background: #f8f9fa;
-            padding: 6px 10px;
-            border-radius: 6px;
+            padding: 4px 8px;
+            border-radius: 4px;
             border: 1px solid #dee2e6;
         }
         
         .speed-shortcut {
-            font-size: 9px;
+            font-size: 8px;
             color: #6c757d;
             font-weight: 500;
             text-align: center;
@@ -347,14 +357,14 @@
         
         .current-time {
             background: #e9ecef;
-            padding: 6px 10px;
-            border-radius: 6px;
+            padding: 4px 8px;
+            border-radius: 4px;
             font-family: 'Consolas', monospace;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             color: #495057;
             border: 1px solid #dee2e6;
-            min-width: 60px;
+            min-width: 50px;
             text-align: center;
         }
         
@@ -369,6 +379,16 @@
         
         /* 響應式設計 */
         @media (max-width: 768px) {
+            body {
+                padding-top: 50px;
+                margin: 10px;
+            }
+            
+            .video-controls {
+                padding: 6px 8px;
+                gap: 4px;
+            }
+            
             .main-content {
                 grid-template-columns: 1fr !important;
                 gap: 20px;
@@ -393,49 +413,86 @@
                 gap: 8px;
             }
             
-            .video-controls {
-                gap: 6px;
-                padding: 10px;
-            }
-            
             .control-btn {
-                padding: 6px 8px;
-                font-size: 11px;
-                min-width: 50px;
+                padding: 5px 7px;
+                font-size: 10px;
+                min-width: 45px;
             }
             
             .btn-shortcut {
-                font-size: 8px;
+                font-size: 7px;
             }
             
             .btn-group {
-                gap: 3px;
+                gap: 2px;
             }
             
             .play-pause-btn {
-                min-width: 70px;
-            }
-            
-            .speed-control {
-                padding: 4px 6px;
-            }
-            
-            .speed-group {
-                gap: 3px;
+                min-width: 60px;
             }
             
             .speed-main {
-                padding: 4px 6px;
+                padding: 3px 6px;
             }
             
             .speed-shortcut {
-                font-size: 8px;
+                font-size: 7px;
+            }
+            
+            .current-time {
+                padding: 3px 6px;
+                font-size: 9px;
+                min-width: 45px;
             }
         }
     </style>
     <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
+    <!-- 置頂控制按鈕列 -->
+    <div class="video-controls" id="videoControls">
+        <div class="btn-group">
+            <button class="control-btn play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
+                <span id="playPauseIcon">▶️</span>
+                <span id="playPauseText">播放</span>
+            </button>
+            <div class="btn-shortcut">空白鍵</div>
+        </div>
+        
+        <div class="btn-group">
+            <button class="control-btn" onclick="seekRelative(-2)">
+                ⏪ -2s
+            </button>
+            <div class="btn-shortcut">← 鍵</div>
+        </div>
+        
+        <div class="btn-group">
+            <button class="control-btn" onclick="seekRelative(2)">
+                ⏩ +2s
+            </button>
+            <div class="btn-shortcut">→ 鍵</div>
+        </div>
+        
+        <div class="current-time" id="currentTime">00:00</div>
+        
+        <div class="speed-group">
+            <div class="speed-main">
+                <span class="speed-label">速度:</span>
+                <select class="speed-select" id="speedSelect" onchange="changePlaybackRate()">
+                    <option value="0.25">0.25x</option>
+                    <option value="0.5">0.5x</option>
+                    <option value="0.75">0.75x</option>
+                    <option value="1" selected>1x</option>
+                    <option value="1.25">1.25x</option>
+                    <option value="1.5">1.5x</option>
+                    <option value="1.75">1.75x</option>
+                    <option value="2">2x</option>
+                </select>
+            </div>
+            <div class="speed-shortcut">- + 鍵</div>
+        </div>
+    </div>
+    
     <div class="container">
         <div class="title">《藥師咒》梵字、羅馬拼音、漢文音譯及漢文義譯對照全文：</div>
         
@@ -454,50 +511,7 @@
                     <div class="video-container">
                         <div id="youtubePlayer"></div>
                     </div>
-                    
-                    <!-- 控制按鈕列在並排模式時顯示在影片下方 -->
-                    <div class="video-controls" id="videoControls" style="display: none;">
-                        <div class="btn-group">
-                            <button class="control-btn play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
-                                <span id="playPauseIcon">▶️</span>
-                                <span id="playPauseText">播放</span>
-                            </button>
-                            <div class="btn-shortcut" id="playPauseShortcut">空白鍵</div>
-                        </div>
-                        
-                        <div class="btn-group">
-                            <button class="control-btn" onclick="seekRelative(-2)">
-                                ⏪ -2s
-                            </button>
-                            <div class="btn-shortcut">← 鍵</div>
-                        </div>
-                        
-                        <div class="btn-group">
-                            <button class="control-btn" onclick="seekRelative(2)">
-                                ⏩ +2s
-                            </button>
-                            <div class="btn-shortcut">→ 鍵</div>
-                        </div>
-                        
-                        <div class="current-time" id="currentTime">00:00</div>
-                        
-                        <div class="speed-group">
-                            <div class="speed-main">
-                                <span class="speed-label">速度:</span>
-                                <select class="speed-select" id="speedSelect" onchange="changePlaybackRate()">
-                                    <option value="0.25">0.25x</option>
-                                    <option value="0.5">0.5x</option>
-                                    <option value="0.75">0.75x</option>
-                                    <option value="1" selected>1x</option>
-                                    <option value="1.25">1.25x</option>
-                                    <option value="1.5">1.5x</option>
-                                    <option value="1.75">1.75x</option>
-                                    <option value="2">2x</option>
-                                </select>
-                            </div>
-                            <div class="speed-shortcut">- + 鍵</div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             
@@ -599,49 +613,7 @@
                     </div>
                 </div>
                 
-                <!-- 控制按鈕列在垂直模式時顯示在梵字下方 -->
-                <div class="video-controls vertical-mode-controls" id="videoControlsVertical" style="display: flex;">
-                    <div class="btn-group">
-                        <button class="control-btn play-pause-btn" onclick="togglePlayPause()">
-                            <span class="play-pause-icon">▶️</span>
-                            <span class="play-pause-text">播放</span>
-                        </button>
-                        <div class="btn-shortcut">空白鍵</div>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button class="control-btn" onclick="seekRelative(-2)">
-                            ⏪ -2s
-                        </button>
-                        <div class="btn-shortcut">← 鍵</div>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button class="control-btn" onclick="seekRelative(2)">
-                            ⏩ +2s
-                        </button>
-                        <div class="btn-shortcut">→ 鍵</div>
-                    </div>
-                    
-                    <div class="current-time" id="currentTimeVertical">00:00</div>
-                    
-                    <div class="speed-group">
-                        <div class="speed-main">
-                            <span class="speed-label">速度:</span>
-                            <select class="speed-select" onchange="changePlaybackRate()">
-                                <option value="0.25">0.25x</option>
-                                <option value="0.5">0.5x</option>
-                                <option value="0.75">0.75x</option>
-                                <option value="1" selected>1x</option>
-                                <option value="1.25">1.25x</option>
-                                <option value="1.5">1.5x</option>
-                                <option value="1.75">1.75x</option>
-                                <option value="2">2x</option>
-                            </select>
-                        </div>
-                        <div class="speed-shortcut">- + 鍵</div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -750,20 +722,10 @@
             updateControlsVisibility();
         }
         
-        // 更新控制按鈕顯示狀態
+        // 控制按鈕已置頂，無需切換顯示
         function updateControlsVisibility() {
-            const horizontalControls = document.getElementById('videoControls');
-            const verticalControls = document.getElementById('videoControlsVertical');
-            
-            if (isVerticalMode) {
-                // 垂直模式：顯示梵字下方的控制按鈕
-                horizontalControls.style.display = 'none';
-                verticalControls.style.display = 'flex';
-            } else {
-                // 並排模式：顯示影片下方的控制按鈕
-                horizontalControls.style.display = 'flex';
-                verticalControls.style.display = 'none';
-            }
+            // 置頂控制欄始終顯示，無需操作
+            console.log('控制按鈕已置頂顯示');
         }
         
         // YouTube IFrame API 準備就緒時調用
@@ -788,8 +750,7 @@
         
         function onPlayerReady(event) {
             console.log('YouTube Player 已準備就緒');
-            // 顯示對應模式的控制按鈕
-            updateControlsVisibility();
+            // 置頂控制欄已設定，開始時間更新
             startTimeUpdate();
         }
         
@@ -814,21 +775,17 @@
         }
         
         function updatePlayPauseButton() {
-            // 更新兩個控制按鈕列中的播放/暫停按鈕
-            const icons = [document.getElementById('playPauseIcon'), ...document.querySelectorAll('.play-pause-icon')];
-            const texts = [document.getElementById('playPauseText'), ...document.querySelectorAll('.play-pause-text')];
+            // 更新置頂控制欄中的播放/暫停按鈕
+            const icon = document.getElementById('playPauseIcon');
+            const text = document.getElementById('playPauseText');
             
-            icons.forEach(icon => {
-                if (icon) {
-                    icon.textContent = isPlaying ? '⏸️' : '▶️';
-                }
-            });
+            if (icon) {
+                icon.textContent = isPlaying ? '⏸️' : '▶️';
+            }
             
-            texts.forEach(text => {
-                if (text) {
-                    text.textContent = isPlaying ? '暫停' : '播放';
-                }
-            });
+            if (text) {
+                text.textContent = isPlaying ? '暫停' : '播放';
+            }
         }
         
         function seekRelative(seconds) {
@@ -887,16 +844,14 @@
         }
         
         function updateTimeDisplay() {
-            const timeElements = [document.getElementById('currentTime'), document.getElementById('currentTimeVertical')];
+            const timeElement = document.getElementById('currentTime');
             const minutes = Math.floor(currentTime / 60);
             const seconds = Math.floor(currentTime % 60);
             const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
-            timeElements.forEach(element => {
-                if (element) {
-                    element.textContent = timeString;
-                }
-            });
+            if (timeElement) {
+                timeElement.textContent = timeString;
+            }
         }
         
         // 鍵盤快捷鍵支援
