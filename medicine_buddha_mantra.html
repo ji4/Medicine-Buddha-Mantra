@@ -886,7 +886,7 @@
                     event.preventDefault();
                     togglePlayPause();
                     break;
-                case 'KeyR':  // 新增 R 鍵
+                case 'KeyR':
                     event.preventDefault();
                     resetAndPlay();
                     break;
@@ -902,13 +902,19 @@
                     break;
                 case 'Minus':
                 case 'NumpadSubtract':
-                    event.preventDefault();
-                    adjustSpeed('down');
+                    // 只有在沒有按下 Cmd 鍵時才觸發速度控制
+                    if (!event.metaKey) {
+                        event.preventDefault();
+                        adjustSpeed('down');
+                    }
                     break;
                 case 'Equal':
                 case 'NumpadAdd':
-                    event.preventDefault();
-                    adjustSpeed('up');
+                    // 只有在沒有按下 Cmd 鍵時才觸發速度控制
+                    if (!event.metaKey) {
+                        event.preventDefault();
+                        adjustSpeed('up');
+                    }
                     break;
                 case 'Digit0':
                 case 'Numpad0':
