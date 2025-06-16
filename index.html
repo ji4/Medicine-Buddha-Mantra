@@ -380,23 +380,27 @@
         /* 響應式設計 */
         @media (max-width: 768px) {
             body {
-                padding-top: 50px;
-                margin: 10px;
+                padding-top: 45px;
+                margin: 5px;
+            }
+            
+            .container {
+                padding: 10px;
             }
             
             .video-controls {
-                padding: 6px 8px;
-                gap: 4px;
+                padding: 4px 6px;
+                gap: 3px;
             }
             
             .main-content {
                 grid-template-columns: 1fr !important;
-                gap: 20px;
+                gap: 15px;
             }
             
             .main-content.vertical-mode .video-container {
                 max-width: 100%;
-                padding-bottom: 56.25%;
+                padding-bottom: 45%; /* 減少影片高度 */
             }
             
             .view-toggle-btn {
@@ -411,38 +415,165 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 8px;
+                font-size: 14px; /* 縮小標題字體 */
+                padding: 8px;
+                margin-bottom: 10px;
+            }
+            
+            .mantra-content {
+                padding: 10px; /* 減少內邊距 */
+                margin-bottom: 10px;
+            }
+            
+            /* 調整梵咒排版 - 更緊湊 */
+            .mantra-section {
+                gap: 8px; /* 減少間距 */
+                margin-bottom: 8px; /* 減少底部間距 */
+            }
+            
+            .word-group {
+                min-width: 90px; /* 縮小最小寬度 */
+            }
+            
+            .romanization {
+                font-size: 14px; /* 縮小羅馬拼音字體 */
+                margin-bottom: 3px;
+                letter-spacing: 1px;
+            }
+            
+            .chinese {
+                font-size: 13px; /* 縮小中文字體 */
+                line-height: 1.2;
+            }
+            
+            .separator {
+                margin: 8px 0; /* 減少分隔線間距 */
             }
             
             .control-btn {
-                padding: 5px 7px;
-                font-size: 10px;
-                min-width: 45px;
+                padding: 4px 6px;
+                font-size: 9px;
+                min-width: 40px;
             }
             
             .btn-shortcut {
-                font-size: 7px;
+                font-size: 6px;
             }
             
             .btn-group {
-                gap: 2px;
+                gap: 1px;
             }
             
             .play-pause-btn {
-                min-width: 60px;
+                min-width: 55px;
             }
             
             .speed-main {
-                padding: 3px 6px;
+                padding: 2px 4px;
             }
             
             .speed-shortcut {
-                font-size: 7px;
+                font-size: 6px;
             }
             
             .current-time {
-                padding: 3px 6px;
+                padding: 2px 4px;
+                font-size: 8px;
+                min-width: 40px;
+            }
+        }
+        
+        /* 極小螢幕優化 */
+        @media (max-width: 480px) {
+            body {
+                padding-top: 40px;
+                margin: 3px;
+            }
+            
+            .container {
+                padding: 8px;
+            }
+            
+            .title {
+                font-size: 15px;
+                padding: 8px;
+                margin: -8px -8px 15px -8px;
+            }
+            
+            .main-content.vertical-mode .video-container {
+                padding-bottom: 40%; /* 進一步減少影片高度 */
+            }
+            
+            .section-title {
+                font-size: 13px;
+                padding: 6px;
+                margin-bottom: 8px;
+            }
+            
+            .mantra-content {
+                padding: 8px;
+                margin-bottom: 8px;
+            }
+            
+            .mantra-section {
+                gap: 6px;
+                margin-bottom: 6px;
+            }
+            
+            .word-group {
+                min-width: 80px;
+            }
+            
+            .romanization {
+                font-size: 12px;
+                margin-bottom: 2px;
+                letter-spacing: 0.5px;
+            }
+            
+            .chinese {
+                font-size: 11px;
+                line-height: 1.1;
+            }
+            
+            .separator {
+                margin: 6px 0;
+                height: 0.5px;
+            }
+            
+            .video-controls {
+                padding: 3px 4px;
+                gap: 2px;
+            }
+            
+            .control-btn {
+                padding: 3px 5px;
+                font-size: 8px;
+                min-width: 35px;
+            }
+            
+            .play-pause-btn {
+                min-width: 50px;
+            }
+            
+            .speed-main {
+                padding: 2px 3px;
+            }
+            
+            .speed-select {
+                padding: 2px 3px;
                 font-size: 9px;
-                min-width: 45px;
+                min-width: 40px;
+            }
+            
+            .current-time {
+                padding: 2px 3px;
+                font-size: 7px;
+                min-width: 35px;
+            }
+            
+            .btn-shortcut,
+            .speed-shortcut {
+                font-size: 5px;
             }
         }
     </style>
