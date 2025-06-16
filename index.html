@@ -365,7 +365,7 @@
             
             .main-content.vertical-mode .video-container {
                 max-width: 100%;
-                padding-bottom: 45%; /* 減少影片高度 */
+                padding-bottom: 56.25%; /* 保持 16:9 比例，減少黑邊 */
             }
             
             .view-toggle-btn {
@@ -459,7 +459,7 @@
             }
             
             .main-content.vertical-mode .video-container {
-                padding-bottom: 40%; /* 進一步減少影片高度 */
+                padding-bottom: 56.25%; /* 保持 16:9 比例 */
             }
             
             .section-title {
@@ -843,6 +843,9 @@
                     'modestbranding': 1,
                     'controls': 0, // 隱藏 YouTube 內建控制項
                     'disablekb': 1, // 禁用 YouTube 內建鍵盤快捷鍵
+                    'playsinline': 1, // 手機版內嵌播放，不全螢幕
+                    'iv_load_policy': 3, // 隱藏注釋
+                    'fs': 0, // 禁用全螢幕按鈕
                 },
                 events: {
                     'onReady': onPlayerReady,
