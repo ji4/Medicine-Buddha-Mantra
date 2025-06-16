@@ -452,6 +452,13 @@
     <!-- 置頂控制按鈕列 -->
     <div class="video-controls" id="videoControls">
         <div class="btn-group">
+            <button class="control-btn" onclick="resetAndPlay()">
+                🔄 重播
+            </button>
+            <div class="btn-shortcut">R 鍵</div>
+        </div>
+        
+        <div class="btn-group">
             <button class="control-btn play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
                 <span id="playPauseIcon">▶️</span>
                 <span id="playPauseText">播放</span>
@@ -471,13 +478,6 @@
                 ⏩ +2s
             </button>
             <div class="btn-shortcut">→ 或 ] 鍵</div>
-        </div>
-        
-        <div class="btn-group">
-            <button class="control-btn" onclick="resetAndPlay()">
-                🔄 重播
-            </button>
-            <div class="btn-shortcut">R 鍵</div>
         </div>
         
         <div class="current-time" id="currentTime">00:00</div>
