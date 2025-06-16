@@ -867,10 +867,12 @@
                     togglePlayPause();
                     break;
                 case 'ArrowLeft':
+                case 'BracketLeft':
                     event.preventDefault();
                     seekRelative(-2);
                     break;
                 case 'ArrowRight':
+                case 'BracketRight':
                     event.preventDefault();
                     seekRelative(2);
                     break;
