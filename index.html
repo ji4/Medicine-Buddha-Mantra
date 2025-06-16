@@ -221,10 +221,10 @@
             border: none;
         }
         
-        /* 影片控制區域 - 桌面版固定置頂，手機版置底 */
+        /* 影片控制區域 - 統一固定在底部 */
         .video-controls {
             position: fixed;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
             z-index: 1000;
@@ -232,16 +232,16 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
-            padding: 8px 15px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
         }
         
-        /* 為固定控制欄增加頁面頂部間距 */
+        /* 為固定控制欄增加頁面底部間距 */
         body {
-            padding-top: 60px;
+            padding-bottom: 70px;
         }
         
         /* 通用控制按鈕樣式 */
@@ -339,26 +339,18 @@
         /* 響應式設計 */
         @media (max-width: 768px) {
             body {
-                padding-top: 5px;
-                padding-bottom: 80px;
                 margin: 5px;
+                padding-bottom: 75px;
             }
             
             .container {
                 padding: 10px;
             }
             
-            /* 手機版控制列置底 */
+            /* 手機版控制列調整（保持固定在底部） */
             .video-controls {
-                position: fixed;
-                bottom: 0;
-                top: auto;
-                padding: 8px 16px;
-                gap: 8px;
-                border-top: 1px solid rgba(0, 0, 0, 0.1);
-                border-bottom: none;
-                box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
-                background: rgba(255, 255, 255, 0.98);
+                padding: 8px 12px;
+                gap: 6px;
             }
             
             /* 手機版隱藏輔助提示 */
@@ -452,8 +444,8 @@
         /* 極小螢幕優化 */
         @media (max-width: 480px) {
             body {
-                padding-top: 40px;
                 margin: 3px;
+                padding-bottom: 70px;
             }
             
             .container {
@@ -507,8 +499,8 @@
             }
             
             .video-controls {
-                padding: 3px 4px;
-                gap: 2px;
+                padding: 6px 8px;
+                gap: 4px;
             }
             
             /* 極小螢幕版按鈕調整 */
@@ -833,10 +825,10 @@
             updateControlsVisibility();
         }
         
-        // 控制按鈕已置頂，無需切換顯示
+        // 控制按鈕已置底，無需切換顯示
         function updateControlsVisibility() {
-            // 置頂控制欄始終顯示，無需操作
-            console.log('控制按鈕已置頂顯示');
+            // 置底控制欄始終顯示，無需操作
+            console.log('控制按鈕已置底顯示');
         }
         
         // YouTube IFrame API 準備就緒時調用
@@ -861,7 +853,7 @@
         
         function onPlayerReady(event) {
             console.log('YouTube Player 已準備就緒');
-            // 置頂控制欄已設定，開始時間更新
+            // 置底控制欄已設定，開始時間更新
             startTimeUpdate();
         }
         
@@ -1048,6 +1040,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('頁面已載入，等待 YouTube API...');
             console.log('預設檢視模式：垂直佈局');
+            console.log('控制欄模式：統一固定在底部');
         });
     </script>
 </body>
