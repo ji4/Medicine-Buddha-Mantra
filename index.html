@@ -918,18 +918,21 @@
                     break;
                 case 'Digit0':
                 case 'Numpad0':
-                    event.preventDefault();
-                    // 重設為正常速度 1x
-                    currentSpeedIndex = 3;
-                    const normalSpeed = speedOptions[currentSpeedIndex];
-                    if (player) {
-                        player.setPlaybackRate(normalSpeed);
-                        const selects = document.querySelectorAll('.speed-select');
-                        selects.forEach(select => {
-                            select.value = normalSpeed;
-                        });
-                        showSpeedNotification(normalSpeed);
-                        console.log('速度重設為正常: 1x');
+                    // 只有在沒有按下 Cmd 鍵時才觸發速度重置
+                    if (!event.metaKey) {
+                        event.preventDefault();
+                        // 重設為正常速度 1x
+                        currentSpeedIndex = 3;
+                        const normalSpeed = speedOptions[currentSpeedIndex];
+                        if (player) {
+                            player.setPlaybackRate(normalSpeed);
+                            const selects = document.querySelectorAll('.speed-select');
+                            selects.forEach(select => {
+                                select.value = normalSpeed;
+                            });
+                            showSpeedNotification(normalSpeed);
+                            console.log('速度重設為正常: 1x');
+                        }
                     }
                     break;
             }
