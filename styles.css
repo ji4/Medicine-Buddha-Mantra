@@ -1,0 +1,698 @@
+body {
+    font-family: 'Microsoft JhengHei', 'PingFang TC', 'Noto Sans Devanagari', serif;
+    background: 
+        /* 更自然的紙張紋理 - 使用不規則的形狀和多層次疊加 */
+        radial-gradient(ellipse 180px 95px at 17% 33%, rgba(0, 165, 32, 0.08) 0%, transparent 30%),
+        radial-gradient(ellipse 140px 200px at 84% 67%, rgba(205, 133, 63, 0.06) 0%, transparent 35%),
+        radial-gradient(ellipse 230px 120px at 42% 8%, rgba(139, 69, 19, 0.04) 0%, transparent 40%),
+        radial-gradient(ellipse 90px 160px at 12% 88%, rgba(255, 215, 0, 0.05) 0%, transparent 28%),
+        radial-gradient(ellipse 170px 85px at 78% 15%, rgba(160, 82, 45, 0.03) 0%, transparent 32%),
+        radial-gradient(ellipse 110px 145px at 65% 92%, rgba(184, 134, 11, 0.04) 0%, transparent 38%),
+        radial-gradient(ellipse 95px 210px at 3% 45%, rgba(139, 69, 19, 0.025) 0%, transparent 42%),
+        radial-gradient(ellipse 260px 75px at 88% 58%, rgba(205, 133, 63, 0.035) 0%, transparent 30%),
+        radial-gradient(ellipse 125px 180px at 35% 78%, rgba(160, 82, 45, 0.02) 0%, transparent 45%),
+        /* 細微的噪點紋理 */
+        radial-gradient(circle at 23% 19%, rgba(139, 69, 19, 0.015) 0%, transparent 15%),
+        radial-gradient(circle at 67% 84%, rgba(205, 133, 63, 0.02) 0%, transparent 12%),
+        radial-gradient(circle at 91% 23%, rgba(184, 134, 11, 0.018) 0%, transparent 14%),
+        radial-gradient(circle at 8% 76%, rgba(160, 82, 45, 0.012) 0%, transparent 16%),
+        radial-gradient(circle at 45% 34%, rgba(255, 215, 0, 0.01) 0%, transparent 13%),
+        radial-gradient(circle at 72% 61%, rgba(139, 69, 19, 0.008) 0%, transparent 18%),
+        /* 主背景漸層 */
+        linear-gradient(135deg, #f9f6f0 0%, #f0ebe0 25%, #e8dcc0 50%, #e0d3a8 75%, #d4c5a0 100%);
+    background-size: 
+        250px 130px, 190px 280px, 320px 160px, 130px 220px, 240px 110px, 150px 200px, 130px 290px, 360px 100px, 170px 250px,
+        35px 35px, 42px 42px, 38px 38px, 46px 46px, 33px 33px, 40px 40px,
+        100% 100%;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0 125px; /* 桌面版：更大的 padding */
+    line-height: 1.8;
+    color: #3d2914;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 80px; /* 為固定控制欄增加底部間距 */
+}
+
+.container {
+    max-width: 95vw;
+    margin: 30px auto; /* 桌面版：更大的 margin */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 3px solid rgba(139, 69, 19, 0.6);
+    border-radius: 12px;
+    padding: 20px; /* 桌面版：更大的 padding */
+    box-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2),
+        0 8px 25px rgba(139, 69, 19, 0.2);
+    position: relative;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        rgba(255, 215, 0, 0.4) 0%, 
+        rgba(218, 165, 32, 0.4) 25%, 
+        rgba(184, 134, 11, 0.4) 50%, 
+        rgba(205, 133, 63, 0.4) 75%, 
+        rgba(139, 69, 19, 0.4) 100%);
+    border-radius: 14px;
+    z-index: -1;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, 
+        rgba(139, 69, 19, 0.95) 0%, 
+        rgba(160, 82, 45, 0.95) 25%,
+        rgba(205, 133, 63, 0.95) 50%,
+        rgba(184, 134, 11, 0.95) 75%,
+        rgba(139, 69, 19, 0.95) 100%);
+    color: #fff4e6;
+    padding: 15px 10px;
+    margin: -20px -20px 20px -20px;
+    border-radius: 8px 8px 0 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 
+        0 2px 8px rgba(139, 69, 19, 0.3),
+        inset 0 1px 2px rgba(255, 215, 0, 0.3);
+}
+
+.title::before {
+    content: '☸ ॐ ☸';
+    position: absolute;
+    left: 15px;
+    font-size: 16px;
+    color: rgba(255, 215, 0, 0.8);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.title::after {
+    content: '☸ ॐ ☸';
+    position: absolute;
+    right: 15px;
+    font-size: 16px;
+    color: rgba(255, 215, 0, 0.8);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.mantra-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+}
+
+.word-group {
+    text-align: center;
+    min-width: 100px;
+    flex: 1;
+    position: relative;
+    padding: 6px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.word-group:hover {
+    background: rgba(255, 248, 220, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.2);
+}
+
+.romanization {
+    font-family: 'Times New Roman', 'Noto Sans Devanagari', serif;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 3px rgba(139, 69, 19, 0.3);
+    position: relative;
+    line-height: 1.2;
+}
+
+.voiceless {
+    color: #4a6fa5; /* 較淺的深藍色 - 清音 */
+}
+
+.voiced {
+    color: #8b2635; /* 較重的深紅色 - 濁音 */
+}
+
+.voiced-pronunciation {
+    color: #4a6fa5; /* 清音顏色 */
+    text-decoration: underline;
+    text-decoration-color: #ff6b35;
+    text-decoration-thickness: 2px;
+    position: relative;
+}
+
+.voiced-pronunciation::after {
+    content: "→d";
+    position: absolute;
+    top: -12px;
+    left: -10px;
+    font-size: 12px;
+    color: #ff6b35;
+    font-weight: normal;
+    z-index: 1;
+}
+
+.chinese {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2d1810;
+    line-height: 1.3;
+    text-shadow: 0 1px 2px rgba(255, 248, 220, 0.8);
+    position: relative;
+}
+
+.separator {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(184, 134, 11, 0.3) 20%, 
+        rgba(205, 133, 63, 0.6) 50%, 
+        rgba(184, 134, 11, 0.3) 80%, 
+        transparent 100%);
+    margin: 20px 0;
+    position: relative;
+}
+
+.separator::before {
+    content: '❋';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 248, 220, 0.9);
+    color: rgba(139, 69, 19, 0.8);
+    padding: 5px 10px;
+    border-radius: 50%;
+    font-size: 12px;
+    box-shadow: 0 2px 6px rgba(139, 69, 19, 0.2);
+}
+
+/* 主要內容區域 - 左右對照 */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+/* 垂直檢視模式 */
+.main-content.vertical-mode {
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.left-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.right-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.mantra-content {
+    background: 
+        radial-gradient(ellipse 120px 80px at 23% 67%, rgba(205, 133, 63, 0.045) 0%, rgba(205, 133, 63, 0.008) 35%, transparent 60%),
+        radial-gradient(ellipse 90px 140px at 78% 15%, rgba(139, 69, 19, 0.04) 0%, rgba(139, 69, 19, 0.007) 30%, transparent 55%),
+        radial-gradient(ellipse 150px 70px at 45% 85%, rgba(160, 82, 45, 0.038) 0%, rgba(160, 82, 45, 0.006) 40%, transparent 65%),
+        radial-gradient(ellipse 70px 110px at 12% 25%, rgba(255, 215, 0, 0.03) 0%, rgba(255, 215, 0, 0.005) 45%, transparent 70%),
+        radial-gradient(ellipse 200px 60px at 89% 72%, rgba(184, 134, 11, 0.025) 0%, rgba(184, 134, 11, 0.004) 50%, transparent 75%),
+        linear-gradient(135deg, #ffffff 0%, #fefefe 25%, #fdfdfd 50%, #fcfcfc 75%, #fafafa 100%);
+    background-size: 
+        180px 120px, 140px 190px, 200px 110px, 100px 160px, 250px 90px,
+        100% 100%;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #8b4513;
+    background: 
+        linear-gradient(135deg, 
+            rgba(255, 248, 220, 0.9) 0%,
+            rgba(250, 235, 215, 0.9) 50%,
+            rgba(245, 222, 179, 0.9) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 12px 15px;
+    border-radius: 25px;
+    border: 2px solid rgba(184, 134, 11, 0.4);
+    position: relative;
+    box-shadow: 
+        0 3px 12px rgba(139, 69, 19, 0.15),
+        inset 0 1px 2px rgba(255, 255, 255, 0.6);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.section-title::before {
+    content: '❁';
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(184, 134, 11, 0.7);
+    font-size: 14px;
+}
+
+.section-title::after {
+    content: '❁';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(184, 134, 11, 0.7);
+    font-size: 14px;
+}
+
+.video-section {
+    text-align: center;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    height: 0;
+    padding-bottom: 337.5px; /* 600px * 0.5625 = 337.5px for 16:9 ratio */
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+}
+
+/* 在小螢幕上使用百分比 */
+@media (max-width: 600px) {
+    .video-container {
+        padding-bottom: 56.25% !important;
+    }
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* 影片控制區域 - 統一固定在底部 */
+.video-controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 15px;
+    background: 
+        linear-gradient(180deg, 
+            rgba(255, 248, 220, 0.98) 0%,
+            rgba(250, 235, 215, 0.98) 50%,
+            rgba(245, 222, 179, 0.98) 100%);
+    backdrop-filter: blur(15px);
+    border-top: 2px solid rgba(184, 134, 11, 0.3);
+    box-shadow: 
+        0 -4px 20px rgba(139, 69, 19, 0.15),
+        inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+/* 桌機版下隱藏手機版元素 */
+.mobile-left,
+.mobile-center,
+.mobile-right {
+    display: none;
+}
+
+/* 通用控制按鈕樣式 */
+.control-btn {
+    background: 
+        linear-gradient(135deg, 
+            rgba(255, 248, 220, 0.95) 0%,
+            rgba(250, 235, 215, 0.95) 50%,
+            rgba(245, 222, 179, 0.95) 100%);
+    color: #8b4513;
+    border: 1px solid rgba(184, 134, 11, 0.3);
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 2px 8px rgba(139, 69, 19, 0.15),
+        inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.control-btn:hover {
+    background: 
+        linear-gradient(135deg, 
+            rgba(255, 248, 220, 1) 0%,
+            rgba(250, 235, 215, 1) 50%,
+            rgba(245, 222, 179, 1) 100%);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 4px 12px rgba(139, 69, 19, 0.2),
+        inset 0 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+/* 播放/暫停按鈕特殊樣式 */
+.play-pause-btn {
+    background: 
+        linear-gradient(135deg, 
+            rgba(139, 69, 19, 0.95) 0%, 
+            rgba(160, 82, 45, 0.95) 25%,
+            rgba(205, 133, 63, 0.95) 50%,
+            rgba(184, 134, 11, 0.95) 75%,
+            rgba(139, 69, 19, 0.95) 100%) !important;
+    color: #fff4e6 !important;
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+    border: 2px solid rgba(255, 215, 0, 0.4) !important;
+    box-shadow: 
+        0 3px 12px rgba(139, 69, 19, 0.3),
+        inset 0 1px 3px rgba(255, 215, 0, 0.3) !important;
+}
+
+.play-pause-btn:hover {
+    background: 
+        linear-gradient(135deg, 
+            rgba(160, 82, 45, 1) 0%, 
+            rgba(205, 133, 63, 1) 25%,
+            rgba(184, 134, 11, 1) 50%,
+            rgba(218, 165, 32, 1) 75%,
+            rgba(160, 82, 45, 1) 100%) !important;
+}
+
+/* 時間顯示 */
+.current-time {
+    background: 
+        linear-gradient(135deg, 
+            rgba(255, 248, 220, 0.95) 0%,
+            rgba(250, 235, 215, 0.95) 100%);
+    color: #8b4513;
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-family: 'Consolas', 'SF Mono', 'Monaco', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    min-width: 50px;
+    text-align: center;
+    border: 1px solid rgba(184, 134, 11, 0.3);
+    box-shadow: 
+        0 2px 6px rgba(139, 69, 19, 0.1),
+        inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+/* 速度控制 */
+.speed-select {
+    background: 
+        linear-gradient(135deg, 
+            rgba(255, 248, 220, 0.95) 0%,
+            rgba(250, 235, 215, 0.95) 100%);
+    border: 1px solid rgba(184, 134, 11, 0.3);
+    border-radius: 12px;
+    padding: 6px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 55px;
+    text-align: center;
+    color: #8b4513;
+    box-shadow: 
+        0 2px 6px rgba(139, 69, 19, 0.1),
+        inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.speed-select:hover {
+    border-color: rgba(184, 134, 11, 0.5);
+}
+
+.speed-select:focus {
+    outline: none;
+    border-color: rgba(139, 69, 19, 0.6);
+}
+
+/* 桌面版輔助提示 */
+.helper-text {
+    font-size: 9px;
+    color: #6c757d;
+    margin-top: 2px;
+    text-align: center;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    body {
+        margin: 0;
+        padding: 5px; /* 手機版：較小的 padding */
+        padding-bottom: 80px;
+    }
+    
+    .container {
+        margin: 10px auto; /* 手機版：與桌面版相同 */
+        padding: 10px; /* 手機版：較小的 padding */
+    }
+    
+    /* 手機版控制列調整 */
+    .video-controls {
+        padding: 8px 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    /* 手機版顯示元素 */
+    .mobile-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .mobile-center {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    .mobile-right {
+        display: flex;
+        align-items: center;
+    }
+    
+    /* 手機版下隱藏桌機版元素 */
+    .video-controls > div:not(.mobile-left):not(.mobile-center):not(.mobile-right) {
+        display: none;
+    }
+    
+    .helper-text {
+        display: none;
+    }
+    
+    .main-content {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+    }
+    
+    .section-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .mantra-content {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .mantra-section {
+        gap: 5px;
+        margin-bottom: 12px;
+    }
+    
+    .word-group {
+        min-width: 80px;
+        padding: 3px;
+    }
+    
+    .romanization {
+        font-size: 13px;
+        margin-bottom: 8px;
+        letter-spacing: 0.3px;
+    }
+    
+    .chinese {
+        font-size: 12px;
+        line-height: 1.1;
+    }
+    
+    .voiced-pronunciation::after {
+        top: -7px;
+        left: -7px;
+        font-size: 9px;
+    }
+    
+    .separator {
+        margin: 25px 0 25px 0;
+    }
+    
+    .control-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+    
+    .play-pause-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+    
+    .current-time {
+        padding: 6px 10px;
+        font-size: 11px;
+        min-width: 50px;
+    }
+    
+    .speed-select {
+        padding: 6px 10px;
+        font-size: 11px;
+        min-width: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        margin: 0;
+        padding: 3px; /* 小螢幕：更小的 padding */
+        padding-bottom: 75px;
+    }
+    
+    .container {
+        margin: 8px auto; /* 小螢幕：更小的 margin */
+        padding: 8px; /* 小螢幕：更小的 padding */
+    }
+    
+    .title {
+        font-size: 15px;
+        padding: 8px 40px;
+        margin: -8px -8px 15px -8px;
+    }
+    
+    .section-title {
+        font-size: 13px;
+        padding: 6px;
+        margin-bottom: 8px;
+    }
+    
+    .mantra-content {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+    
+    .mantra-section {
+        gap: 4px;
+        margin-bottom: 10px;
+    }
+    
+    .word-group {
+        min-width: 70px;
+        padding: 2px;
+    }
+    
+    .romanization {
+        font-size: 11px;
+        margin-bottom: 7px;
+        letter-spacing: 0.2px;
+    }
+    
+    .chinese {
+        font-size: 10px;
+        line-height: 1.0;
+    }
+    
+    .voiced-pronunciation::after {
+        top: -6px;
+        left: -7px;
+        font-size: 8px;
+    }
+    
+    .video-controls {
+        padding: 6px 8px;
+    }
+    
+    .control-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+    
+    .play-pause-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .current-time {
+        padding: 5px 8px;
+        font-size: 10px;
+        min-width: 45px;
+    }
+    
+    .speed-select {
+        padding: 5px 8px;
+        font-size: 10px;
+        min-width: 55px;
+    }
+}
