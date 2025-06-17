@@ -322,13 +322,30 @@ class CounterManager {
         const counterDisplay = document.getElementById('counterDisplay');
 
         if (counterDisplay) {
-            // 點擊計數
-            counterDisplay.addEventListener('click', (e) => {
+            // 使用 touchstart 和 click 事件來處理點擊
+            counterDisplay.addEventListener('touchstart', (e) => {
                 e.preventDefault();
-                this.increment();
+                this.startLongPress();
             });
 
-            // 長按重置
+            counterDisplay.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                if (this.longPressTimer) {
+                    clearTimeout(this.longPressTimer);
+                    this.longPressTimer = null;
+                    this.increment(); // 如果不是長按，就增加計數
+                }
+            });
+
+            counterDisplay.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                if (this.longPressTimer) {
+                    clearTimeout(this.longPressTimer);
+                    this.longPressTimer = null;
+                }
+            });
+
+            // 滑鼠事件作為備用
             counterDisplay.addEventListener('mousedown', (e) => {
                 e.preventDefault();
                 this.startLongPress();
@@ -336,48 +353,28 @@ class CounterManager {
 
             counterDisplay.addEventListener('mouseup', (e) => {
                 e.preventDefault();
-                this.cancelLongPress();
+                if (this.longPressTimer) {
+                    clearTimeout(this.longPressTimer);
+                    this.longPressTimer = null;
+                    this.increment(); // 如果不是長按，就增加計數
+                }
             });
 
             counterDisplay.addEventListener('mouseleave', (e) => {
                 e.preventDefault();
-                this.cancelLongPress();
+                if (this.longPressTimer) {
+                    clearTimeout(this.longPressTimer);
+                    this.longPressTimer = null;
+                }
             });
-
-            // 觸控設備支援
-            counterDisplay.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                this.startLongPress();
-            }, { passive: false });
-
-            counterDisplay.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                this.cancelLongPress();
-            }, { passive: false });
-
-            counterDisplay.addEventListener('touchcancel', (e) => {
-                e.preventDefault();
-                this.cancelLongPress();
-            }, { passive: false });
-
-            // 防止觸控時出現選中效果
-            counterDisplay.addEventListener('touchmove', (e) => {
-                e.preventDefault();
-            }, { passive: false });
         }
     }
 
     startLongPress() {
         this.longPressTimer = setTimeout(() => {
             this.reset();
-        }, this.longPressDuration);
-    }
-
-    cancelLongPress() {
-        if (this.longPressTimer) {
-            clearTimeout(this.longPressTimer);
             this.longPressTimer = null;
-        }
+        }, this.longPressDuration);
     }
 
     increment() {
