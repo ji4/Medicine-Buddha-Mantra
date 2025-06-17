@@ -118,17 +118,17 @@
         .mantra-section {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 6px;
+            margin-bottom: 10px;
             align-items: flex-start;
         }
         
         .word-group {
             text-align: center;
-            min-width: 100px;
+            min-width: 90px;
             flex: 1;
             position: relative;
-            padding: 6px;
+            padding: 4px;
             border-radius: 8px;
             transition: all 0.3s ease;
         }
@@ -142,13 +142,13 @@
         .romanization {
             font-family: 'Times New Roman', 'Noto Sans Devanagari', serif;
             font-style: italic;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
-            margin-bottom: 4px;
-            letter-spacing: 1px;
+            margin-bottom: 3px;
+            letter-spacing: 0.5px;
             text-shadow: 0 1px 3px rgba(139, 69, 19, 0.3);
             position: relative;
-            line-height: 1.2;
+            line-height: 1.4;
         }
         
         .voiceless {
@@ -170,18 +170,19 @@
         .voiced-pronunciation::after {
             content: "→d";
             position: absolute;
-            top: -10px;
-            left: -10px;
-            font-size: 12px;
+            top: -14px;
+            left: -6px;
+            font-size: 10px;
             color: #ff6b35;
             font-weight: normal;
+            z-index: 1;
         }
         
         .chinese {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             color: #2d1810;
-            line-height: 1.3;
+            line-height: 1.2;
             text-shadow: 0 1px 2px rgba(255, 248, 220, 0.8);
             position: relative;
         }
@@ -567,23 +568,30 @@
             }
             
             .mantra-section {
-                gap: 8px;
+                gap: 5px;
                 margin-bottom: 8px;
             }
             
             .word-group {
-                min-width: 90px;
+                min-width: 80px;
+                padding: 3px;
             }
             
             .romanization {
-                font-size: 14px;
-                margin-bottom: 3px;
-                letter-spacing: 1px;
+                font-size: 13px;
+                margin-bottom: 2px;
+                letter-spacing: 0.3px;
             }
             
             .chinese {
-                font-size: 13px;
-                line-height: 1.2;
+                font-size: 12px;
+                line-height: 1.1;
+            }
+            
+            .voiced-pronunciation::after {
+                top: -12px;
+                left: -5px;
+                font-size: 9px;
             }
             
             .separator {
@@ -645,23 +653,30 @@
             }
             
             .mantra-section {
-                gap: 6px;
+                gap: 4px;
                 margin-bottom: 6px;
             }
             
             .word-group {
-                min-width: 80px;
+                min-width: 70px;
+                padding: 2px;
             }
             
             .romanization {
-                font-size: 12px;
-                margin-bottom: 2px;
-                letter-spacing: 0.5px;
+                font-size: 11px;
+                margin-bottom: 1px;
+                letter-spacing: 0.2px;
             }
             
             .chinese {
-                font-size: 11px;
-                line-height: 1.1;
+                font-size: 10px;
+                line-height: 1.0;
+            }
+            
+            .voiced-pronunciation::after {
+                top: -10px;
+                left: -4px;
+                font-size: 8px;
             }
             
             .video-controls {
