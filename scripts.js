@@ -312,35 +312,89 @@ class SpeedController {
 // ===== 計數器管理器（為未來功能預留） =====
 class CounterManager {
     constructor() {
-        this.isEnabled = false;
+        this.counter = 0;
+        this.longPressTimer = null;
+        this.longPressDuration = 1000; // 1秒長按
+        this.init();
     }
 
-    startSession() {
-        appState.sessionStartTime = new Date();
-        appState.mantraCount = 0;
-        this.isEnabled = true;
-        uiManager.updateMantraCounter();
-        console.log('開始計數會話');
+    init() {
+        const counterDisplay = document.getElementById('counterDisplay');
+
+        if (counterDisplay) {
+            // 點擊計數
+            counterDisplay.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.increment();
+            });
+
+            // 長按重置
+            counterDisplay.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                this.startLongPress();
+            });
+
+            counterDisplay.addEventListener('mouseup', (e) => {
+                e.preventDefault();
+                this.cancelLongPress();
+            });
+
+            counterDisplay.addEventListener('mouseleave', (e) => {
+                e.preventDefault();
+                this.cancelLongPress();
+            });
+
+            // 觸控設備支援
+            counterDisplay.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                this.startLongPress();
+            }, { passive: false });
+
+            counterDisplay.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.cancelLongPress();
+            }, { passive: false });
+
+            counterDisplay.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                this.cancelLongPress();
+            }, { passive: false });
+
+            // 防止觸控時出現選中效果
+            counterDisplay.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+            }, { passive: false });
+        }
+    }
+
+    startLongPress() {
+        this.longPressTimer = setTimeout(() => {
+            this.reset();
+        }, this.longPressDuration);
+    }
+
+    cancelLongPress() {
+        if (this.longPressTimer) {
+            clearTimeout(this.longPressTimer);
+            this.longPressTimer = null;
+        }
     }
 
     increment() {
-        if (!this.isEnabled) return;
-        
-        appState.mantraCount++;
-        uiManager.updateMantraCounter();
-        console.log(`咒語計數: ${appState.mantraCount}`);
+        this.counter++;
+        this.updateDisplay();
     }
 
     reset() {
-        appState.mantraCount = 0;
-        appState.sessionStartTime = null;
-        uiManager.updateMantraCounter();
-        console.log('計數器已重置');
+        this.counter = 0;
+        this.updateDisplay();
     }
 
-    getSessionDuration() {
-        if (!appState.sessionStartTime) return 0;
-        return Math.floor((new Date() - appState.sessionStartTime) / 1000);
+    updateDisplay() {
+        const counterDisplay = document.getElementById('counterDisplay');
+        if (counterDisplay) {
+            counterDisplay.textContent = this.counter;
+        }
     }
 }
 
