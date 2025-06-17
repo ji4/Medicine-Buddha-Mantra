@@ -522,28 +522,25 @@ body {
 }
 
 .counter-display {
-    font-size: 18px;
-    font-weight: bold;
-    color: #3d2914;
-    margin-bottom: 10px;
-    background: linear-gradient(135deg, 
-        rgba(255, 248, 220, 0.95) 0%,
-        rgba(250, 235, 215, 0.95) 50%,
-        rgba(245, 222, 179, 0.95) 100%);
-    border: 1px solid rgba(184, 134, 11, 0.4);
-    padding: 12px;
+    font-size: 16px;
+    font-weight: normal;
+    color: #8b4513;
+    margin-bottom: 8px;
+    background: rgba(255, 248, 220, 0.4);
+    border: 1px solid rgba(184, 134, 11, 0.15);
+    padding: 10px;
     border-radius: 50%;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     box-shadow: 
-        0 2px 8px rgba(139, 69, 19, 0.2),
-        inset 0 1px 2px rgba(255, 255, 255, 0.6);
-    width: 50px;
-    height: 50px;
+        0 1px 3px rgba(139, 69, 19, 0.05),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    text-shadow: none;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     user-select: none;
@@ -551,24 +548,26 @@ body {
 }
 
 .counter-display:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
+    background: rgba(255, 248, 220, 0.5);
     box-shadow: 
-        0 4px 12px rgba(139, 69, 19, 0.3),
-        inset 0 1px 3px rgba(255, 255, 255, 0.8);
+        0 2px 4px rgba(139, 69, 19, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .counter-display:active {
-    transform: translateY(1px);
+    transform: translateY(0);
+    background: rgba(255, 248, 220, 0.6);
     box-shadow: 
-        0 2px 4px rgba(139, 69, 19, 0.2),
-        inset 0 1px 2px rgba(255, 255, 255, 0.6);
+        0 1px 2px rgba(139, 69, 19, 0.05),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .counter-section .helper-text {
-    margin-top: 8px;
-    font-size: 14px;
+    margin-top: 6px;
+    font-size: 12px;
     color: #8b4513;
-    opacity: 0.8;
+    opacity: 0.6;
     display: block;
     text-align: center;
     width: 100%;
@@ -698,25 +697,21 @@ body {
     }
 
     .counter-section {
-        margin-top: 15px;
-        padding: 12px;
-        width: 100%;
-        max-width: 300px;
-        margin-left: auto;
-        margin-right: auto;
+        margin-top: 12px;
+        padding: 10px;
     }
 
     .counter-display {
-        font-size: 16px;
-        width: 45px;
-        height: 45px;
-        padding: 10px;
-        margin-bottom: 8px;
+        font-size: 15px;
+        width: 36px;
+        height: 36px;
+        padding: 8px;
+        margin-bottom: 6px;
     }
 
     .counter-section .helper-text {
-        font-size: 13px;
-        margin-top: 6px;
+        font-size: 11px;
+        margin-top: 4px;
     }
 }
 
@@ -805,22 +800,20 @@ body {
     }
 
     .counter-section {
-        margin-top: 12px;
-        padding: 10px;
-        width: 100%;
-        max-width: 250px;
+        margin-top: 10px;
+        padding: 8px;
     }
 
     .counter-display {
-        font-size: 15px;
-        width: 40px;
-        height: 40px;
-        padding: 8px;
-        margin-bottom: 6px;
+        font-size: 14px;
+        width: 32px;
+        height: 32px;
+        padding: 6px;
+        margin-bottom: 4px;
     }
 
     .counter-section .helper-text {
-        font-size: 12px;
-        margin-top: 5px;
+        font-size: 10px;
+        margin-top: 3px;
     }
 }
