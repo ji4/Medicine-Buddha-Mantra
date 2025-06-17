@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-TW"><head><meta name="emotion-insertion-point" content="">
+<html lang="zh-TW">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>藥師咒羅馬拼音對照表</title>
@@ -25,6 +26,7 @@
             color: #3d2914;
             position: relative;
             min-height: 100vh;
+            padding-bottom: 80px; /* 為固定控制欄增加底部間距 */
         }
         
         .container {
@@ -213,27 +215,6 @@
             gap: 20px;
         }
         
-        /* 垂直模式下影片區域調整 */
-        .main-content.vertical-mode .left-section {
-            order: 1;
-        }
-        
-        .main-content.vertical-mode .right-section {
-            order: 2;
-        }
-        
-        /* 垂直模式下將控制按鈕移到梵字下方 */
-        .main-content.vertical-mode .video-controls {
-            order: 3;
-        }
-        
-        /* 垂直模式下影片容器調整 */
-        .main-content.vertical-mode .video-container {
-            max-width: 600px;
-            margin: 0 auto 15px auto;
-            padding-bottom: 33.75%; /* 16:9 在較小寬度下的比例 */
-        }
-        
         .left-section {
             display: flex;
             flex-direction: column;
@@ -246,31 +227,14 @@
         
         .mantra-content {
             background: 
-                /* 自然紙張紋理 - 調整到平衡的深度，不突兀 */
                 radial-gradient(ellipse 120px 80px at 23% 67%, rgba(205, 133, 63, 0.045) 0%, rgba(205, 133, 63, 0.008) 35%, transparent 60%),
                 radial-gradient(ellipse 90px 140px at 78% 15%, rgba(139, 69, 19, 0.04) 0%, rgba(139, 69, 19, 0.007) 30%, transparent 55%),
                 radial-gradient(ellipse 150px 70px at 45% 85%, rgba(160, 82, 45, 0.038) 0%, rgba(160, 82, 45, 0.006) 40%, transparent 65%),
                 radial-gradient(ellipse 70px 110px at 12% 25%, rgba(255, 215, 0, 0.03) 0%, rgba(255, 215, 0, 0.005) 45%, transparent 70%),
                 radial-gradient(ellipse 200px 60px at 89% 72%, rgba(184, 134, 11, 0.025) 0%, rgba(184, 134, 11, 0.004) 50%, transparent 75%),
-                /* 細微不規則紋理 */
-                radial-gradient(ellipse 40px 60px at 65% 35%, rgba(139, 69, 19, 0.022) 0%, transparent 40%),
-                radial-gradient(ellipse 80px 30px at 15% 78%, rgba(205, 133, 63, 0.018) 0%, transparent 35%),
-                radial-gradient(ellipse 55px 45px at 92% 45%, rgba(160, 82, 45, 0.02) 0%, transparent 45%),
-                radial-gradient(ellipse 35px 75px at 38% 12%, rgba(184, 134, 11, 0.015) 0%, transparent 50%),
-                /* 極細微的質感點綴 */
-                radial-gradient(ellipse 25px 35px at 72% 88%, rgba(139, 69, 19, 0.012) 0%, transparent 30%),
-                radial-gradient(ellipse 45px 20px at 8% 52%, rgba(205, 133, 63, 0.01) 0%, transparent 25%),
-                /* 細緻的紋理層 */
-                radial-gradient(ellipse 60px 40px at 55% 20%, rgba(139, 69, 19, 0.008) 0%, transparent 35%),
-                radial-gradient(ellipse 30px 50px at 85% 60%, rgba(205, 133, 63, 0.007) 0%, transparent 30%),
-                radial-gradient(ellipse 75px 25px at 20% 40%, rgba(160, 82, 45, 0.009) 0%, transparent 40%),
-                /* 主背景漸層 - 保持純白色 */
                 linear-gradient(135deg, #ffffff 0%, #fefefe 25%, #fdfdfd 50%, #fcfcfc 75%, #fafafa 100%);
             background-size: 
                 180px 120px, 140px 190px, 200px 110px, 100px 160px, 250px 90px,
-                50px 70px, 90px 40px, 65px 55px, 45px 85px,
-                30px 40px, 50px 25px,
-                70px 50px, 35px 60px, 85px 30px,
                 100% 100%;
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
@@ -362,19 +326,8 @@
                 inset 0 1px 3px rgba(255, 215, 0, 0.3);
         }
         
-        .view-toggle-btn:active {
-            transform: translateY(-50%) scale(0.95);
-        }
-        
         .video-section {
             text-align: center;
-        }
-        
-        .video-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #333;
         }
         
         .video-container {
@@ -427,12 +380,6 @@
         .mobile-right {
             display: none;
         }
-
-        
-        /* 為固定控制欄增加頁面底部間距 */
-        body {
-            padding-bottom: 70px;
-        }
         
         /* 通用控制按鈕樣式 */
         .control-btn {
@@ -472,9 +419,6 @@
         
         .control-btn:active {
             transform: translateY(0);
-            box-shadow: 
-                0 2px 6px rgba(139, 69, 19, 0.15),
-                inset 0 1px 2px rgba(255, 255, 255, 0.6);
         }
         
         /* 播放/暫停按鈕特殊樣式 */
@@ -504,9 +448,6 @@
                     rgba(184, 134, 11, 1) 50%,
                     rgba(218, 165, 32, 1) 75%,
                     rgba(160, 82, 45, 1) 100%) !important;
-            box-shadow: 
-                0 4px 16px rgba(139, 69, 19, 0.4),
-                inset 0 2px 4px rgba(255, 215, 0, 0.4) !important;
         }
         
         /* 時間顯示 */
@@ -552,18 +493,11 @@
         
         .speed-select:hover {
             border-color: rgba(184, 134, 11, 0.5);
-            background: 
-                linear-gradient(135deg, 
-                    rgba(255, 248, 220, 1) 0%,
-                    rgba(250, 235, 215, 1) 100%);
         }
         
         .speed-select:focus {
             outline: none;
             border-color: rgba(139, 69, 19, 0.6);
-            box-shadow: 
-                0 0 0 2px rgba(184, 134, 11, 0.2),
-                0 2px 8px rgba(139, 69, 19, 0.15);
         }
         
         /* 桌面版輔助提示 */
@@ -580,14 +514,14 @@
         @media (max-width: 768px) {
             body {
                 margin: 5px;
-                padding-bottom: 75px;
+                padding-bottom: 80px;
             }
             
             .container {
                 padding: 10px;
             }
             
-            /* 手機版控制列調整（保持固定在底部） */
+            /* 手機版控制列調整 */
             .video-controls {
                 padding: 8px 12px;
                 display: flex;
@@ -618,7 +552,6 @@
                 display: none;
             }
             
-            /* 手機版隱藏輔助提示 */
             .helper-text {
                 display: none;
             }
@@ -626,11 +559,6 @@
             .main-content {
                 grid-template-columns: 1fr !important;
                 gap: 15px;
-            }
-            
-            .main-content.vertical-mode .video-container {
-                max-width: 100%;
-                padding-bottom: 56.25%; /* 保持 16:9 比例，減少黑邊 */
             }
             
             .view-toggle-btn {
@@ -645,42 +573,40 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 8px;
-                font-size: 14px; /* 縮小標題字體 */
+                font-size: 14px;
                 padding: 8px;
                 margin-bottom: 10px;
             }
             
             .mantra-content {
-                padding: 10px; /* 減少內邊距 */
+                padding: 10px;
                 margin-bottom: 10px;
             }
             
-            /* 調整梵咒排版 - 更緊湊 */
             .mantra-section {
-                gap: 8px; /* 減少間距 */
-                margin-bottom: 8px; /* 減少底部間距 */
+                gap: 8px;
+                margin-bottom: 8px;
             }
             
             .word-group {
-                min-width: 90px; /* 縮小最小寬度 */
+                min-width: 90px;
             }
             
             .romanization {
-                font-size: 14px; /* 縮小羅馬拼音字體 */
+                font-size: 14px;
                 margin-bottom: 3px;
                 letter-spacing: 1px;
             }
             
             .chinese {
-                font-size: 13px; /* 縮小中文字體 */
+                font-size: 13px;
                 line-height: 1.2;
             }
             
             .separator {
-                margin: 8px 0; /* 減少分隔線間距 */
+                margin: 8px 0;
             }
             
-            /* 手機版按鈕調整 */
             .control-btn {
                 width: 36px;
                 height: 36px;
@@ -706,11 +632,10 @@
             }
         }
         
-        /* 極小螢幕優化 */
         @media (max-width: 480px) {
             body {
                 margin: 3px;
-                padding-bottom: 70px;
+                padding-bottom: 75px;
             }
             
             .container {
@@ -721,23 +646,6 @@
                 font-size: 15px;
                 padding: 8px 40px;
                 margin: -8px -8px 15px -8px;
-            }
-            
-            .title::before,
-            .title::after {
-                font-size: 14px;
-            }
-            
-            .title::before {
-                left: 8px;
-            }
-            
-            .title::after {
-                right: 8px;
-            }
-            
-            .main-content.vertical-mode .video-container {
-                padding-bottom: 56.25%; /* 保持 16:9 比例 */
             }
             
             .section-title {
@@ -771,42 +679,10 @@
                 line-height: 1.1;
             }
             
-            .separator {
-                margin: 6px 0;
-                height: 0.5px;
-            }
-            
             .video-controls {
                 padding: 6px 8px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
             }
             
-            /* 極小螢幕版顯示元素 */
-            .mobile-left {
-                display: flex;
-                align-items: center;
-                gap: 6px;
-            }
-            
-            .mobile-center {
-                display: flex;
-                align-items: center;
-                gap: 4px;
-            }
-            
-            .mobile-right {
-                display: flex;
-                align-items: center;
-            }
-            
-            /* 極小螢幕版下隱藏桌機版元素 */
-            .video-controls > div:not(.mobile-left):not(.mobile-center):not(.mobile-right) {
-                display: none;
-            }
-            
-            /* 極小螢幕版按鈕調整 */
             .control-btn {
                 width: 32px;
                 height: 32px;
@@ -832,400 +708,9 @@
             }
         }
     </style>
-    <script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/94f771d8/www-widgetapi.vflset/www-widgetapi.js" async=""></script><script src="https://www.youtube.com/iframe_api"></script>
-<style type="text/css">.resize-observer[data-v-8859cc6c]{position:absolute;top:0;left:0;z-index:-1;width:100%;height:100%;border:none;background-color:transparent;pointer-events:none;display:block;overflow:hidden;opacity:0}.resize-observer[data-v-8859cc6c] object{display:block;position:absolute;top:0;left:0;height:100%;width:100%;overflow:hidden;pointer-events:none;z-index:-1}</style><style type="text/css">x-vue-echarts{display:flex;flex-direction:column;width:100%;height:100%;min-width:0}
-.vue-echarts-inner{flex-grow:1;min-width:0;width:auto!important;height:auto!important}
-</style><style data-id="immersive-translate-input-injected-css">.immersive-translate-input {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 2147483647;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.immersive-translate-attach-loading::after {
-  content: " ";
-
-  --loading-color: #f78fb6;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  display: block;
-  margin: 12px auto;
-  position: relative;
-  color: white;
-  left: -100px;
-  box-sizing: border-box;
-  animation: immersiveTranslateShadowRolling 1.5s linear infinite;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-2000%, -50%);
-  z-index: 100;
-}
-
-.immersive-translate-loading-spinner {
-  vertical-align: middle !important;
-  width: 10px !important;
-  height: 10px !important;
-  display: inline-block !important;
-  margin: 0 4px !important;
-  border: 2px rgba(221, 244, 255, 0.6) solid !important;
-  border-top: 2px rgba(0, 0, 0, 0.375) solid !important;
-  border-left: 2px rgba(0, 0, 0, 0.375) solid !important;
-  border-radius: 50% !important;
-  padding: 0 !important;
-  -webkit-animation: immersive-translate-loading-animation 0.6s infinite linear !important;
-  animation: immersive-translate-loading-animation 0.6s infinite linear !important;
-}
-
-@-webkit-keyframes immersive-translate-loading-animation {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-
-  to {
-    -webkit-transform: rotate(359deg);
-  }
-}
-
-@keyframes immersive-translate-loading-animation {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(359deg);
-  }
-}
-
-.immersive-translate-input-loading {
-  --loading-color: #f78fb6;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  display: block;
-  margin: 12px auto;
-  position: relative;
-  color: white;
-  left: -100px;
-  box-sizing: border-box;
-  animation: immersiveTranslateShadowRolling 1.5s linear infinite;
-}
-
-@keyframes immersiveTranslateShadowRolling {
-  0% {
-    box-shadow: 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0),
-      0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
-  }
-
-  12% {
-    box-shadow: 100px 0 var(--loading-color), 0px 0 rgba(255, 255, 255, 0),
-      0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
-  }
-
-  25% {
-    box-shadow: 110px 0 var(--loading-color), 100px 0 var(--loading-color),
-      0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
-  }
-
-  36% {
-    box-shadow: 120px 0 var(--loading-color), 110px 0 var(--loading-color),
-      100px 0 var(--loading-color), 0px 0 rgba(255, 255, 255, 0);
-  }
-
-  50% {
-    box-shadow: 130px 0 var(--loading-color), 120px 0 var(--loading-color),
-      110px 0 var(--loading-color), 100px 0 var(--loading-color);
-  }
-
-  62% {
-    box-shadow: 200px 0 rgba(255, 255, 255, 0), 130px 0 var(--loading-color),
-      120px 0 var(--loading-color), 110px 0 var(--loading-color);
-  }
-
-  75% {
-    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0),
-      130px 0 var(--loading-color), 120px 0 var(--loading-color);
-  }
-
-  87% {
-    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0),
-      200px 0 rgba(255, 255, 255, 0), 130px 0 var(--loading-color);
-  }
-
-  100% {
-    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0),
-      200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0);
-  }
-}
-
-.immersive-translate-toast {
-  display: flex;
-  position: fixed;
-  z-index: 2147483647;
-  left: 0;
-  right: 0;
-  top: 1%;
-  width: fit-content;
-  padding: 12px 20px;
-  margin: auto;
-  overflow: auto;
-  background: #fef6f9;
-  box-shadow: 0px 4px 10px 0px rgba(0, 10, 30, 0.06);
-  font-size: 15px;
-  border-radius: 8px;
-  color: #333;
-}
-
-.immersive-translate-toast-content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.immersive-translate-toast-hidden {
-  margin: 0 20px 0 72px;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.immersive-translate-toast-close {
-  color: #666666;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 0 10px;
-  cursor: pointer;
-}
-
-@media screen and (max-width: 768px) {
-  .immersive-translate-toast {
-    top: 0;
-    padding: 12px 0px 0 10px;
-  }
-  .immersive-translate-toast-content {
-    flex-direction: column;
-    text-align: center;
-  }
-  .immersive-translate-toast-hidden {
-    margin: 10px auto;
-  }
-}
-
-.immersive-translate-modal {
-  display: none;
-  position: fixed;
-  z-index: 2147483647;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
-  font-size: 15px;
-}
-
-.immersive-translate-modal-content {
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 40px 24px 24px;
-  border: 1px solid #888;
-  border-radius: 10px;
-  width: 80%;
-  max-width: 270px;
-  font-family: system-ui, -apple-system, "Segoe UI", "Roboto", "Ubuntu",
-    "Cantarell", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
-  position: relative;
-}
-
-@media screen and (max-width: 768px) {
-  .immersive-translate-modal-content {
-    margin: 50% auto !important;
-  }
-}
-
-.immersive-translate-modal .immersive-translate-modal-content-in-input {
-  max-width: 500px;
-}
-.immersive-translate-modal-content-in-input .immersive-translate-modal-body {
-  text-align: left;
-  max-height: unset;
-}
-
-.immersive-translate-modal-title {
-  text-align: center;
-  font-size: 16px;
-  font-weight: 700;
-  color: #333333;
-}
-
-.immersive-translate-modal-body {
-  text-align: center;
-  font-size: 14px;
-  font-weight: 400;
-  color: #333333;
-  word-break: break-all;
-  margin-top: 24px;
-}
-
-@media screen and (max-width: 768px) {
-  .immersive-translate-modal-body {
-    max-height: 250px;
-    overflow-y: auto;
-  }
-}
-
-.immersive-translate-close {
-  color: #666666;
-  position: absolute;
-  right: 16px;
-  top: 16px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.immersive-translate-close:hover,
-.immersive-translate-close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.immersive-translate-modal-footer {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 24px;
-}
-
-.immersive-translate-btn {
-  width: fit-content;
-  color: #fff;
-  background-color: #ea4c89;
-  border: none;
-  font-size: 16px;
-  margin: 0 8px;
-  padding: 9px 30px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.immersive-translate-btn:hover {
-  background-color: #f082ac;
-}
-.immersive-translate-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-.immersive-translate-btn:disabled:hover {
-  background-color: #ea4c89;
-}
-
-.immersive-translate-cancel-btn {
-  /* gray color */
-  background-color: rgb(89, 107, 120);
-}
-
-.immersive-translate-cancel-btn:hover {
-  background-color: hsl(205, 20%, 32%);
-}
-
-.immersive-translate-action-btn {
-  background-color: transparent;
-  color: #ea4c89;
-  border: 1px solid #ea4c89;
-}
-
-.immersive-translate-btn svg {
-  margin-right: 5px;
-}
-
-.immersive-translate-link {
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-drag: none;
-  text-decoration: none;
-  color: #007bff;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
-}
-
-.immersive-translate-primary-link {
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-drag: none;
-  text-decoration: none;
-  color: #ea4c89;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
-}
-
-.immersive-translate-modal input[type="radio"] {
-  margin: 0 6px;
-  cursor: pointer;
-}
-
-.immersive-translate-modal label {
-  cursor: pointer;
-}
-
-.immersive-translate-close-action {
-  position: absolute;
-  top: 2px;
-  right: 0px;
-  cursor: pointer;
-}
-
-.imt-image-status {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 16px !important;
-}
-.imt-image-status img,
-.imt-image-status svg,
-.imt-img-loading {
-  width: 28px !important;
-  height: 28px !important;
-  margin: 0 0 8px 0 !important;
-  min-height: 28px !important;
-  min-width: 28px !important;
-  position: relative !important;
-}
-.imt-img-loading {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAtFBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////oK74hAAAAPHRSTlMABBMIDyQXHwyBfFdDMSw+OjXCb+5RG51IvV/k0rOqlGRM6KKMhdvNyZBz9MaupmxpWyj437iYd/yJVNZeuUC7AAACt0lEQVRIx53T2XKiUBCA4QYOiyCbiAsuuGBcYtxiYtT3f6/pbqoYHVFO5r+iivpo6DpAWYpqeoFfr9f90DsYAuRSWkFnPO50OgR9PwiCUFcl2GEcx+N/YBh6pvKaefHlUgZd1zVe0NbYcQjGBfzrPE8Xz8aF+71D8gG6DHFPpc4a7xFiCDuhaWgKgGIJQ3d5IMGDrpS4S5KgpIm+en9f6PlAhKby4JwEIxlYJV9h5k5nee9GoxHJ2IDSNB0dwdad1NAxDJ/uXDHYmebdk4PdbkS58CIVHdYSUHTYYRWOJblWSyu2lmy3KNFVJNBhxcuGW4YBVCbYGRZwIooipHsNqjM4FbgOQqQqSKQQU9V8xmi1QlgHqQQ6DDBvRUVCDirs+EzGDGOQTCATgtYTnbCVLgsVgRE0T1QE0qHCFAht2z6dLvJQs3Lo2FQoDxWNUiBhaP4eRgwNkI+dAjVOA/kUrIDwf3CG8NfNOE0eiFotSuo+rBiq8tD9oY4Qzc6YJw99hl1wzpQvD7ef2M8QgnOGJfJw+EltQc+oX2yn907QB22WZcvlUpd143dqQu+8pCJZuGE4xCuPXJqqcs5sNpsI93Rmzym1k4Npk+oD1SH3/a3LOK/JpUBpWfqNySxWzCfNCUITuDG5dtuphrUJ1myeIE9bIsPiKrfqTai5WZxbhtNphYx6GEIHihyGFTI69lje/rxajdh0s0msZ0zYxyPLhYCb1CyHm9Qsd2H37Y3lugVwL9kNh8Ot8cha6fUNQ8nuXi5z9/ExsAO4zQrb/ev1yrCB7lGyQzgYDGuxq1toDN/JGvN+HyWNHKB7zEoK+PX11e12G431erGYzwmytAWU56fkMHY5JJnDRR2eZji3AwtIcrEV8Cojat/BdQ7XOwGV1e1hDjGGjXbdArm8uJZtCH5MbcctVX8A1WpqumJHwckAAAAASUVORK5CYII=");
-  background-size: 28px 28px;
-  animation: image-loading-rotate 1s linear infinite !important;
-}
-
-.imt-image-status span {
-  color: var(--bg-2, #fff) !important;
-  font-size: 14px !important;
-  line-height: 14px !important;
-  font-weight: 500 !important;
-  font-family: "PingFang SC", Arial, sans-serif !important;
-}
-
-@keyframes image-loading-rotate {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
-}
-</style></head>
-<body ap-style="" data-new-gr-c-s-check-loaded="14.1240.0" data-gr-ext-installed="">
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
     <!-- 現代化播放器控制列 -->
     <div class="video-controls" id="videoControls">
         <!-- 手機版左側區域 -->
@@ -1235,7 +720,7 @@
                     <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"></path>
                 </svg>
             </button>
-            <div class="current-time" id="currentTime">00:37</div>
+            <div class="current-time" id="currentTime">00:00</div>
         </div>
         
         <!-- 手機版中央區域 -->
@@ -1266,7 +751,7 @@
                 <option value="0.25">0.25×</option>
                 <option value="0.5">0.5×</option>
                 <option value="0.75">0.75×</option>
-                <option value="1" selected="">1×</option>
+                <option value="1" selected>1×</option>
                 <option value="1.25">1.25×</option>
                 <option value="1.5">1.5×</option>
                 <option value="1.75">1.75×</option>
@@ -1286,7 +771,7 @@
         </div>
         
         <!-- 時間顯示 -->
-        <div class="current-time" id="currentTimeDesktop">00:37</div>
+        <div class="current-time" id="currentTimeDesktop">00:00</div>
         
         <!-- 後退 -->
         <div>
@@ -1327,7 +812,7 @@
                 <option value="0.25">0.25×</option>
                 <option value="0.5">0.5×</option>
                 <option value="0.75">0.75×</option>
-                <option value="1" selected="">1×</option>
+                <option value="1" selected>1×</option>
                 <option value="1.25">1.25×</option>
                 <option value="1.5">1.5×</option>
                 <option value="1.75">1.75×</option>
@@ -1353,9 +838,17 @@
                     </div>
                     
                     <div class="video-container">
-                        <iframe id="youtubePlayer" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="108篇藥師咒、藥師灌頂真言 (梵音)" width="100%" height="100%" src="https://www.youtube.com/embed/oayy63pHCAA?enablejsapi=1&amp;rel=0&amp;modestbranding=1&amp;controls=0&amp;disablekb=1&amp;playsinline=1&amp;iv_load_policy=3&amp;fs=0&amp;origin=http%3A%2F%2F127.0.0.1%3A5500&amp;widgetid=1&amp;forigin=http%3A%2F%2F127.0.0.1%3A5500%2Findex.html&amp;aoriginsup=1&amp;gporigin=http%3A%2F%2F127.0.0.1%3A5500%2Findex.html&amp;vf=6"></iframe>
+                        <iframe id="youtubePlayer" 
+                                frameborder="0" 
+                                allowfullscreen 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                title="108篇藥師咒、藥師灌頂真言 (梵音)" 
+                                width="100%" 
+                                height="100%" 
+                                src="https://www.youtube.com/embed/oayy63pHCAA?enablejsapi=1&rel=0&modestbranding=1&controls=0&disablekb=1&playsinline=1&iv_load_policy=3&fs=0">
+                        </iframe>
                     </div>
-
                 </div>
             </div>
             
@@ -1456,124 +949,25 @@
                         </div>
                     </div>
                 </div>
-                
-
             </div>
         </div>
     </div>
+
     <script>
         let player;
         let isPlaying = false;
         let currentTime = 0;
         let timeUpdateInterval;
-        let isVerticalMode = true; // 修改：預設為垂直檢視模式
+        let isVerticalMode = true;
+        let playerReady = false;
         
         // 可用的播放速度選項
         const speedOptions = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
         let currentSpeedIndex = 3; // 預設 1x 速度
         
-        // 調整播放速度函數
-        function adjustSpeed(direction) {
-            if (!player) return;
-            
-            if (direction === 'up' && currentSpeedIndex < speedOptions.length - 1) {
-                currentSpeedIndex++;
-            } else if (direction === 'down' && currentSpeedIndex > 0) {
-                currentSpeedIndex--;
-            } else {
-                return; // 已達到最大或最小值
-            }
-            
-            const newSpeed = speedOptions[currentSpeedIndex];
-            
-            try {
-                player.setPlaybackRate(newSpeed);
-                
-                // 更新所有速度選擇器
-                const selects = document.querySelectorAll('.speed-select');
-                selects.forEach(select => {
-                    select.value = newSpeed;
-                });
-                
-                console.log(`速度調整至: ${newSpeed}x`);
-                
-                // 顯示速度改變提示
-                showSpeedNotification(newSpeed);
-                
-            } catch (error) {
-                console.error('設定播放速度失敗:', error);
-            }
-        }
-        
-        // 顯示速度改變提示
-        function showSpeedNotification(speed) {
-            // 創建或更新速度提示
-            let notification = document.getElementById('speedNotification');
-            if (!notification) {
-                notification = document.createElement('div');
-                notification.id = 'speedNotification';
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background: rgba(0, 0, 0, 0.8);
-                    color: white;
-                    padding: 15px 25px;
-                    border-radius: 8px;
-                    font-size: 18px;
-                    font-weight: 600;
-                    z-index: 1000;
-                    opacity: 0;
-                    transition: opacity 0.3s ease;
-                    pointer-events: none;
-                `;
-                document.body.appendChild(notification);
-            }
-            
-            notification.textContent = `播放速度: ${speed}x`;
-            notification.style.opacity = '1';
-            
-            // 1秒後淡出
-            setTimeout(() => {
-                notification.style.opacity = '0';
-            }, 1000);
-        }
-        
-        // 切換檢視模式函數
-        function toggleViewMode() {
-            const mainContent = document.getElementById('mainContent');
-            const toggleIcon = document.getElementById('toggleIcon');
-            const toggleText = document.getElementById('toggleText');
-            
-            isVerticalMode = !isVerticalMode;
-            
-            if (isVerticalMode) {
-                // 切換到垂直模式
-                mainContent.classList.add('vertical-mode');
-                toggleIcon.textContent = '🔄';
-                toggleText.textContent = '並排檢視';
-                console.log('切換到垂直檢視模式');
-            } else {
-                // 切換到並排模式
-                mainContent.classList.remove('vertical-mode');
-                toggleIcon.textContent = '📱';
-                toggleText.textContent = '垂直檢視';
-                console.log('切換到並排檢視模式');
-            }
-            
-            // 更新控制按鈕顯示
-            updateControlsVisibility();
-        }
-        
-        // 控制按鈕已置底，無需切換顯示
-        function updateControlsVisibility() {
-            // 置底控制欄始終顯示，無需操作
-            console.log('控制按鈕已置底顯示');
-        }
-        
         // YouTube IFrame API 準備就緒時調用
         function onYouTubeIframeAPIReady() {
+            console.log('YouTube API 正在初始化...');
             player = new YT.Player('youtubePlayer', {
                 height: '100%',
                 width: '100%',
@@ -1582,47 +976,72 @@
                     'enablejsapi': 1,
                     'rel': 0,
                     'modestbranding': 1,
-                    'controls': 0, // 隱藏 YouTube 內建控制項
-                    'disablekb': 1, // 禁用 YouTube 內建鍵盤快捷鍵
-                    'playsinline': 1, // 手機版內嵌播放，不全螢幕
-                    'iv_load_policy': 3, // 隱藏注釋
-                    'fs': 0, // 禁用全螢幕按鈕
+                    'controls': 0,
+                    'disablekb': 1,
+                    'playsinline': 1,
+                    'iv_load_policy': 3,
+                    'fs': 0,
                 },
                 events: {
                     'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
+                    'onStateChange': onPlayerStateChange,
+                    'onError': onPlayerError
                 }
             });
         }
         
         function onPlayerReady(event) {
             console.log('YouTube Player 已準備就緒');
-            // 置底控制欄已設定，開始時間更新
+            playerReady = true;
             startTimeUpdate();
+            
+            // 初始化時間顯示
+            updateTimeDisplay();
         }
         
         function onPlayerStateChange(event) {
+            console.log('播放器狀態變化:', event.data);
+            
             if (event.data == YT.PlayerState.PLAYING) {
                 isPlaying = true;
                 updatePlayPauseButton();
+                console.log('開始播放');
             } else if (event.data == YT.PlayerState.PAUSED) {
                 isPlaying = false;
                 updatePlayPauseButton();
+                console.log('暫停播放');
+            } else if (event.data == YT.PlayerState.ENDED) {
+                isPlaying = false;
+                updatePlayPauseButton();
+                console.log('播放結束');
             }
         }
         
+        function onPlayerError(event) {
+            console.error('YouTube Player 錯誤:', event.data);
+        }
+        
         function togglePlayPause() {
-            if (!player) return;
+            if (!playerReady || !player) {
+                console.log('播放器尚未準備就緒');
+                return;
+            }
             
-            if (isPlaying) {
-                player.pauseVideo();
-            } else {
-                player.playVideo();
+            try {
+                if (isPlaying) {
+                    player.pauseVideo();
+                    console.log('執行暫停');
+                } else {
+                    player.playVideo();
+                    console.log('執行播放');
+                }
+            } catch (error) {
+                console.error('播放/暫停操作失敗:', error);
             }
         }
         
         function updatePlayPauseButton() {
-            // 更新現代化播放/暫停按鈕圖標（手機版）
+            // 更新手機版按鈕
             const playIcon = document.getElementById('playIcon');
             const pauseIcon = document.getElementById('pauseIcon');
             
@@ -1652,20 +1071,26 @@
         }
         
         function seekRelative(seconds) {
-            if (!player) return;
+            if (!playerReady || !player) {
+                console.log('播放器尚未準備就緒，無法跳轉');
+                return;
+            }
             
             try {
                 const currentTime = player.getCurrentTime();
                 const newTime = Math.max(0, currentTime + seconds);
                 player.seekTo(newTime, true);
+                console.log(`跳轉到: ${newTime.toFixed(1)}秒 (${seconds > 0 ? '+' : ''}${seconds}秒)`);
             } catch (error) {
                 console.error('跳轉失敗:', error);
             }
         }
         
-        // 新增重置播放函數
         function resetAndPlay() {
-            if (!player) return;
+            if (!playerReady || !player) {
+                console.log('播放器尚未準備就緒，無法重置');
+                return;
+            }
             
             try {
                 player.seekTo(0, true);
@@ -1677,18 +1102,19 @@
         }
         
         function changePlaybackRate() {
-            if (!player) return;
+            if (!playerReady || !player) {
+                console.log('播放器尚未準備就緒，無法改變速度');
+                return;
+            }
             
-            // 取得所有速度選擇器
             const selects = document.querySelectorAll('.speed-select');
             let rate = 1;
             
-            // 找到被改變的選擇器
             selects.forEach(select => {
                 if (document.activeElement === select) {
                     rate = parseFloat(select.value);
-                    // 更新當前速度索引
                     currentSpeedIndex = speedOptions.indexOf(rate);
+                    
                     // 同步其他選擇器
                     selects.forEach(otherSelect => {
                         if (otherSelect !== select) {
@@ -1706,17 +1132,82 @@
             }
         }
         
+        function adjustSpeed(direction) {
+            if (!playerReady || !player) return;
+            
+            if (direction === 'up' && currentSpeedIndex < speedOptions.length - 1) {
+                currentSpeedIndex++;
+            } else if (direction === 'down' && currentSpeedIndex > 0) {
+                currentSpeedIndex--;
+            } else {
+                return;
+            }
+            
+            const newSpeed = speedOptions[currentSpeedIndex];
+            
+            try {
+                player.setPlaybackRate(newSpeed);
+                
+                const selects = document.querySelectorAll('.speed-select');
+                selects.forEach(select => {
+                    select.value = newSpeed;
+                });
+                
+                console.log(`速度調整至: ${newSpeed}x`);
+                showSpeedNotification(newSpeed);
+                
+            } catch (error) {
+                console.error('設定播放速度失敗:', error);
+            }
+        }
+        
+        function showSpeedNotification(speed) {
+            let notification = document.getElementById('speedNotification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'speedNotification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(0, 0, 0, 0.8);
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 8px;
+                    font-size: 18px;
+                    font-weight: 600;
+                    z-index: 1000;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(notification);
+            }
+            
+            notification.textContent = `播放速度: ${speed}x`;
+            notification.style.opacity = '1';
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+            }, 1000);
+        }
+        
         function startTimeUpdate() {
+            if (timeUpdateInterval) {
+                clearInterval(timeUpdateInterval);
+            }
+            
             timeUpdateInterval = setInterval(() => {
-                if (player && typeof player.getCurrentTime === 'function') {
+                if (playerReady && player && typeof player.getCurrentTime === 'function') {
                     try {
                         currentTime = player.getCurrentTime();
                         updateTimeDisplay();
                     } catch (error) {
-                        // 忽略錯誤，繼續嘗試
+                        // 靜默處理錯誤
                     }
                 }
-            }, 1000);
+            }, 500); // 減少更新間隔到500ms以獲得更精確的時間顯示
         }
         
         function updateTimeDisplay() {
@@ -1735,9 +1226,28 @@
             }
         }
         
+        function toggleViewMode() {
+            const mainContent = document.getElementById('mainContent');
+            const toggleIcon = document.getElementById('toggleIcon');
+            const toggleText = document.getElementById('toggleText');
+            
+            isVerticalMode = !isVerticalMode;
+            
+            if (isVerticalMode) {
+                mainContent.classList.add('vertical-mode');
+                toggleIcon.textContent = '🔄';
+                toggleText.textContent = '並排檢視';
+                console.log('切換到垂直檢視模式');
+            } else {
+                mainContent.classList.remove('vertical-mode');
+                toggleIcon.textContent = '📱';
+                toggleText.textContent = '垂直檢視';
+                console.log('切換到並排檢視模式');
+            }
+        }
+        
         // 鍵盤快捷鍵支援
         document.addEventListener('keydown', function(event) {
-            // 確保不在輸入框內
             if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.tagName === 'SELECT') {
                 return;
             }
@@ -1763,7 +1273,6 @@
                     break;
                 case 'Minus':
                 case 'NumpadSubtract':
-                    // 只有在沒有按下 Cmd 鍵時才觸發速度控制
                     if (!event.metaKey) {
                         event.preventDefault();
                         adjustSpeed('down');
@@ -1771,7 +1280,6 @@
                     break;
                 case 'Equal':
                 case 'NumpadAdd':
-                    // 只有在沒有按下 Cmd 鍵時才觸發速度控制
                     if (!event.metaKey) {
                         event.preventDefault();
                         adjustSpeed('up');
@@ -1779,13 +1287,11 @@
                     break;
                 case 'Digit0':
                 case 'Numpad0':
-                    // 只有在沒有按下 Cmd 鍵時才觸發速度重置
                     if (!event.metaKey) {
                         event.preventDefault();
-                        // 重設為正常速度 1x
                         currentSpeedIndex = 3;
                         const normalSpeed = speedOptions[currentSpeedIndex];
-                        if (player) {
+                        if (playerReady && player) {
                             player.setPlaybackRate(normalSpeed);
                             const selects = document.querySelectorAll('.speed-select');
                             selects.forEach(select => {
@@ -1804,45 +1310,19 @@
             console.log('頁面已載入，等待 YouTube API...');
             console.log('預設檢視模式：垂直佈局');
             console.log('控制欄模式：統一固定在底部');
+            
+            // 確保 YouTube API 腳本已載入
+            if (!window.YT) {
+                console.log('正在等待 YouTube API 載入...');
+            }
+        });
+        
+        // 清理函數
+        window.addEventListener('beforeunload', function() {
+            if (timeUpdateInterval) {
+                clearInterval(timeUpdateInterval);
+            }
         });
     </script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
-
-<div class="ap-ext ap-ext-taobao_search_by_image"><div translate="no" class="ap-base ap-base--ltr ap-theme--dark"><div><div class="ap-toolbar ap-toolbar--left ap-toolbar--collapse"><!----><div class="ap-toolbar__inner"><!----><!----><!----></div></div></div><!----><div><!----><div class="ap-sbi"><div class="ap-sbi-btn-search-wrapper" style="cursor: pointer; display: none;"><div class="ap-sbi-btn-search"><i class="ap-sbi-btn-search__icon ap-icon-search"></i><span class="ap-sbi-btn-search__txt">AliPrice</span></div><div class="ap-sbi-options"><div class="ap-sbi-options__label"><i class="ap-sbi-options__icon ap-icon-vertical-ellipsis"></i></div><!----></div></div><!----><div class="ap-sbi-aside"><!----><div class="ap-sbi-aside-btn-minimize" style="display: none;"><img src="" class="ap-sbi-img-thumb"><i class="ap-sbi-aside-btn-minimize__icon ap-icon-chevron-right"></i></div><!----></div><!----></div></div><!----><div><div class="ap-dlimgs-modal-wrapper"><!----></div><div class="ap-dlimgs-msg-modal"><!----></div><div><!----></div><div><div class="ap-dlimgs-export"><!----></div></div><div><div class="ap-dlimgs-rename-modal"><!----></div></div><!----></div><div></div><div></div><div></div><div></div><!----><div></div><div><!----></div><div></div><div></div><!----><!----><!----><div></div><div></div><div><!----></div><div></div><div class="ap-sub-favorite-modal" config="[object Object]"><!----></div><!----><!----></div></div><div id="quick-start-container"></div></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration><div id="immersive-translate-popup" style="all: initial"></div></html>
+</body>
+</html>
