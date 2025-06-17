@@ -333,12 +333,21 @@
         .video-container {
             position: relative;
             width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
             height: 0;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 337.5px; /* 600px * 0.5625 = 337.5px for 16:9 ratio */
             overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             margin-bottom: 15px;
+        }
+        
+        /* 在小螢幕上使用百分比 */
+        @media (max-width: 600px) {
+            .video-container {
+                padding-bottom: 56.25% !important;
+            }
         }
         
         .video-container iframe {
