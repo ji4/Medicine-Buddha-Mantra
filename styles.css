@@ -475,7 +475,94 @@ body {
 
 .speed-select:focus {
     outline: none;
-    border-color: rgba(139, 69, 19, 0.6);
+}
+
+/* 計數器觸發按鈕樣式 */
+.counter-toggle-btn {
+    position: relative;
+    margin-left: 8px;
+}
+
+.counter-toggle-btn.active {
+    background: rgba(139, 69, 19, 0.15);
+    color: #8b4513;
+}
+
+/* 浮動計數器面板樣式 */
+.counter-panel {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 80px;
+    background: rgba(255, 248, 220, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 12px 24px;
+    box-shadow: 
+        0 4px 16px rgba(139, 69, 19, 0.2),
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid rgba(139, 69, 19, 0.3);
+    min-width: 120px;
+    z-index: 1000;
+}
+
+.counter-panel.show {
+    display: flex;
+}
+
+.counter-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #3d2914;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.counter-number {
+    min-width: 32px;
+    text-align: center;
+}
+
+.reset-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #8b4513;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+}
+
+.reset-btn:hover {
+    opacity: 1;
+    background: rgba(139, 69, 19, 0.1);
+}
+
+.counter-helpers {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: #8b4513;
+    opacity: 0.8;
+}
+
+.counter-display:hover {
+    background: rgba(139, 69, 19, 0.05);
+}
+
+.counter-display:active {
+    transform: scale(0.98);
 }
 
 /* 桌面版輔助提示 */
@@ -713,6 +800,19 @@ body {
         font-size: 11px;
         margin-top: 4px;
     }
+
+    .counter-panel {
+        bottom: 70px;
+        padding: 8px 16px;
+    }
+    
+    .counter-display {
+        font-size: 20px;
+    }
+    
+    .counter-helpers {
+        display: none;
+    }
 }
 
 @media (max-width: 480px) {
@@ -815,5 +915,15 @@ body {
     .counter-section .helper-text {
         font-size: 10px;
         margin-top: 3px;
+    }
+
+    .counter-panel {
+        bottom: 65px;
+        min-width: 100px;
+    }
+    
+    .counter-display {
+        font-size: 18px;
+        gap: 8px;
     }
 }

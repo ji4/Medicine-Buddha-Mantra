@@ -312,85 +312,111 @@ class SpeedController {
 // ===== 計數器管理器（為未來功能預留） =====
 class CounterManager {
     constructor() {
-        this.counter = 0;
-        this.longPressTimer = null;
-        this.longPressDuration = 1000; // 1秒長按
-        this.init();
+        this.count = 0;
+        this.isVisible = false;
     }
 
     init() {
-        const counterDisplay = document.getElementById('counterDisplay');
+        console.log('初始化計數器管理器...');
+        
+        // 獲取 DOM 元素
+        this.counterPanel = document.getElementById('counterPanel');
+        this.counterNumber = document.querySelector('.counter-number');
+        this.resetBtn = document.getElementById('resetCounter');
+        this.toggleBtns = {
+            mobile: document.getElementById('counterToggleBtn'),
+            desktop: document.getElementById('counterToggleBtnDesktop')
+        };
 
-        if (counterDisplay) {
-            // 使用 touchstart 和 click 事件來處理點擊
-            counterDisplay.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                this.startLongPress();
-            });
+        // 檢查元素是否存在
+        if (!this.counterPanel) console.error('找不到計數器面板元素');
+        if (!this.counterNumber) console.error('找不到計數顯示元素');
+        if (!this.resetBtn) console.error('找不到重設按鈕元素');
+        if (!this.toggleBtns.mobile) console.error('找不到移動版切換按鈕');
+        if (!this.toggleBtns.desktop) console.error('找不到桌面版切換按鈕');
 
-            counterDisplay.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                if (this.longPressTimer) {
-                    clearTimeout(this.longPressTimer);
-                    this.longPressTimer = null;
-                    this.increment(); // 如果不是長按，就增加計數
-                }
-            });
+        // 初始化計數器顯示
+        this.updateDisplay();
 
-            counterDisplay.addEventListener('touchcancel', (e) => {
-                e.preventDefault();
-                if (this.longPressTimer) {
-                    clearTimeout(this.longPressTimer);
-                    this.longPressTimer = null;
-                }
-            });
-
-            // 滑鼠事件作為備用
-            counterDisplay.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                this.startLongPress();
-            });
-
-            counterDisplay.addEventListener('mouseup', (e) => {
-                e.preventDefault();
-                if (this.longPressTimer) {
-                    clearTimeout(this.longPressTimer);
-                    this.longPressTimer = null;
-                    this.increment(); // 如果不是長按，就增加計數
-                }
-            });
-
-            counterDisplay.addEventListener('mouseleave', (e) => {
-                e.preventDefault();
-                if (this.longPressTimer) {
-                    clearTimeout(this.longPressTimer);
-                    this.longPressTimer = null;
-                }
+        // 綁定計數器面板點擊事件
+        if (this.counterPanel) {
+            this.counterPanel.addEventListener('click', (e) => {
+                console.log('計數器面板被點擊');
+                // 如果點擊的是重設按鈕，不要增加計數
+                if (e.target.closest('.reset-btn')) return;
+                this.increment();
             });
         }
+
+        // 綁定重設按鈕事件
+        if (this.resetBtn) {
+            this.resetBtn.addEventListener('click', (e) => {
+                console.log('重設按鈕被點擊');
+                e.stopPropagation(); // 防止觸發面板的點擊事件
+                this.reset();
+            });
+        }
+
+        // 綁定切換按鈕事件
+        Object.entries(this.toggleBtns).forEach(([type, btn]) => {
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    console.log(`${type} 切換按鈕被點擊`);
+                    this.toggleVisibility();
+                });
+            }
+        });
+
+        // 綁定鍵盤事件
+        document.addEventListener('keydown', (e) => {
+            if (!this.isVisible) return;
+
+            if (e.key === 'Enter') {
+                console.log('Enter 鍵被按下');
+                this.increment();
+            } else if (e.key === 'Delete' || e.key === 'Backspace') {
+                console.log('Delete/Backspace 鍵被按下');
+                this.reset();
+            }
+        });
+
+        console.log('計數器管理器初始化完成');
     }
 
-    startLongPress() {
-        this.longPressTimer = setTimeout(() => {
-            this.reset();
-            this.longPressTimer = null;
-        }, this.longPressDuration);
+    toggleVisibility() {
+        console.log('切換計數器面板可見性');
+        this.isVisible = !this.isVisible;
+        if (this.counterPanel) {
+            this.counterPanel.classList.toggle('show', this.isVisible);
+        }
+        
+        // 更新切換按鈕狀態
+        Object.values(this.toggleBtns).forEach(btn => {
+            if (btn) {
+                btn.classList.toggle('active', this.isVisible);
+            }
+        });
+        console.log('計數器面板可見性:', this.isVisible);
     }
 
     increment() {
-        this.counter++;
+        this.count++;
+        console.log('計數增加到:', this.count);
         this.updateDisplay();
     }
 
     reset() {
-        this.counter = 0;
+        this.count = 0;
+        console.log('計數重設為 0');
         this.updateDisplay();
     }
 
     updateDisplay() {
-        const counterDisplay = document.getElementById('counterDisplay');
-        if (counterDisplay) {
-            counterDisplay.textContent = this.counter;
+        if (this.counterNumber) {
+            this.counterNumber.textContent = this.count;
+            console.log('更新計數顯示:', this.count);
+        } else {
+            console.error('無法更新計數顯示：找不到計數顯示元素');
         }
     }
 }
@@ -490,7 +516,7 @@ class EventManager {
 // ===== 應用程式初始化 =====
 class App {
     constructor() {
-        this.youtubePlayer = new YouTubePlayerManager();
+        this.youtubeManager = new YouTubePlayerManager();
         this.uiManager = new UIManager();
         this.timeManager = new TimeManager();
         this.speedController = new SpeedController();
@@ -499,9 +525,9 @@ class App {
     }
 
     init() {
-        console.log('應用程式初始化中...');
+        this.youtubeManager.init();
         this.eventManager.init();
-        console.log('控制欄模式：統一固定在底部');
+        this.counterManager.init();
     }
 
     cleanup() {
@@ -516,7 +542,6 @@ const timeManager = new TimeManager();
 const speedController = new SpeedController();
 const counterManager = new CounterManager();
 const eventManager = new EventManager();
-const app = new App();
 
 // ===== YouTube API 回調函數 =====
 function onYouTubeIframeAPIReady() {
@@ -524,14 +549,22 @@ function onYouTubeIframeAPIReady() {
 }
 
 // ===== 頁面生命週期 =====
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('頁面已載入，等待 YouTube API...');
-    app.init();
+window.addEventListener('load', () => {
+    console.log('頁面完全載入，包括所有依賴項...');
     
-    // 確保 YouTube API 腳本已載入
-    if (!window.YT) {
-        console.log('正在等待 YouTube API 載入...');
-    }
+    // 初始化應用
+    const app = new App();
+    app.init();
+    window.app = app; // 為了調試方便
+    
+    // 檢查計數器元素
+    const counterPanel = document.getElementById('counterPanel');
+    const counterToggleBtn = document.getElementById('counterToggleBtn');
+    const counterToggleBtnDesktop = document.getElementById('counterToggleBtnDesktop');
+    
+    console.log('計數器面板元素:', counterPanel ? '已找到' : '未找到');
+    console.log('移動版切換按鈕:', counterToggleBtn ? '已找到' : '未找到');
+    console.log('桌面版切換按鈕:', counterToggleBtnDesktop ? '已找到' : '未找到');
 });
 
 // 清理函數
