@@ -475,17 +475,17 @@ body {
 
 .speed-select:focus {
     outline: none;
+    border-color: rgba(139, 69, 19, 0.6);
 }
 
-/* 計數器觸發按鈕樣式 */
-.counter-toggle-btn {
-    position: relative;
-    margin-left: 8px;
-}
-
-.counter-toggle-btn.active {
-    background: rgba(139, 69, 19, 0.15);
-    color: #8b4513;
+/* 桌面版輔助提示 */
+.helper-text {
+    font-size: 9px !important;
+    color: #6c757d;
+    margin-top: 2px;
+    text-align: center;
+    opacity: 0.8;
+    font-weight: 500;
 }
 
 /* 手機版浮動計數器面板 */
