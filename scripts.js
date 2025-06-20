@@ -380,6 +380,28 @@ class CounterManager {
                 this.reset();
             }
         });
+
+        // 監聽視窗大小變化，當切換到桌面版時隱藏手機版計數器面板
+        window.addEventListener('resize', this.handleResize.bind(this));
+    }
+
+    handleResize() {
+        // 當視窗寬度大於 768px（桌面版）時，隱藏手機版計數器面板
+        if (window.innerWidth > 768 && this.isVisible) {
+            this.hidePanel();
+        }
+    }
+
+    hidePanel() {
+        this.isVisible = false;
+        
+        if (this.counterPanel) {
+            this.counterPanel.classList.remove('show');
+        }
+        
+        if (this.counterToggleBtn) {
+            this.counterToggleBtn.classList.remove('active');
+        }
     }
 
     toggleVisibility() {

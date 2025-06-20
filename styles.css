@@ -511,6 +511,13 @@ body {
     box-sizing: border-box;
 }
 
+/* 桌面版下隱藏計數器面板 */
+@media (min-width: 769px) {
+    .counter-panel {
+        display: none !important;
+    }
+}
+
 .counter-panel.show {
     display: block;
 }
