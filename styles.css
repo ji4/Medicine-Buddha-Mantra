@@ -193,19 +193,7 @@ body {
     position: relative;
 }
 
-.separator::before {
-    content: '❋';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 248, 220, 0.9);
-    color: rgba(139, 69, 19, 0.8);
-    padding: 5px 10px;
-    border-radius: 50%;
-    font-size: 12px;
-    box-shadow: 0 2px 6px rgba(139, 69, 19, 0.2);
-}
+
 
 /* 主要內容區域 - 左右對照 */
 .main-content {
@@ -496,9 +484,9 @@ body {
 /* 手機版浮動計數器面板 */
 .counter-panel {
     position: fixed;
-    left: 5vw;
-    right: 5vw;
-    width: 90vw;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
     bottom: 80px;
     background: rgba(245, 241, 230, 0.9);
     backdrop-filter: blur(10px);
@@ -967,6 +955,7 @@ body {
 @media (max-width: 768px) {
     .counter-panel {
         bottom: 70px;
+        width: 180px;
     }
     
     .counter-panel .counter-number {
@@ -991,6 +980,7 @@ body {
 @media (max-width: 480px) {
     .counter-panel {
         bottom: 65px;
+        width: 160px;
     }
     
     .counter-panel .counter-number {
