@@ -523,7 +523,7 @@ body {
 }
 
 .counter-panel .counter-number {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: 500;
     color: #3d2914;
     flex-grow: 1;
@@ -571,7 +571,7 @@ body {
     }
     
     .counter-panel .counter-number {
-        font-size: 32px;
+        font-size: 24px;
     }
 
     .counter-panel .reset-btn svg {
@@ -587,7 +587,7 @@ body {
     }
     
     .counter-panel .counter-number {
-        font-size: 28px;
+        font-size: 22px;
         padding-left: 18px;
     }
 
