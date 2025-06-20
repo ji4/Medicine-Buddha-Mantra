@@ -359,6 +359,11 @@ body {
     display: none;
 }
 
+/* 手機版計數器觸發按鈕預設隱藏 */
+.counter-toggle-btn {
+    display: none;
+}
+
 /* 通用控制按鈕樣式 */
 .control-btn {
     background: 
@@ -608,10 +613,6 @@ body {
 
 /* 移動版樣式調整 */
 @media (max-width: 768px) {
-    .mobile-only {
-        display: flex;
-    }
-    
     .desktop-counter {
         display: none;
     }
@@ -656,6 +657,11 @@ body {
     .mobile-right {
         display: flex;
         align-items: center;
+    }
+    
+    /* 手機版計數器觸發按鈕顯示 */
+    .counter-toggle-btn {
+        display: flex;
     }
     
     /* 手機版下隱藏桌機版元素 */
@@ -890,6 +896,12 @@ body {
 /* 響應式顯示控制 */
 .mobile-only {
     display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-only {
+        display: flex;
+    }
 }
 
 /* 桌機版計數器樣式 */
