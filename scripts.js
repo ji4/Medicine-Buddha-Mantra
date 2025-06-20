@@ -375,8 +375,10 @@ class CounterManager {
             if (window.innerWidth <= 768 && !this.isVisible) return;
 
             if (e.key === 'Enter') {
+                e.preventDefault(); // 防止觸發點擊事件
                 this.increment();
             } else if (e.key === 'Delete' || e.key === 'Backspace') {
+                e.preventDefault(); // 防止觸發瀏覽器返回等預設行為
                 this.reset();
             }
         });
