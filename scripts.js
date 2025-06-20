@@ -314,62 +314,70 @@ class CounterManager {
     constructor() {
         this.count = 0;
         this.isVisible = false;
+        
+        // 手機版元素
+        this.counterPanel = document.getElementById('counterPanel');
+        this.counterToggleBtn = document.getElementById('counterToggleBtn');
+        this.resetBtn = document.getElementById('resetCounter');
+        
+        // 桌機版元素
+        this.counterBtnDesktop = document.getElementById('counterBtnDesktop');
+        this.resetBtnDesktop = document.getElementById('resetCounterDesktop');
+        
+        // 所有計數顯示元素
+        this.counterNumbers = document.querySelectorAll('.counter-number');
     }
 
     init() {
         console.log('初始化計數器管理器...');
         
-        // 獲取 DOM 元素
-        this.counterPanel = document.getElementById('counterPanel');
-        this.counterNumber = document.querySelector('.counter-number');
-        this.resetBtn = document.getElementById('resetCounter');
-        this.toggleBtns = {
-            mobile: document.getElementById('counterToggleBtn'),
-            desktop: document.getElementById('counterToggleBtnDesktop')
-        };
-
-        // 檢查元素是否存在
-        if (!this.counterPanel) console.error('找不到計數器面板元素');
-        if (!this.counterNumber) console.error('找不到計數顯示元素');
-        if (!this.resetBtn) console.error('找不到重設按鈕元素');
-        if (!this.toggleBtns.mobile) console.error('找不到移動版切換按鈕');
-        if (!this.toggleBtns.desktop) console.error('找不到桌面版切換按鈕');
-
         // 初始化計數器顯示
         this.updateDisplay();
 
-        // 綁定計數器面板點擊事件
-        if (this.counterPanel) {
+        // 手機版事件綁定
+        if (this.counterPanel && this.counterToggleBtn) {
+            // 切換按鈕事件
+            this.counterToggleBtn.addEventListener('click', () => {
+                console.log('手機版切換按鈕被點擊');
+                this.toggleVisibility();
+            });
+
+            // 計數器面板點擊事件
             this.counterPanel.addEventListener('click', (e) => {
-                console.log('計數器面板被點擊');
-                // 如果點擊的是重設按鈕，不要增加計數
                 if (e.target.closest('.reset-btn')) return;
+                console.log('手機版計數器面板被點擊');
+                this.increment();
+            });
+
+            // 重設按鈕事件
+            if (this.resetBtn) {
+                this.resetBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    console.log('手機版重設按鈕被點擊');
+                    this.reset();
+                });
+            }
+        }
+
+        // 桌機版事件綁定
+        if (this.counterBtnDesktop) {
+            this.counterBtnDesktop.addEventListener('click', () => {
+                console.log('桌機版計數器按鈕被點擊');
                 this.increment();
             });
         }
 
-        // 綁定重設按鈕事件
-        if (this.resetBtn) {
-            this.resetBtn.addEventListener('click', (e) => {
-                console.log('重設按鈕被點擊');
-                e.stopPropagation(); // 防止觸發面板的點擊事件
+        if (this.resetBtnDesktop) {
+            this.resetBtnDesktop.addEventListener('click', () => {
+                console.log('桌機版重設按鈕被點擊');
                 this.reset();
             });
         }
 
-        // 綁定切換按鈕事件
-        Object.entries(this.toggleBtns).forEach(([type, btn]) => {
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    console.log(`${type} 切換按鈕被點擊`);
-                    this.toggleVisibility();
-                });
-            }
-        });
-
-        // 綁定鍵盤事件
+        // 鍵盤事件
         document.addEventListener('keydown', (e) => {
-            if (!this.isVisible) return;
+            // 在手機版時，只有當面板顯示時才響應鍵盤事件
+            if (window.innerWidth <= 768 && !this.isVisible) return;
 
             if (e.key === 'Enter') {
                 console.log('Enter 鍵被按下');
@@ -384,18 +392,13 @@ class CounterManager {
     }
 
     toggleVisibility() {
-        console.log('切換計數器面板可見性');
         this.isVisible = !this.isVisible;
         if (this.counterPanel) {
             this.counterPanel.classList.toggle('show', this.isVisible);
         }
-        
-        // 更新切換按鈕狀態
-        Object.values(this.toggleBtns).forEach(btn => {
-            if (btn) {
-                btn.classList.toggle('active', this.isVisible);
-            }
-        });
+        if (this.counterToggleBtn) {
+            this.counterToggleBtn.classList.toggle('active', this.isVisible);
+        }
         console.log('計數器面板可見性:', this.isVisible);
     }
 
@@ -412,12 +415,12 @@ class CounterManager {
     }
 
     updateDisplay() {
-        if (this.counterNumber) {
-            this.counterNumber.textContent = this.count;
-            console.log('更新計數顯示:', this.count);
-        } else {
-            console.error('無法更新計數顯示：找不到計數顯示元素');
-        }
+        this.counterNumbers.forEach(element => {
+            if (element) {
+                element.textContent = this.count;
+            }
+        });
+        console.log('更新所有計數顯示為:', this.count);
     }
 }
 

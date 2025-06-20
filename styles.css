@@ -927,3 +927,158 @@ body {
         gap: 8px;
     }
 }
+
+/* 響應式顯示控制 */
+.mobile-only {
+    display: none;
+}
+
+/* 桌機版計數器樣式 */
+.desktop-counter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.desktop-counter .counter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 32px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #3d2914;
+    background: rgba(255, 248, 220, 0.95);
+    border: 1px solid rgba(139, 69, 19, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.desktop-counter .counter-btn:hover {
+    background: rgba(255, 248, 220, 0.8);
+}
+
+.desktop-counter .counter-btn:active {
+    transform: scale(0.98);
+}
+
+.desktop-counter .reset-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #8b4513;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+}
+
+.desktop-counter .reset-btn:hover {
+    opacity: 1;
+    background: rgba(139, 69, 19, 0.1);
+}
+
+/* 手機版計數器觸發按鈕 */
+.counter-toggle-btn {
+    position: relative;
+    margin-left: 8px;
+}
+
+.counter-toggle-btn.active {
+    background: rgba(139, 69, 19, 0.15);
+    color: #8b4513;
+}
+
+/* 手機版浮動計數器面板 */
+.counter-panel {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 80px;
+    background: rgba(255, 248, 220, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 8px 16px;
+    box-shadow: 
+        0 4px 16px rgba(139, 69, 19, 0.2),
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(139, 69, 19, 0.2);
+    min-width: 120px;
+    z-index: 1000;
+}
+
+.counter-panel.show {
+    display: flex;
+}
+
+.counter-panel .counter-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #3d2914;
+    padding: 4px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.counter-panel .counter-number {
+    min-width: 32px;
+    text-align: center;
+}
+
+.counter-panel .reset-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #8b4513;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+}
+
+.counter-panel .reset-btn:hover {
+    opacity: 1;
+    background: rgba(139, 69, 19, 0.1);
+}
+
+/* 移動版樣式調整 */
+@media (max-width: 768px) {
+    .mobile-only {
+        display: flex;
+    }
+    
+    .desktop-counter {
+        display: none;
+    }
+    
+    .counter-panel {
+        bottom: 70px;
+    }
+    
+    .counter-panel .counter-display {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .counter-panel {
+        bottom: 65px;
+        min-width: 100px;
+        padding: 6px 12px;
+    }
+    
+    .counter-panel .counter-display {
+        font-size: 18px;
+        gap: 8px;
+    }
+}
