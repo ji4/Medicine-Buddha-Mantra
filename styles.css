@@ -499,16 +499,16 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 16px;
-    padding: 8px 20px;
+    padding: 0;
     box-shadow: 
         0 5px 20px rgba(139, 69, 19, 0.25),
         inset 0 1px 2px rgba(255, 255, 255, 0.3);
     display: none;
     border: 1px solid rgba(139, 69, 19, 0.2);
     z-index: 1000;
-    cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 /* 桌面版下隱藏計數器面板 */
@@ -525,17 +525,60 @@ body {
 .counter-panel .counter-display {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
+    min-height: 56px;
+}
+
+/* 計數器主要區域 - 可點擊 */
+.counter-panel .counter-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.counter-panel .counter-main:hover {
+    background: rgba(139, 69, 19, 0.05);
 }
 
 .counter-panel .counter-number {
     font-size: 28px;
     font-weight: 500;
     color: #3d2914;
-    flex-grow: 1;
     text-align: center;
-    padding-left: 24px;
+}
+
+/* 分隔線 */
+.counter-panel .separator {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(139, 69, 19, 0.3) 20%,
+        rgba(139, 69, 19, 0.3) 80%,
+        transparent 100%
+    );
+    margin: 0;
+}
+
+/* Reset 按鈕區域 - 擴大可點擊範圍 */
+.counter-panel .reset-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(139, 69, 19, 0.02);
+}
+
+.counter-panel .reset-area:hover {
+    background: rgba(139, 69, 19, 0.08);
 }
 
 .counter-panel .reset-btn {
@@ -544,22 +587,23 @@ body {
     padding: 8px;
     cursor: pointer;
     color: #8b4513;
-    opacity: 0.5;
+    opacity: 0.6;
     transition: all 0.2s ease;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: none; /* 讓父元素處理點擊事件 */
 }
 
-.counter-panel .reset-btn:hover {
+.counter-panel .reset-area:hover .reset-btn {
     opacity: 1;
     background: rgba(139, 69, 19, 0.1);
 }
 
 .counter-panel .reset-btn svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
 }
 
 /* 移動版樣式調整 */
@@ -571,38 +615,9 @@ body {
     .desktop-counter {
         display: none;
     }
-    
-    .counter-panel {
-        bottom: 70px;
-        padding: 6px 15px;
-    }
-    
-    .counter-panel .counter-number {
-        font-size: 24px;
-    }
-
-    .counter-panel .reset-btn svg {
-        width: 14px;
-        height: 14px;
-    }
 }
 
-@media (max-width: 480px) {
-    .counter-panel {
-        bottom: 65px;
-        padding: 5px 15px;
-    }
-    
-    .counter-panel .counter-number {
-        font-size: 22px;
-        padding-left: 18px;
-    }
 
-    .counter-panel .reset-btn svg {
-        width: 12px;
-        height: 12px;
-    }
-}
 
 /* 響應式設計 */
 @media (max-width: 768px) {
@@ -936,94 +951,55 @@ body {
     color: #8b4513;
 }
 
-/* 手機版浮動計數器面板 */
-.counter-panel {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 80px;
-    background: rgba(255, 248, 220, 0.5);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 12px;
-    padding: 8px 16px;
-    box-shadow: 
-        0 4px 16px rgba(139, 69, 19, 0.2),
-        0 2px 4px rgba(0, 0, 0, 0.1);
-    display: none;
-    align-items: center;
-    gap: 12px;
-    border: 1px solid rgba(139, 69, 19, 0.2);
-    min-width: 120px;
-    z-index: 1000;
-}
-
-.counter-panel.show {
-    display: flex;
-}
-
-.counter-panel .counter-display {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #3d2914;
-    padding: 4px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    cursor: pointer;
-}
-
-.counter-panel .counter-number {
-    min-width: 32px;
-    text-align: center;
-}
-
-.counter-panel .reset-btn {
-    background: none;
-    border: none;
-    padding: 4px;
-    cursor: pointer;
-    color: #8b4513;
-    opacity: 0.6;
-    transition: all 0.2s ease;
-    border-radius: 50%;
-}
-
-.counter-panel .reset-btn:hover {
-    opacity: 1;
-    background: rgba(139, 69, 19, 0.1);
-}
-
-/* 移動版樣式調整 */
+/* 更新移動版樣式調整 */
 @media (max-width: 768px) {
-    .mobile-only {
-        display: flex;
-    }
-    
-    .desktop-counter {
-        display: none;
-    }
-    
     .counter-panel {
         bottom: 70px;
     }
     
-    .counter-panel .counter-display {
-        font-size: 20px;
+    .counter-panel .counter-number {
+        font-size: 24px;
+    }
+
+    .counter-panel .reset-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .counter-panel .separator {
+        height: 35px;
+    }
+
+    .counter-panel .reset-area {
+        min-width: 55px;
+        padding: 10px;
     }
 }
 
 @media (max-width: 480px) {
     .counter-panel {
         bottom: 65px;
-        min-width: 100px;
-        padding: 6px 12px;
     }
     
-    .counter-panel .counter-display {
-        font-size: 18px;
-        gap: 8px;
+    .counter-panel .counter-number {
+        font-size: 22px;
+    }
+
+    .counter-panel .reset-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .counter-panel .separator {
+        height: 30px;
+    }
+
+    .counter-panel .reset-area {
+        min-width: 50px;
+        padding: 8px;
+    }
+
+    .counter-panel .counter-main {
+        padding: 10px 15px;
     }
 }

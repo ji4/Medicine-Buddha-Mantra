@@ -341,13 +341,25 @@ class CounterManager {
                 this.toggleVisibility();
             });
 
-            // 計數器面板點擊事件
-            this.counterPanel.addEventListener('click', (e) => {
-                if (e.target.closest('.reset-btn')) return;
-                this.increment();
-            });
+            // 計數器主要區域點擊事件
+            const counterMain = document.getElementById('counterMain');
+            if (counterMain) {
+                counterMain.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.increment();
+                });
+            }
 
-            // 重設按鈕事件
+            // Reset 區域點擊事件
+            const resetArea = document.getElementById('resetArea');
+            if (resetArea) {
+                resetArea.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.reset();
+                });
+            }
+
+            // 重設按鈕事件（保留作為備用）
             if (this.resetBtn) {
                 this.resetBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
