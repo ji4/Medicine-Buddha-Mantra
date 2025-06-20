@@ -934,8 +934,8 @@ body {
     left: 50%;
     transform: translateX(-50%);
     bottom: 80px;
-    background: rgba(255, 248, 220, 0.85);
-    backdrop-filter: blur(8px);
+    background: rgba(255, 248, 220, 0.5);
+    backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: 12px;
     padding: 8px 16px;
