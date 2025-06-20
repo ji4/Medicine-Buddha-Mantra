@@ -250,7 +250,7 @@ class TimeManager {
         }
         
         timeUpdateInterval = setInterval(() => {
-            if (appState.playerReady && youtubePlayer) {
+            if (appState.playerReady && youtubePlayer && youtubePlayer.isReady()) {
                 try {
                     appState.currentTime = youtubePlayer.getCurrentTime();
                     uiManager.updateTimeDisplay();
@@ -541,16 +541,15 @@ class EventManager {
 // ===== 應用程式初始化 =====
 class App {
     constructor() {
-        this.youtubeManager = new YouTubePlayerManager();
-        this.uiManager = new UIManager();
-        this.timeManager = new TimeManager();
-        this.speedController = new SpeedController();
-        this.counterManager = new CounterManager();
-        this.eventManager = new EventManager();
+        this.youtubeManager = youtubePlayer;
+        this.uiManager = uiManager;
+        this.timeManager = timeManager;
+        this.speedController = speedController;
+        this.counterManager = counterManager;
+        this.eventManager = eventManager;
     }
 
     init() {
-        this.youtubeManager.init();
         this.eventManager.init();
         this.counterManager.init();
     }
@@ -594,7 +593,9 @@ window.addEventListener('load', () => {
 
 // 清理函數
 window.addEventListener('beforeunload', function() {
-    app.cleanup();
+    if (window.app) {
+        window.app.cleanup();
+    }
 });
 
 // ===== 向後相容的全域函數（保留舊的函數名稱） =====
