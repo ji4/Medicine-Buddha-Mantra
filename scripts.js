@@ -374,6 +374,15 @@ class CounterManager {
             // 在手機版時，只有當面板顯示時才響應鍵盤事件
             if (window.innerWidth <= 768 && !this.isVisible) return;
 
+            // 如果焦點在任何一個按鈕上，而且該按鈕不是計數器按鈕，則不執行計數操作
+            const focusedElement = document.activeElement;
+            if (focusedElement && focusedElement.tagName === 'BUTTON') {
+                const isCounterButton = focusedElement.id === 'counterBtnDesktop' || focusedElement.id === 'counterBtnMobile';
+                if (!isCounterButton) {
+                    return; // 讓 Enter 鍵觸發按鈕的預設 click 行為
+                }
+            }
+            
             if (e.key === 'Enter') {
                 e.preventDefault(); // 防止觸發點擊事件
                 this.increment();
