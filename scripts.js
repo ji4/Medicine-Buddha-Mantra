@@ -331,13 +331,29 @@ class CounterManager {
     init() {
         console.log('初始化計數器管理器...');
         
+        // 檢查元素是否存在
+        console.log('計數器面板元素:', this.counterPanel);
+        console.log('手機版切換按鈕:', this.counterToggleBtn);
+        console.log('手機版重設按鈕:', this.resetBtn);
+        console.log('桌機版計數器按鈕:', this.counterBtnDesktop);
+        console.log('桌機版重設按鈕:', this.resetBtnDesktop);
+        console.log('計數顯示元素數量:', this.counterNumbers.length);
+        
+        // 檢查初始樣式
+        if (this.counterPanel) {
+            console.log('計數器面板初始 display 樣式:', window.getComputedStyle(this.counterPanel).display);
+            console.log('計數器面板初始 visibility 樣式:', window.getComputedStyle(this.counterPanel).visibility);
+        }
+        
         // 初始化計數器顯示
         this.updateDisplay();
 
         // 手機版事件綁定
         if (this.counterPanel && this.counterToggleBtn) {
             // 切換按鈕事件
-            this.counterToggleBtn.addEventListener('click', () => {
+            this.counterToggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 console.log('手機版切換按鈕被點擊');
                 this.toggleVisibility();
             });
@@ -357,6 +373,8 @@ class CounterManager {
                     this.reset();
                 });
             }
+        } else {
+            console.error('找不到手機版計數器元素');
         }
 
         // 桌機版事件綁定
@@ -393,13 +411,23 @@ class CounterManager {
 
     toggleVisibility() {
         this.isVisible = !this.isVisible;
+        console.log('切換計數器面板可見性:', this.isVisible);
+        
         if (this.counterPanel) {
+            const beforeDisplay = window.getComputedStyle(this.counterPanel).display;
+            console.log('切換前 display 樣式:', beforeDisplay);
+            
             this.counterPanel.classList.toggle('show', this.isVisible);
+            
+            const afterDisplay = window.getComputedStyle(this.counterPanel).display;
+            console.log('切換後 display 樣式:', afterDisplay);
+            console.log('面板是否有 show 類:', this.counterPanel.classList.contains('show'));
         }
+        
         if (this.counterToggleBtn) {
             this.counterToggleBtn.classList.toggle('active', this.isVisible);
+            console.log('切換按鈕是否有 active 類:', this.counterToggleBtn.classList.contains('active'));
         }
-        console.log('計數器面板可見性:', this.isVisible);
     }
 
     increment() {
