@@ -1337,7 +1337,7 @@ strong, b, .guide-section h3 {
     font-variant-ligatures: common-ligatures discretionary-ligatures;
 }
 
-/* Buy Me a Coffee 支持區塊樣式 */
+/* Portaly 支持區塊樣式 */
 .support-section {
     margin-top: 30px;
     background: 
@@ -1388,38 +1388,62 @@ strong, b, .guide-section h3 {
     margin-top: 10px;
 }
 
-.buy-me-coffee-container {
+.portaly-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.buy-me-coffee-btn {
+.portaly-btn {
     display: inline-block;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, 
+        rgba(139, 69, 19, 0.95) 0%, 
+        rgba(160, 82, 45, 0.95) 25%,
+        rgba(205, 133, 63, 0.95) 50%,
+        rgba(184, 134, 11, 0.95) 75%,
+        rgba(139, 69, 19, 0.95) 100%);
+    color: #fff4e6;
+    text-decoration: none;
     border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
+    padding: 12px 24px;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 12px rgba(139, 69, 19, 0.3),
+        inset 0 1px 3px rgba(255, 215, 0, 0.3);
+    border: 2px solid rgba(255, 215, 0, 0.4);
 }
 
-.buy-me-coffee-btn:hover {
+.portaly-btn:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(160, 82, 45, 1) 0%, 
+        rgba(205, 133, 63, 1) 25%,
+        rgba(184, 134, 11, 1) 50%,
+        rgba(218, 165, 32, 1) 75%,
+        rgba(160, 82, 45, 1) 100%);
+    box-shadow: 
+        0 8px 20px rgba(139, 69, 19, 0.4),
+        inset 0 2px 4px rgba(255, 215, 0, 0.4);
 }
 
-.buy-me-coffee-btn:active {
+.portaly-btn:active {
     transform: translateY(-1px) scale(1.02);
 }
 
-.coffee-btn-image {
-    height: 50px;
-    width: auto;
-    border-radius: 12px;
-    transition: all 0.3s ease;
+.portaly-btn-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 16px;
 }
 
-.buy-me-coffee-btn:hover .coffee-btn-image {
-    filter: brightness(1.1) saturate(1.1);
+.portaly-icon {
+    font-size: 18px;
+}
+
+.portaly-text {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* 聯絡區塊樣式 */
@@ -1542,8 +1566,16 @@ strong, b, .guide-section h3 {
         padding: 8px 12px;
     }
     
-    .coffee-btn-image {
-        height: 45px;
+    .portaly-btn {
+        padding: 10px 20px;
+    }
+    
+    .portaly-btn-content {
+        font-size: 14px;
+    }
+    
+    .portaly-icon {
+        font-size: 16px;
     }
     
     .contact-section {
@@ -1628,8 +1660,17 @@ strong, b, .guide-section h3 {
         padding: 6px 10px;
     }
     
-    .coffee-btn-image {
-        height: 40px;
+    .portaly-btn {
+        padding: 8px 16px;
+    }
+    
+    .portaly-btn-content {
+        font-size: 13px;
+        gap: 6px;
+    }
+    
+    .portaly-icon {
+        font-size: 14px;
     }
     
     .contact-section {
