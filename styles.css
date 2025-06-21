@@ -1066,18 +1066,6 @@ body {
         inset 0 1px 3px rgba(255, 255, 255, 0.7);
 }
 
-.guide-title::before {
-    content: '॰';
-    left: 20px;
-    font-size: 18px;
-}
-
-.guide-title::after {
-    content: '॰';
-    right: 20px;
-    font-size: 18px;
-}
-
 .guide-content {
     display: grid;
     gap: 20px;
@@ -1182,17 +1170,6 @@ body {
         padding: 18px;
     }
     
-    .guide-title {
-        font-size: 14px;
-        padding: 8px;
-        margin-bottom: 10px;
-    }
-    
-    .guide-title::before,
-    .guide-title::after {
-        font-size: 12px;
-    }
-    
     .guide-content {
         gap: 15px;
     }
@@ -1232,22 +1209,6 @@ body {
     .pronunciation-guide {
         margin-top: 15px;
         padding: 15px;
-    }
-    
-    .guide-title {
-        font-size: 13px;
-        padding: 6px;
-        margin-bottom: 8px;
-    }
-    
-    .guide-title::before,
-    .guide-title::after {
-        font-size: 11px;
-        left: 15px;
-    }
-    
-    .guide-title::after {
-        right: 15px;
     }
     
     .guide-content {
