@@ -335,11 +335,10 @@ class YouTubePlayerManager {
             const savedTime = storageManager.loadVideoTime();
             const savedSpeed = storageManager.loadPlaybackSpeed();
             
-            // 恢復播放位置（如果有保存且大於5秒，避免恢復到0秒或太小的時間）
+            // 記錄保存的時間，但不立即跳轉（等待播放時再跳轉）
             if (savedTime > 5) {
-                this.player.seekTo(savedTime, true);
-                appState.lastVideoTimeSave = savedTime; // 同步更新lastVideoTimeSave
-                console.log('已恢復播放位置至:', savedTime.toFixed(1) + '秒');
+                appState.lastVideoTimeSave = savedTime;
+                console.log('已記錄上次播放位置:', savedTime.toFixed(1) + '秒，將在播放時自動跳轉');
             } else if (savedTime > 0) {
                 // 如果時間小於5秒但大於0，記錄但不自動跳轉
                 appState.lastVideoTimeSave = savedTime;
@@ -371,9 +370,17 @@ class YouTubePlayerManager {
             uiManager.updatePlayPauseButton();
             console.log('開始播放');
             
-            // 如果是第一次播放，初始化lastVideoTimeSave
-            if (appState.lastVideoTimeSave === 0) {
-                const currentTime = this.getCurrentTime();
+            // 檢查是否需要恢復到上次的時間
+            const currentTime = this.getCurrentTime();
+            const savedTime = storageManager.loadVideoTime();
+            
+            // 如果當前時間接近0秒（小於1秒）且有保存的時間大於5秒，則跳轉到保存的時間
+            if (currentTime < 1 && savedTime > 5) {
+                console.log('檢測到從0秒開始播放，自動跳轉到上次位置:', savedTime.toFixed(1) + '秒');
+                this.player.seekTo(savedTime, true);
+                appState.lastVideoTimeSave = savedTime;
+            } else if (appState.lastVideoTimeSave === 0) {
+                // 如果是第一次播放，初始化lastVideoTimeSave
                 appState.lastVideoTimeSave = currentTime;
             }
         } else if (event.data == YT.PlayerState.PAUSED) {
