@@ -1340,83 +1340,67 @@ strong, b, .guide-section h3 {
 /* 響應式設計 - 手機版調整 */
 @media (max-width: 768px) {
     .pronunciation-guide {
-        margin-top: 20px;
-        padding: 18px;
-    }
-    
-    .guide-content {
-        gap: 15px;
-    }
-    
-    .guide-section {
         padding: 15px;
     }
-    
+
+    .guide-content {
+        gap: 20px;
+    }
+    .guide-section {
+        padding: 12px;
+    }
     .guide-section h3 {
-        font-size: 15px;
-        margin-bottom: 12px;
+        font-size: 16px;
+        margin-bottom: 8px;
     }
-    
     .explanation {
-        line-height: 1.6;
+        font-size: 14px;
     }
-    
     .explanation p {
-        margin-bottom: 10px;
+        font-size: 15px;
+        line-height: 1.7;
     }
-    
     .explanation ul {
-        padding-left: 16px;
+        padding-left: 18px;
     }
-    
     .explanation li {
-        margin-bottom: 6px;
+        font-size: 15px;
+        margin-bottom: 4px;
     }
-    
     .explanation .note {
-        font-size: 13px;
-        padding: 6px 10px;
+        font-size: 14px;
+        padding: 8px;
     }
 }
 
 @media (max-width: 480px) {
     .pronunciation-guide {
-        margin-top: 15px;
-        padding: 15px;
+        padding: 10px;
     }
-    
+
     .guide-content {
-        gap: 12px;
+        flex-direction: column;
+        gap: 15px;
     }
-    
     .guide-section {
-        padding: 12px;
+        padding: 10px;
     }
-    
     .guide-section h3 {
-        font-size: 14px;
-        margin-bottom: 10px;
+        font-size: 15px;
     }
-    
     .explanation {
-        line-height: 1.5;
+        font-size: 13px;
     }
-    
     .explanation p {
-        margin-bottom: 8px;
+        font-size: 14px;
     }
-    
     .explanation ul {
-        padding-left: 14px;
-        margin: 8px 0;
+        padding-left: 16px;
     }
-    
     .explanation li {
-        margin-bottom: 5px;
+        font-size: 14px;
     }
-    
     .explanation .note {
-        font-size: 12px;
-        padding: 5px 8px;
+        font-size: 13px;
     }
 }
