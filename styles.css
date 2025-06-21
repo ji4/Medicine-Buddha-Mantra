@@ -1337,8 +1337,115 @@ strong, b, .guide-section h3 {
     font-variant-ligatures: common-ligatures discretionary-ligatures;
 }
 
+/* Buy Me a Coffee 支持區塊樣式 */
+.support-section {
+    margin-top: 30px;
+    background: 
+        radial-gradient(ellipse 160px 100px at 30% 40%, rgba(255, 165, 0, 0.06) 0%, rgba(255, 165, 0, 0.01) 35%, transparent 60%),
+        radial-gradient(ellipse 130px 170px at 80% 60%, rgba(255, 140, 0, 0.04) 0%, rgba(255, 140, 0, 0.008) 30%, transparent 55%),
+        radial-gradient(ellipse 190px 90px at 50% 15%, rgba(184, 134, 11, 0.03) 0%, rgba(184, 134, 11, 0.006) 40%, transparent 65%),
+        linear-gradient(135deg, #fffef8 0%, #fffdf5 25%, #fffcf2 50%, #fffbef 75%, #fffaec 100%);
+    background-size: 
+        220px 150px, 180px 230px, 260px 130px,
+        100% 100%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 165, 0, 0.25);
+    box-shadow: 
+        0 4px 16px rgba(255, 140, 0, 0.15),
+        inset 0 1px 3px rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+
+.support-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.support-text {
+    color: #5d4e37;
+    line-height: 1.7;
+}
+
+.support-text p {
+    margin: 0 0 12px 0;
+    font-size: 15px;
+    text-align: center;
+}
+
+.support-text .support-note {
+    font-size: 13px;
+    color: #8b7355;
+    font-style: italic;
+    background: rgba(255, 248, 220, 0.6);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(255, 165, 0, 0.4);
+    margin-top: 10px;
+}
+
+.buy-me-coffee-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buy-me-coffee-btn {
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
+}
+
+.buy-me-coffee-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+}
+
+.buy-me-coffee-btn:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+.coffee-btn-image {
+    height: 50px;
+    width: auto;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.buy-me-coffee-btn:hover .coffee-btn-image {
+    filter: brightness(1.1) saturate(1.1);
+}
+
 /* 響應式設計 - 手機版調整 */
 @media (max-width: 768px) {
+    .support-section {
+        margin-top: 20px;
+        padding: 20px 15px;
+    }
+    
+    .support-content {
+        gap: 15px;
+    }
+    
+    .support-text p {
+        font-size: 14px;
+    }
+    
+    .support-text .support-note {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+    
+    .coffee-btn-image {
+        height: 45px;
+    }
+    
     .pronunciation-guide {
         padding: 15px;
     }
@@ -1374,6 +1481,28 @@ strong, b, .guide-section h3 {
 }
 
 @media (max-width: 480px) {
+    .support-section {
+        margin-top: 15px;
+        padding: 15px 10px;
+    }
+    
+    .support-content {
+        gap: 12px;
+    }
+    
+    .support-text p {
+        font-size: 13px;
+    }
+    
+    .support-text .support-note {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+    
+    .coffee-btn-image {
+        height: 40px;
+    }
+    
     .pronunciation-guide {
         padding: 10px;
     }
