@@ -5,6 +5,13 @@
     src: local('Noto Sans Devanagari'), local('Times New Roman'), local('serif');
 }
 
+/* 支援梵文羅馬化字符的字體設定 - 僅適用於guide-content */
+@supports (font-variant-ligatures: common-ligatures) {
+    .guide-content .romanization {
+        font-variant-ligatures: common-ligatures discretionary-ligatures;
+    }
+}
+
 /* 確保特殊字符正確顯示的 Unicode 範圍 */
 @supports (font-feature-settings: "liga") {
     .romanization {
@@ -244,8 +251,7 @@ body {
     font-style: italic;
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 4px;
-    letter-spacing: 1px;
+    color: #8b4513;
     text-shadow: 0 1px 3px rgba(139, 69, 19, 0.3);
     position: relative;
     line-height: 1.2;
@@ -1210,6 +1216,7 @@ body {
 }
 
 .guide-content {
+    font-family: 'Noto Sans Devanagari', 'Noto Serif Devanagari', 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', 'Bitstream Vera Serif', 'Georgia', 'Microsoft JhengHei', 'PingFang TC', 'Noto Sans TC', 'Noto Sans CJK TC', 'Apple Color Emoji', serif;
     display: grid;
     gap: 20px;
 }
@@ -1288,6 +1295,11 @@ body {
     padding: 2px 4px;
     background: rgba(210, 105, 30, 0.1);
     border-radius: 3px;
+    font-family: 'Gentium Plus', 'Noto Serif', 'Noto Sans', 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', 'Bitstream Vera Serif', 'Charis SIL', 'Doulos SIL', 'Georgia', serif;
+    -webkit-font-feature-settings: "liga" 1, "kern" 1, "dlig" 1;
+    font-feature-settings: "liga" 1, "kern" 1, "dlig" 1;
+    font-variant-numeric: normal;
+    font-variant-ligatures: common-ligatures discretionary-ligatures;
 }
 
 .explanation .voiced {
@@ -1296,6 +1308,11 @@ body {
     padding: 2px 4px;
     background: rgba(70, 130, 180, 0.1);
     border-radius: 3px;
+    font-family: 'Gentium Plus', 'Noto Serif', 'Noto Sans', 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', 'Bitstream Vera Serif', 'Charis SIL', 'Doulos SIL', 'Georgia', serif;
+    -webkit-font-feature-settings: "liga" 1, "kern" 1, "dlig" 1;
+    font-feature-settings: "liga" 1, "kern" 1, "dlig" 1;
+    font-variant-numeric: normal;
+    font-variant-ligatures: common-ligatures discretionary-ligatures;
 }
 
 .explanation .voiced-pronunciation {
@@ -1304,6 +1321,11 @@ body {
     padding: 2px 4px;
     background: rgba(25, 25, 112, 0.1);
     border-radius: 3px;
+    font-family: 'Gentium Plus', 'Noto Serif', 'Noto Sans', 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', 'Bitstream Vera Serif', 'Charis SIL', 'Doulos SIL', 'Georgia', serif;
+    -webkit-font-feature-settings: "liga" 1, "kern" 1, "dlig" 1;
+    font-feature-settings: "liga" 1, "kern" 1, "dlig" 1;
+    font-variant-numeric: normal;
+    font-variant-ligatures: common-ligatures discretionary-ligatures;
 }
 
 /* 響應式設計 - 手機版調整 */
