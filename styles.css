@@ -146,8 +146,11 @@ body {
 }
 
 /* 修正偽粗體 (Faux Bold) 問題 */
-strong, b {
+strong, b, .guide-section h3, .explanation p, .explanation li {
     font-family: 'Noto Sans TC', 'Noto Sans CJK TC', sans-serif;
+}
+
+strong, b, .guide-section h3 {
     font-weight: 700; /* 明確指定使用 700 字重 */
 }
 
