@@ -1214,14 +1214,14 @@ body {
     }
     
     .guide-title {
-        font-size: 18px;
-        padding: 12px 16px;
-        margin-bottom: 15px;
+        font-size: 14px;
+        padding: 8px;
+        margin-bottom: 10px;
     }
     
     .guide-title::before,
     .guide-title::after {
-        font-size: 16px;
+        font-size: 12px;
     }
     
     .guide-content {
@@ -1266,14 +1266,14 @@ body {
     }
     
     .guide-title {
-        font-size: 16px;
-        padding: 10px 14px;
-        margin-bottom: 12px;
+        font-size: 13px;
+        padding: 6px;
+        margin-bottom: 8px;
     }
     
     .guide-title::before,
     .guide-title::after {
-        font-size: 14px;
+        font-size: 11px;
         left: 15px;
     }
     
