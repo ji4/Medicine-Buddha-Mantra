@@ -1397,33 +1397,33 @@ strong, b, .guide-section h3 {
 .portaly-btn {
     display: inline-block;
     background: linear-gradient(135deg, 
-        rgba(139, 69, 19, 0.95) 0%, 
-        rgba(160, 82, 45, 0.95) 25%,
-        rgba(205, 133, 63, 0.95) 50%,
-        rgba(184, 134, 11, 0.95) 75%,
-        rgba(139, 69, 19, 0.95) 100%);
+        rgba(139, 0, 0, 0.95) 0%, 
+        rgba(160, 20, 20, 0.95) 25%,
+        rgba(178, 34, 34, 0.95) 50%,
+        rgba(155, 15, 15, 0.95) 75%,
+        rgba(139, 0, 0, 0.95) 100%);
     color: #fff4e6;
     text-decoration: none;
     border-radius: 12px;
     padding: 12px 24px;
     transition: all 0.3s ease;
     box-shadow: 
-        0 4px 12px rgba(139, 69, 19, 0.3),
-        inset 0 1px 3px rgba(255, 215, 0, 0.3);
-    border: 2px solid rgba(255, 215, 0, 0.4);
+        0 4px 12px rgba(139, 0, 0, 0.3),
+        inset 0 1px 3px rgba(255, 80, 80, 0.3);
+    border: 2px solid rgba(255, 80, 80, 0.4);
 }
 
 .portaly-btn:hover {
     transform: translateY(-3px) scale(1.05);
     background: linear-gradient(135deg, 
-        rgba(160, 82, 45, 1) 0%, 
-        rgba(205, 133, 63, 1) 25%,
-        rgba(184, 134, 11, 1) 50%,
-        rgba(218, 165, 32, 1) 75%,
-        rgba(160, 82, 45, 1) 100%);
+        rgba(160, 20, 20, 1) 0%, 
+        rgba(178, 34, 34, 1) 25%,
+        rgba(200, 50, 50, 1) 50%,
+        rgba(185, 40, 40, 1) 75%,
+        rgba(160, 20, 20, 1) 100%);
     box-shadow: 
-        0 8px 20px rgba(139, 69, 19, 0.4),
-        inset 0 2px 4px rgba(255, 215, 0, 0.4);
+        0 8px 20px rgba(139, 0, 0, 0.4),
+        inset 0 2px 4px rgba(255, 100, 100, 0.4);
 }
 
 .portaly-btn:active {
