@@ -294,32 +294,57 @@ class YouTubePlayerManager {
     }
 
     init() {
-        console.log('YouTube API 正在初始化...');
-        this.player = new YT.Player('youtubePlayer', {
-            height: '100%',
-            width: '100%',
-            videoId: CONFIG.VIDEO_ID,
-            playerVars: {
-                'enablejsapi': 1,
-                'rel': 0,
-                'modestbranding': 1,
-                'controls': 0,
-                'disablekb': 1,
-                'playsinline': 1,
-                'iv_load_policy': 3,
-                'fs': 0,
-            },
-            events: {
-                'onReady': this.onReady.bind(this),
-                'onStateChange': this.onStateChange.bind(this),
-                'onError': this.onError.bind(this)
-            }
-        });
-        player = this.player; // 設定全域參考
+        console.log('🎬 YouTube API 正在初始化...');
+        console.log('🔍 初始化檢查:');
+        console.log('  - YT對象存在:', typeof YT !== 'undefined');
+        console.log('  - YT.Player存在:', typeof YT !== 'undefined' && typeof YT.Player !== 'undefined');
+        console.log('  - 播放器元素存在:', !!document.getElementById('youtubePlayer'));
+        
+        if (typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
+            console.error('❌ YouTube API未載入，無法初始化播放器');
+            return;
+        }
+        
+        if (!document.getElementById('youtubePlayer')) {
+            console.error('❌ YouTube播放器元素不存在');
+            return;
+        }
+        
+        try {
+            this.player = new YT.Player('youtubePlayer', {
+                height: '100%',
+                width: '100%',
+                videoId: CONFIG.VIDEO_ID,
+                playerVars: {
+                    'enablejsapi': 1,
+                    'rel': 0,
+                    'modestbranding': 1,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'playsinline': 1,
+                    'iv_load_policy': 3,
+                    'fs': 0,
+                },
+                events: {
+                    'onReady': this.onReady.bind(this),
+                    'onStateChange': this.onStateChange.bind(this),
+                    'onError': this.onError.bind(this)
+                }
+            });
+            player = this.player; // 設定全域參考
+            console.log('✅ YouTube播放器初始化成功');
+        } catch (error) {
+            console.error('❌ YouTube播放器初始化失敗:', error);
+        }
     }
 
     onReady(event) {
-        console.log('YouTube Player 已準備就緒');
+        console.log('🎬 YouTube Player 已準備就緒');
+        console.log('🔍 播放器就緒檢查:');
+        console.log('  - 播放器對象存在:', !!this.player);
+        console.log('  - 播放器狀態:', this.player.getPlayerState());
+        console.log('  - 當前時間:', this.getCurrentTime().toFixed(1) + '秒');
+        
         appState.playerReady = true;
         
         // 嘗試恢復上次的播放位置和速度
@@ -327,24 +352,31 @@ class YouTubePlayerManager {
         
         timeManager.start();
         uiManager.updateTimeDisplay();
+        
+        console.log('✅ 播放器初始化完成');
     }
     
     // 恢復上次的播放位置和速度
     restoreLastPosition() {
+        console.log('=== 恢復播放位置 ===');
         try {
             const savedTime = storageManager.loadVideoTime();
             const savedSpeed = storageManager.loadPlaybackSpeed();
             
+            console.log('📊 載入的數據:');
+            console.log('  - 保存時間:', savedTime.toFixed(1) + '秒');
+            console.log('  - 保存速度:', savedSpeed + 'x');
+            
             // 記錄保存的時間，但不立即跳轉（等待播放時再跳轉）
             if (savedTime > 5) {
                 appState.lastVideoTimeSave = savedTime;
-                console.log('已記錄上次播放位置:', savedTime.toFixed(1) + '秒，將在播放時自動跳轉');
+                console.log('📝 已記錄上次播放位置:', savedTime.toFixed(1) + '秒，將在播放時自動跳轉');
             } else if (savedTime > 0) {
                 // 如果時間小於5秒但大於0，記錄但不自動跳轉
                 appState.lastVideoTimeSave = savedTime;
-                console.log('檢測到較短的播放時間:', savedTime.toFixed(1) + '秒，不自動跳轉');
+                console.log('⚠️ 檢測到較短的播放時間:', savedTime.toFixed(1) + '秒，不自動跳轉');
             } else {
-                console.log('沒有有效的播放時間記錄，從頭開始播放');
+                console.log('🔄 沒有有效的播放時間記錄，從頭開始播放');
             }
             
             // 恢復播放速度
@@ -353,58 +385,89 @@ class YouTubePlayerManager {
                 setTimeout(() => {
                     this.player.setPlaybackRate(savedSpeed);
                     speedController.setSpeedFromStorage(savedSpeed);
+                    console.log('⚡ 已恢復播放速度至:', savedSpeed + 'x');
                 }, 500);
-                console.log('將恢復播放速度至:', savedSpeed + 'x');
+                console.log('⏳ 將在500ms後恢復播放速度至:', savedSpeed + 'x');
+            } else {
+                console.log('✅ 播放速度為預設值，無需恢復');
             }
         } catch (error) {
-            console.warn('恢復播放狀態失敗:', error);
+            console.warn('❌ 恢復播放狀態失敗:', error);
         }
+        console.log('=== 恢復播放位置結束 ===');
     }
 
     onStateChange(event) {
-        console.log('播放器狀態變化:', event.data);
+        console.log('=== 播放器狀態變化 ===');
+        console.log('狀態代碼:', event.data);
+        console.log('當前時間:', this.getCurrentTime().toFixed(1) + '秒');
+        console.log('已開始播放:', appState.hasStartedPlaying);
+        console.log('最後儲存時間:', appState.lastVideoTimeSave.toFixed(1) + '秒');
         
         if (event.data == YT.PlayerState.PLAYING) {
             appState.isPlaying = true;
             appState.hasStartedPlaying = true; // 標記已經開始過播放
             uiManager.updatePlayPauseButton();
-            console.log('開始播放');
+            console.log('🎬 開始播放');
             
             // 檢查是否需要恢復到上次的時間
             const currentTime = this.getCurrentTime();
             const savedTime = storageManager.loadVideoTime();
             
+            console.log('🔍 時間檢查:');
+            console.log('  - 當前時間:', currentTime.toFixed(1) + '秒');
+            console.log('  - 保存時間:', savedTime.toFixed(1) + '秒');
+            console.log('  - 是否需要跳轉:', currentTime < 1 && savedTime > 5);
+            
             // 如果當前時間接近0秒（小於1秒）且有保存的時間大於5秒，則跳轉到保存的時間
             if (currentTime < 1 && savedTime > 5) {
-                console.log('檢測到從0秒開始播放，自動跳轉到上次位置:', savedTime.toFixed(1) + '秒');
+                console.log('🚀 檢測到從0秒開始播放，自動跳轉到上次位置:', savedTime.toFixed(1) + '秒');
                 this.player.seekTo(savedTime, true);
                 appState.lastVideoTimeSave = savedTime;
             } else if (appState.lastVideoTimeSave === 0) {
                 // 如果是第一次播放，初始化lastVideoTimeSave
                 appState.lastVideoTimeSave = currentTime;
+                console.log('📝 初始化播放時間:', currentTime.toFixed(1) + '秒');
+            } else {
+                console.log('✅ 正常播放，無需跳轉');
             }
         } else if (event.data == YT.PlayerState.PAUSED) {
             appState.isPlaying = false;
             uiManager.updatePlayPauseButton();
+            console.log('⏸️ 暫停播放');
             
             // 只有在已經開始過播放且時間大於0.5秒時才儲存
             if (appState.hasStartedPlaying) {
                 const currentTime = this.getCurrentTime();
+                console.log('💾 暫停時儲存檢查:');
+                console.log('  - 當前時間:', currentTime.toFixed(1) + '秒');
+                console.log('  - 是否儲存:', currentTime > 0.5);
+                
                 if (currentTime > 0.5) {
                     storageManager.saveVideoTime(currentTime);
                     appState.lastVideoTimeSave = currentTime;
-                    console.log('暫停播放，已儲存時間:', currentTime.toFixed(1) + '秒');
+                    console.log('💾 暫停播放，已儲存時間:', currentTime.toFixed(1) + '秒');
+                } else {
+                    console.log('⚠️ 時間太短，不儲存');
                 }
+            } else {
+                console.log('⚠️ 尚未開始播放，不儲存');
             }
         } else if (event.data == YT.PlayerState.ENDED) {
             appState.isPlaying = false;
             uiManager.updatePlayPauseButton();
-            console.log('播放結束');
+            console.log('🏁 播放結束');
         } else if (event.data == YT.PlayerState.CUED) {
             // 影片已載入但尚未播放
             appState.initialLoadComplete = true;
-            console.log('影片已載入完成，等待播放');
+            console.log('📺 影片已載入完成，等待播放');
+        } else if (event.data == YT.PlayerState.BUFFERING) {
+            console.log('⏳ 緩衝中...');
+        } else if (event.data == YT.PlayerState.UNSTARTED) {
+            console.log('🔄 未開始播放');
         }
+        
+        console.log('=== 狀態變化結束 ===');
     }
 
     onError(event) {
@@ -997,14 +1060,74 @@ const speedController = new SpeedController();
 const counterManager = new CounterManager();
 const eventManager = new EventManager();
 
+// ===== YouTube API 載入管理 =====
+class YouTubeAPIManager {
+    constructor() {
+        this.isLoaded = false;
+        this.isInitialized = false;
+        this.retryCount = 0;
+        this.maxRetries = 3;
+        this.retryDelay = 2000; // 2秒
+    }
+
+    // 檢查API是否已載入
+    checkAPI() {
+        return typeof YT !== 'undefined' && typeof YT.Player !== 'undefined';
+    }
+
+    // 初始化播放器
+    initPlayer() {
+        if (this.checkAPI() && !this.isInitialized) {
+            console.log('🎬 開始初始化YouTube播放器');
+            this.isInitialized = true;
+            youtubePlayer.init();
+        } else if (!this.checkAPI()) {
+            console.warn('⚠️ YouTube API尚未載入，無法初始化播放器');
+            this.retryInit();
+        }
+    }
+
+    // 重試初始化
+    retryInit() {
+        if (this.retryCount < this.maxRetries) {
+            this.retryCount++;
+            console.log(`🔄 重試初始化 (${this.retryCount}/${this.maxRetries})`);
+            setTimeout(() => {
+                this.initPlayer();
+            }, this.retryDelay);
+        } else {
+            console.error('❌ YouTube API載入失敗，已達最大重試次數');
+        }
+    }
+
+    // 標記API已載入
+    markAsLoaded() {
+        this.isLoaded = true;
+        console.log('✅ YouTube API已載入');
+        this.initPlayer();
+    }
+}
+
+// 創建API管理器實例
+const youtubeAPIManager = new YouTubeAPIManager();
+
 // ===== YouTube API 回調函數 =====
 function onYouTubeIframeAPIReady() {
-    youtubePlayer.init();
+    console.log('🎬 YouTube IFrame API 回調被調用');
+    youtubeAPIManager.markAsLoaded();
 }
 
 // ===== 頁面生命週期 =====
 window.addEventListener('load', () => {
     console.log('頁面完全載入，包括所有依賴項...');
+    
+    // 檢查YouTube API狀態
+    console.log('🔍 檢查YouTube API狀態:');
+    console.log('  - YT對象存在:', typeof YT !== 'undefined');
+    console.log('  - YT.Player存在:', typeof YT !== 'undefined' && typeof YT.Player !== 'undefined');
+    
+    // 嘗試初始化播放器
+    youtubeAPIManager.initPlayer();
     
     // 顯示載入狀態提示
     showStorageStatus();
@@ -1025,7 +1148,10 @@ window.addEventListener('load', () => {
     
     // 在開發模式下顯示調試控制
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        document.getElementById('debugControls').style.display = 'flex';
+        const debugControls = document.getElementById('debugControls');
+        if (debugControls) {
+            debugControls.style.display = 'flex';
+        }
     }
 });
 
