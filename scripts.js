@@ -206,7 +206,7 @@ class AppState {
         // 自動儲存相關
         this.autoSaveInterval = null;
         this.lastVideoTimeSave = 0;
-        this.videoTimeSaveThreshold = 10; // 每10秒自動儲存一次影片時間
+        this.videoTimeSaveThreshold = 1; // 改為每1秒自動儲存一次影片時間
     }
 
     // 初始化狀態（從本機儲存讀取）
@@ -246,9 +246,9 @@ class AppState {
                     this.lastVideoTimeSave = currentTime;
                 }
             }
-        }, 5000); // 每5秒檢查一次
+        }, 1000); // 改為每1秒檢查一次
         
-        console.log('自動儲存已啟動');
+        console.log('自動儲存已啟動（播放到哪裡就儲存到哪裡）');
     }
 
     // 停止自動儲存
@@ -360,7 +360,11 @@ class YouTubePlayerManager {
         } else if (event.data == YT.PlayerState.PAUSED) {
             appState.isPlaying = false;
             uiManager.updatePlayPauseButton();
-            console.log('暫停播放');
+            // 暫停時立即儲存當前播放時間
+            const currentTime = this.getCurrentTime();
+            storageManager.saveVideoTime(currentTime);
+            appState.lastVideoTimeSave = currentTime;
+            console.log('暫停播放，已儲存時間:', currentTime.toFixed(1) + '秒');
         } else if (event.data == YT.PlayerState.ENDED) {
             appState.isPlaying = false;
             uiManager.updatePlayPauseButton();
@@ -405,7 +409,10 @@ class YouTubePlayerManager {
             const currentTime = this.player.getCurrentTime();
             const newTime = Math.max(0, currentTime + seconds);
             this.player.seekTo(newTime, true);
-            console.log(`跳轉到: ${newTime.toFixed(1)}秒 (${seconds > 0 ? '+' : ''}${seconds}秒)`);
+            // 跳轉後立即儲存新時間點
+            storageManager.saveVideoTime(newTime);
+            appState.lastVideoTimeSave = newTime;
+            console.log(`跳轉到: ${newTime.toFixed(1)}秒 (${seconds > 0 ? '+' : ''}${seconds}秒)，已儲存`);
         } catch (error) {
             console.error('跳轉失敗:', error);
         }
@@ -420,7 +427,10 @@ class YouTubePlayerManager {
         try {
             this.player.seekTo(0, true);
             this.player.playVideo();
-            console.log('重置並開始播放');
+            // 重置時立即儲存時間點為0
+            storageManager.saveVideoTime(0);
+            appState.lastVideoTimeSave = 0;
+            console.log('重置並開始播放，已儲存時間點為0');
         } catch (error) {
             console.error('重置播放失敗:', error);
         }
@@ -981,6 +991,18 @@ window.addEventListener('load', () => {
 window.addEventListener('beforeunload', function() {
     if (window.app) {
         window.app.cleanup();
+    }
+});
+
+// 頁面可見性變化事件（當使用者切換到其他分頁時）
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden && window.app && youtubePlayer.isReady()) {
+        const currentTime = youtubePlayer.getCurrentTime();
+        if (currentTime > 0) {
+            storageManager.saveVideoTime(currentTime);
+            appState.lastVideoTimeSave = currentTime;
+            console.log('切換分頁時已儲存影片位置:', currentTime.toFixed(1) + '秒');
+        }
     }
 });
 
