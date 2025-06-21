@@ -1648,8 +1648,12 @@ strong, b, .guide-section h3 {
 /* 響應式設計 - 手機版調整 */
 @media (max-width: 768px) {
     .support-section {
-        margin: 25px -12px 20px -12px;
+        margin: 25px 10px 20px 10px; /* 手機版：讓區塊與body之間有padding */
         padding: 25px 15px;
+    }
+    
+    .contact-section {
+        margin: 20px 10px 0 10px; /* 手機版：讓區塊與body之間有padding */
     }
     
     .support-content {
@@ -1677,10 +1681,7 @@ strong, b, .guide-section h3 {
         font-size: 16px;
     }
     
-    .contact-section {
-        margin: 20px -12px 0 -12px;
-        padding: 25px 15px;
-    }
+
     
     .contact-content {
         gap: 15px;
@@ -1742,8 +1743,12 @@ strong, b, .guide-section h3 {
 
 @media (max-width: 480px) {
     .support-section {
-        margin: 20px -10px 15px -10px;
+        margin: 20px 8px 15px 8px; /* 小螢幕：讓區塊與body之間有padding */
         padding: 20px 12px;
+    }
+    
+    .contact-section {
+        margin: 15px 8px 0 8px; /* 小螢幕：讓區塊與body之間有padding */
     }
     
     .support-content {
@@ -1772,10 +1777,7 @@ strong, b, .guide-section h3 {
         font-size: 14px;
     }
     
-    .contact-section {
-        margin: 15px -10px 0 -10px;
-        padding: 20px 12px;
-    }
+
     
     .contact-content {
         gap: 12px;
