@@ -220,6 +220,7 @@ class AppState {
         
         this.mantraCount = savedCount;
         this.currentTime = savedVideoTime;
+        this.lastVideoTimeSave = savedVideoTime; // 確保 lastVideoTimeSave 也被初始化
         
         // 設定播放速度索引
         const speedIndex = this.speedOptions.indexOf(savedSpeed);
@@ -230,7 +231,8 @@ class AppState {
         console.log('已從本機儲存載入狀態:', {
             計數器: savedCount,
             影片時間: savedVideoTime.toFixed(1) + '秒',
-            播放速度: savedSpeed + 'x'
+            播放速度: savedSpeed + 'x',
+            基準時間: this.lastVideoTimeSave.toFixed(1) + '秒'
         });
     }
 
@@ -504,7 +506,18 @@ class YouTubePlayerManager {
         }
         
         try {
-            const currentTime = this.player.getCurrentTime();
+            let currentTime = this.player.getCurrentTime();
+            
+            // 如果影片尚未開始播放（時間為0或接近0），且有儲存的時間，則使用儲存的時間作為基準
+            if (currentTime < 1 && appState.lastVideoTimeSave > 5) {
+                console.log('📺 影片尚未開始播放，使用上次儲存的時間作為基準:', appState.lastVideoTimeSave.toFixed(1) + '秒');
+                currentTime = appState.lastVideoTimeSave;
+            } else if (currentTime < 1 && appState.lastVideoTimeSave > 0) {
+                // 如果有較短的儲存時間，也使用它作為基準
+                console.log('📺 影片尚未開始播放，使用較短的儲存時間作為基準:', appState.lastVideoTimeSave.toFixed(1) + '秒');
+                currentTime = appState.lastVideoTimeSave;
+            }
+            
             const newTime = Math.max(0, currentTime + seconds);
             this.player.seekTo(newTime, true);
             
@@ -514,7 +527,9 @@ class YouTubePlayerManager {
                 appState.lastVideoTimeSave = newTime;
                 console.log(`跳轉到: ${newTime.toFixed(1)}秒 (${seconds > 0 ? '+' : ''}${seconds}秒)，已儲存`);
             } else {
-                console.log(`跳轉到: ${newTime.toFixed(1)}秒 (${seconds > 0 ? '+' : ''}${seconds}秒)`);
+                // 即使尚未開始播放，也要更新 lastVideoTimeSave 以便後續操作
+                appState.lastVideoTimeSave = newTime;
+                console.log(`跳轉到: ${newTime.toFixed(1)}秒 (${seconds > 0 ? '+' : ''}${seconds}秒)，已更新基準時間`);
             }
         } catch (error) {
             console.error('跳轉失敗:', error);
