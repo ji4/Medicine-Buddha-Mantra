@@ -1,3 +1,17 @@
+/* 字體加載優化 */
+@font-face {
+    font-family: 'Sanskrit Fallback';
+    font-display: swap;
+    src: local('Noto Sans Devanagari'), local('Times New Roman'), local('serif');
+}
+
+/* 確保特殊字符正確顯示的 Unicode 範圍 */
+@supports (font-feature-settings: "liga") {
+    .romanization {
+        font-variant-ligatures: common-ligatures;
+    }
+}
+
 /* 儲存狀態提示 */
 .storage-status {
     background: linear-gradient(135deg, 
@@ -89,7 +103,7 @@
 }
 
 body {
-    font-family: 'Microsoft JhengHei', 'PingFang TC', 'Noto Sans Devanagari', serif;
+    font-family: 'Microsoft JhengHei', 'PingFang TC', 'Noto Sans TC', 'Noto Sans CJK TC', 'Noto Sans Devanagari', 'Apple Color Emoji', serif;
     background: 
         /* 更自然的紙張紋理 - 使用不規則的形狀和多層次疊加 */
         radial-gradient(ellipse 180px 95px at 17% 33%, rgba(0, 165, 32, 0.08) 0%, transparent 30%),
@@ -223,7 +237,10 @@ body {
 }
 
 .romanization {
-    font-family: 'Times New Roman', 'Noto Sans Devanagari', serif;
+    font-family: 'Noto Sans Devanagari', 'Noto Serif Devanagari', 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', 'Bitstream Vera Serif', 'Georgia', serif;
+    -webkit-font-feature-settings: "liga" 1, "kern" 1;
+    font-feature-settings: "liga" 1, "kern" 1;
+    text-rendering: optimizeLegibility;
     font-style: italic;
     font-size: 18px;
     font-weight: bold;
@@ -232,6 +249,10 @@ body {
     text-shadow: 0 1px 3px rgba(139, 69, 19, 0.3);
     position: relative;
     line-height: 1.2;
+    /* 確保特殊字符正確顯示 */
+    unicode-bidi: embed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .voiceless {
