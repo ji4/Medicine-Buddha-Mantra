@@ -1422,6 +1422,106 @@ strong, b, .guide-section h3 {
     filter: brightness(1.1) saturate(1.1);
 }
 
+/* 聯絡區塊樣式 */
+.contact-section {
+    margin-top: 30px;
+    background: 
+        radial-gradient(ellipse 160px 100px at 30% 40%, rgba(70, 130, 180, 0.06) 0%, rgba(70, 130, 180, 0.01) 35%, transparent 60%),
+        radial-gradient(ellipse 130px 170px at 80% 60%, rgba(100, 149, 237, 0.04) 0%, rgba(100, 149, 237, 0.008) 30%, transparent 55%),
+        radial-gradient(ellipse 190px 90px at 50% 15%, rgba(139, 69, 19, 0.03) 0%, rgba(139, 69, 19, 0.006) 40%, transparent 65%),
+        linear-gradient(135deg, #f8fbff 0%, #f5faff 25%, #f2f9ff 50%, #eff8ff 75%, #ecf7ff 100%);
+    background-size: 
+        220px 150px, 180px 230px, 260px 130px,
+        100% 100%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid rgba(70, 130, 180, 0.25);
+    box-shadow: 
+        0 4px 16px rgba(70, 130, 180, 0.15),
+        inset 0 1px 3px rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+
+.contact-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-text {
+    color: #2c3e50;
+    line-height: 1.7;
+}
+
+.contact-text p {
+    margin: 0 0 12px 0;
+    font-size: 15px;
+    text-align: center;
+}
+
+.contact-text .contact-note {
+    font-size: 13px;
+    color: #5a6c7d;
+    font-style: italic;
+    background: rgba(240, 248, 255, 0.6);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(70, 130, 180, 0.4);
+    margin-top: 10px;
+}
+
+.contact-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, 
+        rgba(70, 130, 180, 0.9) 0%, 
+        rgba(100, 149, 237, 0.9) 50%, 
+        rgba(70, 130, 180, 0.9) 100%);
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 12px rgba(70, 130, 180, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.contact-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 8px 20px rgba(70, 130, 180, 0.4),
+        inset 0 1px 3px rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, 
+        rgba(100, 149, 237, 0.95) 0%, 
+        rgba(135, 206, 250, 0.95) 50%, 
+        rgba(100, 149, 237, 0.95) 100%);
+}
+
+.contact-btn:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+.contact-icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
 /* 響應式設計 - 手機版調整 */
 @media (max-width: 768px) {
     .support-section {
@@ -1444,6 +1544,35 @@ strong, b, .guide-section h3 {
     
     .coffee-btn-image {
         height: 45px;
+    }
+    
+    .contact-section {
+        margin-top: 20px;
+        padding: 20px 15px;
+    }
+    
+    .contact-content {
+        gap: 15px;
+    }
+    
+    .contact-text p {
+        font-size: 14px;
+    }
+    
+    .contact-text .contact-note {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+    
+    .contact-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        gap: 8px;
+    }
+    
+    .contact-icon {
+        width: 18px;
+        height: 18px;
     }
     
     .pronunciation-guide {
@@ -1502,6 +1631,36 @@ strong, b, .guide-section h3 {
     .coffee-btn-image {
         height: 40px;
     }
+    
+    .contact-section {
+        margin-top: 15px;
+        padding: 15px 10px;
+    }
+    
+    .contact-content {
+        gap: 12px;
+    }
+    
+    .contact-text p {
+        font-size: 13px;
+    }
+    
+    .contact-text .contact-note {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+    
+    .contact-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+        gap: 6px;
+    }
+    
+    .contact-icon {
+        width: 16px;
+        height: 16px;
+    }
+}
     
     .pronunciation-guide {
         padding: 10px;
