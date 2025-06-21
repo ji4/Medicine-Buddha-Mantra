@@ -1203,106 +1203,7 @@ strong, b, .guide-section h3 {
     }
 }
 
-/* 護持網站區塊樣式 - 新設計 */
-.support-section-wrapper {
-    margin: 40px auto;
-    max-width: 800px;
-    background: 
-        /* 柔和的金色背景層 */
-        radial-gradient(ellipse 300px 200px at 25% 30%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse 250px 180px at 75% 70%, rgba(255, 140, 0, 0.06) 0%, transparent 45%),
-        radial-gradient(ellipse 200px 250px at 50% 10%, rgba(184, 134, 11, 0.04) 0%, transparent 40%),
-        /* 主漸層背景 */
-        linear-gradient(135deg, 
-            rgba(255, 248, 220, 0.95) 0%, 
-            rgba(255, 245, 210, 0.95) 25%, 
-            rgba(250, 235, 215, 0.95) 50%, 
-            rgba(245, 222, 179, 0.95) 75%, 
-            rgba(240, 230, 140, 0.95) 100%);
-    border: 3px solid;
-    border-image: linear-gradient(45deg, 
-        rgba(255, 215, 0, 0.6), 
-        rgba(255, 140, 0, 0.8), 
-        rgba(184, 134, 11, 0.7), 
-        rgba(255, 165, 0, 0.6)) 1;
-    border-radius: 20px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 
-        0 8px 32px rgba(255, 140, 0, 0.25),
-        0 4px 16px rgba(184, 134, 11, 0.15),
-        inset 0 2px 4px rgba(255, 255, 255, 0.8);
-    padding: 30px;
-    position: relative;
-    overflow: hidden;
-}
-
-.support-section-wrapper::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: conic-gradient(from 0deg, 
-        rgba(255, 215, 0, 0.3) 0deg, 
-        rgba(255, 140, 0, 0.4) 90deg, 
-        rgba(184, 134, 11, 0.3) 180deg, 
-        rgba(255, 165, 0, 0.4) 270deg, 
-        rgba(255, 215, 0, 0.3) 360deg);
-    border-radius: 22px;
-    z-index: -1;
-    animation: rotate 10s linear infinite;
-}
-
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.support-section {
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
-
-.support-header {
-    margin-bottom: 25px;
-    position: relative;
-}
-
-.support-icon {
-    font-size: 36px;
-    margin-bottom: 15px;
-    filter: drop-shadow(0 4px 8px rgba(255, 140, 0, 0.3));
-    animation: gentle-pulse 3s ease-in-out infinite;
-}
-
-@keyframes gentle-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-.support-title {
-    font-size: 22px;
-    font-weight: bold;
-    color: #8b4513;
-    margin: 0 0 10px 0;
-    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
-    letter-spacing: 1px;
-}
-
-.support-decoration {
-    font-size: 16px;
-    color: rgba(184, 134, 11, 0.7);
-    margin-bottom: 20px;
-    animation: float 2s ease-in-out infinite alternate;
-}
-
-@keyframes float {
-    from { transform: translateY(0px); }
-    to { transform: translateY(-5px); }
-}
+/* 梵文發音說明區塊樣式 */
 .pronunciation-guide {
     margin-top: 25px;
     background: 
@@ -1436,53 +1337,164 @@ strong, b, .guide-section h3 {
     font-variant-ligatures: common-ligatures discretionary-ligatures;
 }
 
+/* Portaly 支持區塊樣式 */
+.support-section {
+    margin-top: 30px;
+    background: 
+        radial-gradient(ellipse 160px 100px at 30% 40%, rgba(255, 165, 0, 0.06) 0%, rgba(255, 165, 0, 0.01) 35%, transparent 60%),
+        radial-gradient(ellipse 130px 170px at 80% 60%, rgba(255, 140, 0, 0.04) 0%, rgba(255, 140, 0, 0.008) 30%, transparent 55%),
+        radial-gradient(ellipse 190px 90px at 50% 15%, rgba(184, 134, 11, 0.03) 0%, rgba(184, 134, 11, 0.006) 40%, transparent 65%),
+        linear-gradient(135deg, #fffef8 0%, #fffdf5 25%, #fffcf2 50%, #fffbef 75%, #fffaec 100%);
+    background-size: 
+        220px 150px, 180px 230px, 260px 130px,
+        100% 100%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 165, 0, 0.25);
+    box-shadow: 
+        0 4px 16px rgba(255, 140, 0, 0.15),
+        inset 0 1px 3px rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
 
+.support-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.support-text {
+    color: #5d4e37;
+    line-height: 1.7;
+}
+
+.support-text p {
+    margin: 0 0 12px 0;
+    font-size: 15px;
+    text-align: center;
+}
+
+.support-text .support-note {
+    font-size: 13px;
+    color: #8b7355;
+    font-style: italic;
+    background: rgba(255, 248, 220, 0.6);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(255, 165, 0, 0.4);
+    margin-top: 10px;
+}
+
+.portaly-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.portaly-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, 
+        rgba(139, 0, 0, 0.95) 0%, 
+        rgba(200, 40, 40, 0.95) 25%,
+        rgba(139, 0, 0, 0.95) 50%,
+        rgba(180, 30, 30, 0.95) 75%,
+        rgba(139, 0, 0, 0.95) 100%);
+    color: #fff4e6;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 12px rgba(139, 0, 0, 0.3),
+        inset 0 1px 3px rgba(255, 80, 80, 0.3);
+    border: 2px solid rgba(255, 80, 80, 0.4);
+}
+
+.portaly-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: linear-gradient(135deg, 
+        rgba(200, 40, 40, 1) 0%, 
+        rgba(160, 20, 20, 1) 25%,
+        rgba(220, 60, 60, 1) 50%,
+        rgba(180, 30, 30, 1) 75%,
+        rgba(240, 80, 80, 1) 100%);
+    box-shadow: 
+        0 8px 20px rgba(139, 0, 0, 0.4),
+        inset 0 2px 4px rgba(255, 100, 100, 0.4);
+}
+
+.portaly-btn:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+.portaly-btn-content {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.portaly-icon {
+    font-size: 14px;
+}
+
+.portaly-text {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 聯絡區塊樣式 */
+.contact-section {
+    margin-top: 30px;
+    background: 
+        radial-gradient(ellipse 160px 100px at 30% 40%, rgba(255, 165, 0, 0.06) 0%, rgba(255, 165, 0, 0.01) 35%, transparent 60%),
+        radial-gradient(ellipse 130px 170px at 80% 60%, rgba(255, 140, 0, 0.04) 0%, rgba(255, 140, 0, 0.008) 30%, transparent 55%),
+        radial-gradient(ellipse 190px 90px at 50% 15%, rgba(184, 134, 11, 0.03) 0%, rgba(184, 134, 11, 0.006) 40%, transparent 65%),
+        linear-gradient(135deg, #fffef8 0%, #fffdf5 25%, #fffcf2 50%, #fffbef 75%, #fffaec 100%);
+    background-size: 
+        220px 150px, 180px 230px, 260px 130px,
+        100% 100%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 165, 0, 0.25);
+    box-shadow: 
+        0 4px 16px rgba(255, 140, 0, 0.15),
+        inset 0 1px 3px rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
 
 .contact-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 25px;
+    gap: 20px;
 }
 
 .contact-text {
-    color: #fff4e6;
-    line-height: 1.8;
-    max-width: 500px;
+    color: #5d4e37;
+    line-height: 1.7;
 }
 
 .contact-text p {
-    margin: 0 0 15px 0;
-    font-size: 16px;
-    font-weight: 500;
+    margin: 0 0 12px 0;
+    font-size: 15px;
     text-align: center;
-    color: #f5f0e8;
 }
 
 .contact-text .contact-note {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 14px;
-    color: #e8dcc0;
-    background: 
-        linear-gradient(135deg, 
-            rgba(139, 69, 19, 0.6) 0%, 
-            rgba(160, 82, 45, 0.6) 100%);
-    padding: 15px 20px;
-    border-radius: 15px;
-    border: 2px solid rgba(255, 248, 220, 0.3);
-    margin-top: 15px;
-    box-shadow: 
-        0 4px 12px rgba(139, 69, 19, 0.2),
-        inset 0 1px 2px rgba(255, 255, 255, 0.3);
-    text-align: left;
-}
-
-.contact-note .note-icon {
-    font-size: 18px;
-    flex-shrink: 0;
-    margin-top: 2px;
+    font-size: 13px;
+    color: #8b7355;
+    font-style: italic;
+    background: rgba(255, 248, 220, 0.6);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(255, 165, 0, 0.4);
+    margin-top: 10px;
 }
 
 .contact-button-container {
@@ -1494,379 +1506,103 @@ strong, b, .guide-section h3 {
 .contact-btn {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    background: 
-        linear-gradient(135deg, 
-            rgba(255, 248, 220, 0.95) 0%, 
-            rgba(245, 222, 179, 0.95) 25%,
-            rgba(222, 184, 135, 0.95) 50%,
-            rgba(205, 133, 63, 0.95) 75%,
-            rgba(160, 82, 45, 0.95) 100%);
-    color: #3d2914;
+    gap: 6px;
+    background: linear-gradient(135deg, 
+        rgba(139, 69, 19, 0.95) 0%, 
+        rgba(160, 82, 45, 0.95) 25%,
+        rgba(205, 133, 63, 0.95) 50%,
+        rgba(184, 134, 11, 0.95) 75%,
+        rgba(139, 69, 19, 0.95) 100%);
+    color: #fff4e6;
     text-decoration: none;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 14px;
     font-weight: 600;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     box-shadow: 
-        0 6px 20px rgba(139, 69, 19, 0.3),
-        0 3px 10px rgba(160, 82, 45, 0.2),
-        inset 0 1px 3px rgba(255, 255, 255, 0.6);
-    border: 2px solid rgba(255, 248, 220, 0.6);
-    position: relative;
-    overflow: hidden;
-}
-
-.contact-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        transparent, 
-        rgba(255, 255, 255, 0.4), 
-        transparent);
-    transition: left 0.5s ease;
-}
-
-.contact-btn:hover::before {
-    left: 100%;
+        0 4px 12px rgba(139, 69, 19, 0.3),
+        inset 0 1px 3px rgba(255, 215, 0, 0.3);
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .contact-btn:hover {
-    transform: translateY(-4px) scale(1.08);
-    background: 
-        linear-gradient(135deg, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 248, 220, 1) 25%,
-            rgba(245, 222, 179, 1) 50%,
-            rgba(222, 184, 135, 1) 75%,
-            rgba(205, 133, 63, 1) 100%);
-    color: #2d1810;
+    transform: translateY(-3px) scale(1.05);
+    background: linear-gradient(135deg, 
+        rgba(160, 82, 45, 1) 0%, 
+        rgba(205, 133, 63, 1) 25%,
+        rgba(184, 134, 11, 1) 50%,
+        rgba(218, 165, 32, 1) 75%,
+        rgba(160, 82, 45, 1) 100%);
     box-shadow: 
-        0 12px 28px rgba(139, 69, 19, 0.4),
-        0 6px 15px rgba(160, 82, 45, 0.3),
-        inset 0 2px 4px rgba(255, 255, 255, 0.8);
+        0 8px 20px rgba(139, 69, 19, 0.4),
+        inset 0 2px 4px rgba(255, 215, 0, 0.4);
 }
 
 .contact-btn:active {
-    transform: translateY(-2px) scale(1.05);
+    transform: translateY(-1px) scale(1.02);
 }
 
 .contact-icon {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     fill: currentColor;
-    transition: all 0.3s ease;
-}
-
-.contact-btn:hover .contact-icon {
-    transform: scale(1.1);
-}
-
-.btn-arrow {
-    font-size: 16px;
-    transition: transform 0.3s ease;
-}
-
-.contact-btn:hover .btn-arrow {
-    transform: translateX(3px);
-}
-
-/* 新增完整的樣式區塊 */
-.portaly-btn {
-    display: inline-block;
-    background: 
-        linear-gradient(135deg, 
-            rgba(220, 20, 60, 0.95) 0%, 
-            rgba(255, 69, 0, 0.95) 25%,
-            rgba(255, 140, 0, 0.95) 50%,
-            rgba(255, 69, 0, 0.95) 75%,
-            rgba(220, 20, 60, 0.95) 100%);
-    color: #fff;
-    text-decoration: none;
-    border-radius: 25px;
-    padding: 12px 24px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
-        0 6px 20px rgba(220, 20, 60, 0.3),
-        0 3px 10px rgba(255, 69, 0, 0.2),
-        inset 0 1px 3px rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    position: relative;
-    overflow: hidden;
-    font-weight: 600;
-    font-size: 16px;
-}
-
-.portaly-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        transparent, 
-        rgba(255, 255, 255, 0.2), 
-        transparent);
-    transition: left 0.5s ease;
-}
-
-.portaly-btn:hover::before {
-    left: 100%;
-}
-
-.portaly-btn:hover {
-    transform: translateY(-4px) scale(1.08);
-    background: 
-        linear-gradient(135deg, 
-            rgba(255, 69, 0, 1) 0%, 
-            rgba(255, 140, 0, 1) 25%,
-            rgba(255, 215, 0, 1) 50%,
-            rgba(255, 140, 0, 1) 75%,
-            rgba(255, 69, 0, 1) 100%);
-    box-shadow: 
-        0 12px 28px rgba(220, 20, 60, 0.4),
-        0 6px 15px rgba(255, 69, 0, 0.3),
-        inset 0 2px 4px rgba(255, 255, 255, 0.4);
-}
-
-.portaly-btn:active {
-    transform: translateY(-2px) scale(1.05);
-}
-
-.portaly-btn-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    position: relative;
-    z-index: 1;
-}
-
-.portaly-icon {
-    font-size: 16px;
-    animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-    from { 
-        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); 
-    }
-    to { 
-        text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 
-                     0 0 25px rgba(255, 215, 0, 0.4); 
-    }
-}
-
-.portaly-text {
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    letter-spacing: 0.5px;
-}
-
-.portaly-arrow {
-    font-size: 16px;
-    transition: transform 0.3s ease;
-}
-
-.portaly-btn:hover .portaly-arrow {
-    transform: translateX(3px);
-}
-
-/* 聯絡我們區塊樣式 - 新設計 */
-.contact-section-wrapper {
-    margin: 40px auto;
-    max-width: 800px;
-    background: 
-        /* 深色神秘背景層 */
-        radial-gradient(ellipse 280px 180px at 20% 40%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
-        radial-gradient(ellipse 220px 240px at 80% 60%, rgba(160, 82, 45, 0.08) 0%, transparent 45%),
-        radial-gradient(ellipse 180px 220px at 50% 20%, rgba(101, 67, 33, 0.06) 0%, transparent 40%),
-        /* 主漸層背景 */
-        linear-gradient(135deg, 
-            rgba(245, 222, 179, 0.95) 0%, 
-            rgba(222, 184, 135, 0.95) 25%, 
-            rgba(205, 133, 63, 0.95) 50%, 
-            rgba(160, 82, 45, 0.95) 75%, 
-            rgba(139, 69, 19, 0.95) 100%);
-    border: 3px solid;
-    border-image: linear-gradient(45deg, 
-        rgba(139, 69, 19, 0.7), 
-        rgba(160, 82, 45, 0.8), 
-        rgba(205, 133, 63, 0.6), 
-        rgba(139, 69, 19, 0.7)) 1;
-    border-radius: 20px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 
-        0 8px 32px rgba(139, 69, 19, 0.3),
-        0 4px 16px rgba(160, 82, 45, 0.2),
-        inset 0 2px 4px rgba(255, 255, 255, 0.6);
-    padding: 30px;
-    position: relative;
-    overflow: hidden;
-}
-
-.contact-section-wrapper::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: conic-gradient(from 180deg, 
-        rgba(139, 69, 19, 0.4) 0deg, 
-        rgba(160, 82, 45, 0.3) 90deg, 
-        rgba(205, 133, 63, 0.4) 180deg, 
-        rgba(139, 69, 19, 0.3) 270deg, 
-        rgba(139, 69, 19, 0.4) 360deg);
-    border-radius: 22px;
-    z-index: -1;
-    animation: rotate-reverse 12s linear infinite;
-}
-
-@keyframes rotate-reverse {
-    from { transform: rotate(360deg); }
-    to { transform: rotate(0deg); }
-}
-
-.contact-section {
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
-
-.contact-header {
-    margin-bottom: 25px;
-    position: relative;
-}
-
-.contact-icon-large {
-    font-size: 36px;
-    margin-bottom: 15px;
-    filter: drop-shadow(0 4px 8px rgba(139, 69, 19, 0.3));
-    animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-8px); }
-    60% { transform: translateY(-4px); }
-}
-
-.contact-title {
-    font-size: 22px;
-    font-weight: bold;
-    color: #fff4e6;
-    margin: 0 0 10px 0;
-    text-shadow: 0 2px 4px rgba(139, 69, 19, 0.8);
-    letter-spacing: 1px;
-}
-
-.contact-decoration {
-    font-size: 16px;
-    color: rgba(255, 248, 220, 0.7);
-    margin-bottom: 20px;
-    animation: sparkle 3s ease-in-out infinite;
-}
-
-@keyframes sparkle {
-    0%, 100% { opacity: 0.7; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.1); }
 }
 
 /* 響應式設計 - 手機版調整 */
 @media (max-width: 768px) {
-    .support-section-wrapper {
-        margin: 20px auto;
+    .support-section {
+        margin-top: 20px;
         padding: 20px 15px;
     }
     
-    .support-header {
-        margin-bottom: 20px;
-    }
-    
-    .support-icon {
-        font-size: 32px;
-        margin-bottom: 12px;
-    }
-    
-    .support-title {
-        font-size: 18px;
-    }
-    
-    .support-decoration {
-        font-size: 14px;
-    }
-    
     .support-content {
-        gap: 20px;
+        gap: 15px;
     }
     
     .support-text p {
-        font-size: 15px;
+        font-size: 14px;
     }
     
     .support-text .support-note {
-        font-size: 13px;
-        padding: 12px 15px;
+        font-size: 12px;
+        padding: 8px 12px;
     }
     
     .portaly-btn {
         padding: 10px 20px;
-        font-size: 15px;
     }
     
     .portaly-btn-content {
-        gap: 6px;
-    }
-    
-    .portaly-icon {
-        font-size: 15px;
-    }
-    
-    .contact-section-wrapper {
-        margin: 20px auto;
-        padding: 20px 15px;
-    }
-    
-    .contact-header {
-        margin-bottom: 20px;
-    }
-    
-    .contact-icon-large {
-        font-size: 32px;
-        margin-bottom: 12px;
-    }
-    
-    .contact-title {
-        font-size: 18px;
-    }
-    
-    .contact-decoration {
         font-size: 14px;
     }
     
+    .portaly-icon {
+        font-size: 16px;
+    }
+    
+    .contact-section {
+        margin-top: 20px;
+        padding: 20px 15px;
+    }
+    
     .contact-content {
-        gap: 20px;
+        gap: 15px;
     }
     
     .contact-text p {
-        font-size: 15px;
+        font-size: 14px;
     }
     
     .contact-text .contact-note {
-        font-size: 13px;
-        padding: 12px 15px;
+        font-size: 12px;
+        padding: 8px 12px;
     }
     
     .contact-btn {
         padding: 10px 20px;
-        font-size: 15px;
+        font-size: 14px;
         gap: 8px;
     }
     
@@ -1910,92 +1646,58 @@ strong, b, .guide-section h3 {
 }
 
 @media (max-width: 480px) {
-    .support-section-wrapper {
-        margin: 15px auto;
+    .support-section {
+        margin-top: 15px;
         padding: 15px 10px;
     }
     
-    .support-header {
-        margin-bottom: 15px;
-    }
-    
-    .support-icon {
-        font-size: 28px;
-        margin-bottom: 10px;
-    }
-    
-    .support-title {
-        font-size: 16px;
-    }
-    
-    .support-decoration {
-        font-size: 12px;
-    }
-    
     .support-content {
-        gap: 15px;
+        gap: 12px;
     }
     
     .support-text p {
-        font-size: 14px;
+        font-size: 13px;
     }
     
     .support-text .support-note {
-        font-size: 12px;
-        padding: 10px 12px;
+        font-size: 11px;
+        padding: 6px 10px;
     }
     
     .portaly-btn {
         padding: 8px 16px;
-        font-size: 14px;
     }
     
     .portaly-btn-content {
-        gap: 5px;
+        font-size: 13px;
+        gap: 6px;
     }
     
     .portaly-icon {
         font-size: 14px;
     }
     
-    .contact-section-wrapper {
-        margin: 15px auto;
+    .contact-section {
+        margin-top: 15px;
         padding: 15px 10px;
     }
     
-    .contact-header {
-        margin-bottom: 15px;
-    }
-    
-    .contact-icon-large {
-        font-size: 28px;
-        margin-bottom: 10px;
-    }
-    
-    .contact-title {
-        font-size: 16px;
-    }
-    
-    .contact-decoration {
-        font-size: 12px;
-    }
-    
     .contact-content {
-        gap: 15px;
+        gap: 12px;
     }
     
     .contact-text p {
-        font-size: 14px;
+        font-size: 13px;
     }
     
     .contact-text .contact-note {
-        font-size: 12px;
-        padding: 10px 12px;
+        font-size: 11px;
+        padding: 6px 10px;
     }
     
     .contact-btn {
         padding: 8px 16px;
-        font-size: 14px;
+        font-size: 13px;
         gap: 6px;
     }
     
