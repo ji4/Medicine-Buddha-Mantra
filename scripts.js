@@ -207,6 +207,9 @@ class AppState {
         this.autoSaveInterval = null;
         this.lastVideoTimeSave = 0;
         this.videoTimeSaveThreshold = 1; // 改為每1秒自動儲存一次影片時間
+        // 新增：追蹤是否已經開始過播放
+        this.hasStartedPlaying = false;
+        this.initialLoadComplete = false;
     }
 
     // 初始化狀態（從本機儲存讀取）
@@ -238,17 +241,19 @@ class AppState {
         }
         
         this.autoSaveInterval = setInterval(() => {
-            // 自動儲存影片時間（如果有變化且超過閾值）
-            if (youtubePlayer && youtubePlayer.isReady()) {
+            // 只有在已經開始過播放且目前正在播放時才自動儲存
+            if (youtubePlayer && youtubePlayer.isReady() && this.hasStartedPlaying && this.isPlaying) {
                 const currentTime = youtubePlayer.getCurrentTime();
-                if (Math.abs(currentTime - this.lastVideoTimeSave) >= this.videoTimeSaveThreshold) {
+                // 避免儲存0秒或太小的時間值（除非是重置後的0）
+                if (currentTime > 0.5 && Math.abs(currentTime - this.lastVideoTimeSave) >= this.videoTimeSaveThreshold) {
                     storageManager.saveVideoTime(currentTime);
                     this.lastVideoTimeSave = currentTime;
+                    console.log('自動儲存播放時間:', currentTime.toFixed(1) + '秒');
                 }
             }
         }, 1000); // 改為每1秒檢查一次
         
-        console.log('自動儲存已啟動（播放到哪裡就儲存到哪裡）');
+        console.log('自動儲存已啟動（只在播放時儲存）');
     }
 
     // 停止自動儲存
@@ -330,10 +335,17 @@ class YouTubePlayerManager {
             const savedTime = storageManager.loadVideoTime();
             const savedSpeed = storageManager.loadPlaybackSpeed();
             
-            // 恢復播放位置（如果有保存且大於5秒）
+            // 恢復播放位置（如果有保存且大於5秒，避免恢復到0秒或太小的時間）
             if (savedTime > 5) {
                 this.player.seekTo(savedTime, true);
+                appState.lastVideoTimeSave = savedTime; // 同步更新lastVideoTimeSave
                 console.log('已恢復播放位置至:', savedTime.toFixed(1) + '秒');
+            } else if (savedTime > 0) {
+                // 如果時間小於5秒但大於0，記錄但不自動跳轉
+                appState.lastVideoTimeSave = savedTime;
+                console.log('檢測到較短的播放時間:', savedTime.toFixed(1) + '秒，不自動跳轉');
+            } else {
+                console.log('沒有有效的播放時間記錄，從頭開始播放');
             }
             
             // 恢復播放速度
@@ -355,20 +367,36 @@ class YouTubePlayerManager {
         
         if (event.data == YT.PlayerState.PLAYING) {
             appState.isPlaying = true;
+            appState.hasStartedPlaying = true; // 標記已經開始過播放
             uiManager.updatePlayPauseButton();
             console.log('開始播放');
+            
+            // 如果是第一次播放，初始化lastVideoTimeSave
+            if (appState.lastVideoTimeSave === 0) {
+                const currentTime = this.getCurrentTime();
+                appState.lastVideoTimeSave = currentTime;
+            }
         } else if (event.data == YT.PlayerState.PAUSED) {
             appState.isPlaying = false;
             uiManager.updatePlayPauseButton();
-            // 暫停時立即儲存當前播放時間
-            const currentTime = this.getCurrentTime();
-            storageManager.saveVideoTime(currentTime);
-            appState.lastVideoTimeSave = currentTime;
-            console.log('暫停播放，已儲存時間:', currentTime.toFixed(1) + '秒');
+            
+            // 只有在已經開始過播放且時間大於0.5秒時才儲存
+            if (appState.hasStartedPlaying) {
+                const currentTime = this.getCurrentTime();
+                if (currentTime > 0.5) {
+                    storageManager.saveVideoTime(currentTime);
+                    appState.lastVideoTimeSave = currentTime;
+                    console.log('暫停播放，已儲存時間:', currentTime.toFixed(1) + '秒');
+                }
+            }
         } else if (event.data == YT.PlayerState.ENDED) {
             appState.isPlaying = false;
             uiManager.updatePlayPauseButton();
             console.log('播放結束');
+        } else if (event.data == YT.PlayerState.CUED) {
+            // 影片已載入但尚未播放
+            appState.initialLoadComplete = true;
+            console.log('影片已載入完成，等待播放');
         }
     }
 
@@ -409,10 +437,15 @@ class YouTubePlayerManager {
             const currentTime = this.player.getCurrentTime();
             const newTime = Math.max(0, currentTime + seconds);
             this.player.seekTo(newTime, true);
-            // 跳轉後立即儲存新時間點
-            storageManager.saveVideoTime(newTime);
-            appState.lastVideoTimeSave = newTime;
-            console.log(`跳轉到: ${newTime.toFixed(1)}秒 (${seconds > 0 ? '+' : ''}${seconds}秒)，已儲存`);
+            
+            // 跳轉後立即儲存新時間點（只有在已經開始過播放時）
+            if (appState.hasStartedPlaying && newTime > 0.5) {
+                storageManager.saveVideoTime(newTime);
+                appState.lastVideoTimeSave = newTime;
+                console.log(`跳轉到: ${newTime.toFixed(1)}秒 (${seconds > 0 ? '+' : ''}${seconds}秒)，已儲存`);
+            } else {
+                console.log(`跳轉到: ${newTime.toFixed(1)}秒 (${seconds > 0 ? '+' : ''}${seconds}秒)`);
+            }
         } catch (error) {
             console.error('跳轉失敗:', error);
         }
@@ -427,9 +460,11 @@ class YouTubePlayerManager {
         try {
             this.player.seekTo(0, true);
             this.player.playVideo();
-            // 重置時立即儲存時間點為0
+            
+            // 重置時立即儲存時間點為0，並重置播放狀態
             storageManager.saveVideoTime(0);
             appState.lastVideoTimeSave = 0;
+            appState.hasStartedPlaying = false; // 重置播放狀態
             console.log('重置並開始播放，已儲存時間點為0');
         } catch (error) {
             console.error('重置播放失敗:', error);
@@ -935,10 +970,10 @@ class App {
         this.timeManager.stop();
         appState.stopAutoSave();
         
-        // 在頁面關閉時儲存當前狀態
-        if (storageManager.isStorageAvailable() && youtubePlayer.isReady()) {
+        // 在頁面關閉時儲存當前狀態（只有在已經開始過播放時）
+        if (storageManager.isStorageAvailable() && youtubePlayer.isReady() && appState.hasStartedPlaying) {
             const currentTime = youtubePlayer.getCurrentTime();
-            if (currentTime > 0) {
+            if (currentTime > 0.5) {
                 storageManager.saveVideoTime(currentTime);
                 console.log('頁面關閉時已儲存影片位置:', currentTime.toFixed(1) + '秒');
             }
@@ -996,9 +1031,9 @@ window.addEventListener('beforeunload', function() {
 
 // 頁面可見性變化事件（當使用者切換到其他分頁時）
 document.addEventListener('visibilitychange', function() {
-    if (document.hidden && window.app && youtubePlayer.isReady()) {
+    if (document.hidden && window.app && youtubePlayer.isReady() && appState.hasStartedPlaying) {
         const currentTime = youtubePlayer.getCurrentTime();
-        if (currentTime > 0) {
+        if (currentTime > 0.5) {
             storageManager.saveVideoTime(currentTime);
             appState.lastVideoTimeSave = currentTime;
             console.log('切換分頁時已儲存影片位置:', currentTime.toFixed(1) + '秒');
