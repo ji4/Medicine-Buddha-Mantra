@@ -1,3 +1,197 @@
+// ===== 輔助功能 =====
+
+// 顯示儲存狀態提示
+function showStorageStatus() {
+    const statusElement = document.getElementById('storageStatus');
+    const statusTextElement = document.getElementById('statusText');
+    
+    if (!statusElement || !statusTextElement) return;
+    
+    if (storageManager.isStorageAvailable()) {
+        // 延遲獲取摘要，等待儲存管理器初始化
+        setTimeout(() => {
+            const summary = storageManager.getStorageSummary();
+            
+            let message = '正在載入保存的進度...';
+            
+            if (summary.mantraCount > 0 || summary.videoTime > 0) {
+                const parts = [];
+                if (summary.mantraCount > 0) {
+                    parts.push(`計數: ${summary.mantraCount}`);
+                }
+                if (summary.videoTime > 5) {
+                    parts.push(`進度: ${summary.videoTime.toFixed(0)}秒`);
+                }
+                if (parts.length > 0) {
+                    message = `已載入保存的 ${parts.join(', ')}`;
+                }
+            } else {
+                message = '歡迎使用藥師咒助念器 🙏';
+            }
+            
+            statusTextElement.textContent = message;
+            statusElement.style.display = 'block';
+            
+            // 3秒後自動隱藏
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 3000);
+        }, 100); // 等待 100ms 讓儲存管理器初始化
+    }
+}
+
+// 清除所有資料（調試用）
+function clearAllData() {
+    if (confirm('確定要清除所有保存的資料嗎？這將重設計數器和影片進度。')) {
+        storageManager.clearAll();
+        
+        // 重設應用狀態
+        appState.mantraCount = 0;
+        appState.currentTime = 0;
+        counterManager.setCount(0);
+        
+        // 重設影片位置
+        if (youtubePlayer.isReady()) {
+            youtubePlayer.resetAndPlay();
+        }
+        
+        alert('所有資料已清除！');
+        console.log('所有儲存資料已清除');
+    }
+}
+
+// 顯示儲存資訊（調試用）
+function showStorageInfo() {
+    const summary = storageManager.getStorageSummary();
+    const lastSaveDate = summary.lastSaveTime ? new Date(parseInt(summary.lastSaveTime)).toLocaleString() : '無';
+    
+    const info = `
+本機儲存狀態：
+
+計數器：${summary.mantraCount}
+影片時間：${summary.videoTime.toFixed(1)}秒
+播放速度：${summary.playbackSpeed}x
+最後儲存：${lastSaveDate}
+儲存可用：${summary.isAvailable ? '是' : '否'}
+    `;
+    
+    alert(info);
+    console.log('儲存狀態摘要:', summary);
+}
+
+// ===== 本機儲存管理器 =====
+class LocalStorageManager {
+    constructor() {
+        this.keys = {
+            MANTRA_COUNT: 'buddhaMantraCount',
+            VIDEO_TIME: 'buddhaVideoTime',
+            LAST_SAVE_TIME: 'buddhaLastSaveTime',
+            PLAYBACK_SPEED: 'buddhaPlaybackSpeed'
+        };
+    }
+
+    // 儲存計數器數值
+    saveMantraCount(count) {
+        try {
+            localStorage.setItem(this.keys.MANTRA_COUNT, count.toString());
+            localStorage.setItem(this.keys.LAST_SAVE_TIME, Date.now().toString());
+            console.log('計數器已儲存:', count);
+        } catch (error) {
+            console.warn('儲存計數器失敗:', error);
+        }
+    }
+
+    // 讀取計數器數值
+    loadMantraCount() {
+        try {
+            const count = localStorage.getItem(this.keys.MANTRA_COUNT);
+            return count ? parseInt(count, 10) : 0;
+        } catch (error) {
+            console.warn('讀取計數器失敗:', error);
+            return 0;
+        }
+    }
+
+    // 儲存影片播放時間
+    saveVideoTime(currentTime) {
+        try {
+            localStorage.setItem(this.keys.VIDEO_TIME, currentTime.toString());
+            localStorage.setItem(this.keys.LAST_SAVE_TIME, Date.now().toString());
+            console.log('影片時間已儲存:', currentTime.toFixed(1) + '秒');
+        } catch (error) {
+            console.warn('儲存影片時間失敗:', error);
+        }
+    }
+
+    // 讀取影片播放時間
+    loadVideoTime() {
+        try {
+            const time = localStorage.getItem(this.keys.VIDEO_TIME);
+            return time ? parseFloat(time) : 0;
+        } catch (error) {
+            console.warn('讀取影片時間失敗:', error);
+            return 0;
+        }
+    }
+
+    // 儲存播放速度
+    savePlaybackSpeed(speed) {
+        try {
+            localStorage.setItem(this.keys.PLAYBACK_SPEED, speed.toString());
+            console.log('播放速度已儲存:', speed + 'x');
+        } catch (error) {
+            console.warn('儲存播放速度失敗:', error);
+        }
+    }
+
+    // 讀取播放速度
+    loadPlaybackSpeed() {
+        try {
+            const speed = localStorage.getItem(this.keys.PLAYBACK_SPEED);
+            return speed ? parseFloat(speed) : 1.0;
+        } catch (error) {
+            console.warn('讀取播放速度失敗:', error);
+            return 1.0;
+        }
+    }
+
+    // 清除所有儲存資料
+    clearAll() {
+        try {
+            Object.values(this.keys).forEach(key => {
+                localStorage.removeItem(key);
+            });
+            console.log('所有儲存資料已清除');
+        } catch (error) {
+            console.warn('清除儲存資料失敗:', error);
+        }
+    }
+
+    // 檢查儲存空間是否可用
+    isStorageAvailable() {
+        try {
+            const test = '__storage_test__';
+            localStorage.setItem(test, test);
+            localStorage.removeItem(test);
+            return true;
+        } catch (error) {
+            console.warn('本機儲存不可用:', error);
+            return false;
+        }
+    }
+
+    // 獲取儲存資料的摘要
+    getStorageSummary() {
+        return {
+            mantraCount: this.loadMantraCount(),
+            videoTime: this.loadVideoTime(),
+            playbackSpeed: this.loadPlaybackSpeed(),
+            lastSaveTime: localStorage.getItem(this.keys.LAST_SAVE_TIME),
+            isAvailable: this.isStorageAvailable()
+        };
+    }
+}
+
 // ===== 應用程式狀態管理 =====
 class AppState {
     constructor() {
@@ -6,9 +200,64 @@ class AppState {
         this.playerReady = false;
         this.currentSpeedIndex = 3; // 預設 1x 速度
         this.speedOptions = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
-        // 預留計數器相關狀態
+        // 計數器相關狀態
         this.mantraCount = 0;
         this.sessionStartTime = null;
+        // 自動儲存相關
+        this.autoSaveInterval = null;
+        this.lastVideoTimeSave = 0;
+        this.videoTimeSaveThreshold = 10; // 每10秒自動儲存一次影片時間
+    }
+
+    // 初始化狀態（從本機儲存讀取）
+    initializeFromStorage() {
+        const savedCount = storageManager.loadMantraCount();
+        const savedVideoTime = storageManager.loadVideoTime();
+        const savedSpeed = storageManager.loadPlaybackSpeed();
+        
+        this.mantraCount = savedCount;
+        this.currentTime = savedVideoTime;
+        
+        // 設定播放速度索引
+        const speedIndex = this.speedOptions.indexOf(savedSpeed);
+        if (speedIndex !== -1) {
+            this.currentSpeedIndex = speedIndex;
+        }
+        
+        console.log('已從本機儲存載入狀態:', {
+            計數器: savedCount,
+            影片時間: savedVideoTime.toFixed(1) + '秒',
+            播放速度: savedSpeed + 'x'
+        });
+    }
+
+    // 開始自動儲存
+    startAutoSave() {
+        if (this.autoSaveInterval) {
+            clearInterval(this.autoSaveInterval);
+        }
+        
+        this.autoSaveInterval = setInterval(() => {
+            // 自動儲存影片時間（如果有變化且超過閾值）
+            if (youtubePlayer && youtubePlayer.isReady()) {
+                const currentTime = youtubePlayer.getCurrentTime();
+                if (Math.abs(currentTime - this.lastVideoTimeSave) >= this.videoTimeSaveThreshold) {
+                    storageManager.saveVideoTime(currentTime);
+                    this.lastVideoTimeSave = currentTime;
+                }
+            }
+        }, 5000); // 每5秒檢查一次
+        
+        console.log('自動儲存已啟動');
+    }
+
+    // 停止自動儲存
+    stopAutoSave() {
+        if (this.autoSaveInterval) {
+            clearInterval(this.autoSaveInterval);
+            this.autoSaveInterval = null;
+            console.log('自動儲存已停止');
+        }
     }
 }
 
@@ -67,8 +316,38 @@ class YouTubePlayerManager {
     onReady(event) {
         console.log('YouTube Player 已準備就緒');
         appState.playerReady = true;
+        
+        // 嘗試恢復上次的播放位置和速度
+        this.restoreLastPosition();
+        
         timeManager.start();
         uiManager.updateTimeDisplay();
+    }
+    
+    // 恢復上次的播放位置和速度
+    restoreLastPosition() {
+        try {
+            const savedTime = storageManager.loadVideoTime();
+            const savedSpeed = storageManager.loadPlaybackSpeed();
+            
+            // 恢復播放位置（如果有保存且大於5秒）
+            if (savedTime > 5) {
+                this.player.seekTo(savedTime, true);
+                console.log('已恢復播放位置至:', savedTime.toFixed(1) + '秒');
+            }
+            
+            // 恢復播放速度
+            if (savedSpeed && savedSpeed !== 1.0) {
+                // 使用延遲來確保播放器完全初始化
+                setTimeout(() => {
+                    this.player.setPlaybackRate(savedSpeed);
+                    speedController.setSpeedFromStorage(savedSpeed);
+                }, 500);
+                console.log('將恢復播放速度至:', savedSpeed + 'x');
+            }
+        } catch (error) {
+            console.warn('恢復播放狀態失敗:', error);
+        }
     }
 
     onStateChange(event) {
@@ -155,6 +434,8 @@ class YouTubePlayerManager {
         
         try {
             this.player.setPlaybackRate(rate);
+            // 儲存播放速度設定
+            storageManager.savePlaybackSpeed(rate);
             console.log('播放速度已設為:', rate + 'x');
         } catch (error) {
             console.error('設定播放速度失敗:', error);
@@ -302,18 +583,33 @@ class SpeedController {
     changeFromSelect(rate) {
         if (!youtubePlayer.isReady()) return;
         
-        appState.currentSpeedIndex = appState.speedOptions.indexOf(rate);
+        const speedIndex = appState.speedOptions.indexOf(rate);
+        if (speedIndex !== -1) {
+            appState.currentSpeedIndex = speedIndex;
+        }
+        
         youtubePlayer.setPlaybackRate(rate);
         uiManager.updateSpeedSelectors(rate);
         console.log('播放速度已設為:', rate + 'x');
     }
+    
+    // 設定速度並更新狀態（用於從儲存載入）
+    setSpeedFromStorage(rate) {
+        const speedIndex = appState.speedOptions.indexOf(rate);
+        if (speedIndex !== -1) {
+            appState.currentSpeedIndex = speedIndex;
+            uiManager.updateSpeedSelectors(rate);
+            console.log('已從儲存載入播放速度:', rate + 'x');
+        }
+    }
 }
 
-// ===== 計數器管理器（為未來功能預留） =====
+// ===== 計數器管理器 =====
 class CounterManager {
     constructor() {
         this.count = 0;
         this.isVisible = false;
+        this.autoSaveEnabled = true; // 是否啟用自動儲存
         
         // 手機版元素
         this.counterPanel = document.getElementById('counterPanel');
@@ -329,6 +625,9 @@ class CounterManager {
     }
 
     init() {
+        // 從本機儲存載入計數值
+        this.loadFromStorage();
+        
         // 初始化計數器顯示
         this.updateDisplay();
 
@@ -442,11 +741,50 @@ class CounterManager {
     increment() {
         this.count++;
         this.updateDisplay();
+        
+        // 自動儲存
+        if (this.autoSaveEnabled) {
+            storageManager.saveMantraCount(this.count);
+        }
     }
 
     reset() {
         this.count = 0;
         this.updateDisplay();
+        
+        // 儲存重設狀態
+        if (this.autoSaveEnabled) {
+            storageManager.saveMantraCount(this.count);
+        }
+    }
+    
+    // 從本機儲存載入計數值
+    loadFromStorage() {
+        try {
+            const savedCount = storageManager.loadMantraCount();
+            this.count = savedCount;
+            console.log('計數器已從本機儲存載入:', savedCount);
+        } catch (error) {
+            console.warn('載入計數器狀態失敗:', error);
+            this.count = 0;
+        }
+    }
+    
+    // 手動儲存至本機
+    saveToStorage() {
+        storageManager.saveMantraCount(this.count);
+    }
+    
+    // 設定計數值（不自動儲存）
+    setCount(count) {
+        this.count = Math.max(0, parseInt(count) || 0);
+        this.updateDisplay();
+    }
+    
+    // 設定計數值並儲存
+    setCountAndSave(count) {
+        this.setCount(count);
+        this.saveToStorage();
     }
 
     updateDisplay() {
@@ -562,16 +900,44 @@ class App {
     }
 
     init() {
+        // 檢查儲存可用性
+        if (!storageManager.isStorageAvailable()) {
+            console.warn('本機儲存不可用，將無法保存設定');
+        } else {
+            console.log('本機儲存可用，將保存計數器和播放狀態');
+            
+            // 載入儲存的狀態
+            appState.initializeFromStorage();
+            
+            // 啟動自動儲存
+            appState.startAutoSave();
+        }
+        
         this.eventManager.init();
         this.counterManager.init();
+        
+        // 顯示儲存摘要（供調試用）
+        const summary = storageManager.getStorageSummary();
+        console.log('儲存狀態摘要:', summary);
     }
 
     cleanup() {
         this.timeManager.stop();
+        appState.stopAutoSave();
+        
+        // 在頁面關閉時儲存當前狀態
+        if (storageManager.isStorageAvailable() && youtubePlayer.isReady()) {
+            const currentTime = youtubePlayer.getCurrentTime();
+            if (currentTime > 0) {
+                storageManager.saveVideoTime(currentTime);
+                console.log('頁面關閉時已儲存影片位置:', currentTime.toFixed(1) + '秒');
+            }
+        }
     }
 }
 
 // ===== 全域實例 =====
+const storageManager = new LocalStorageManager();
 const youtubePlayer = new YouTubePlayerManager();
 const uiManager = new UIManager();
 const timeManager = new TimeManager();
@@ -588,6 +954,9 @@ function onYouTubeIframeAPIReady() {
 window.addEventListener('load', () => {
     console.log('頁面完全載入，包括所有依賴項...');
     
+    // 顯示載入狀態提示
+    showStorageStatus();
+    
     // 初始化應用
     const app = new App();
     app.init();
@@ -601,6 +970,11 @@ window.addEventListener('load', () => {
     console.log('計數器面板元素:', counterPanel ? '已找到' : '未找到');
     console.log('移動版切換按鈕:', counterToggleBtn ? '已找到' : '未找到');
     console.log('桌面版切換按鈕:', counterToggleBtnDesktop ? '已找到' : '未找到');
+    
+    // 在開發模式下顯示調試控制
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        document.getElementById('debugControls').style.display = 'flex';
+    }
 });
 
 // 清理函數

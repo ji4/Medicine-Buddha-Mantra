@@ -168,6 +168,14 @@
     <div class="container">
         <div class="title">《藥師咒》</div>
         
+        <!-- 儲存狀態提示（僅在載入時短暫顯示） -->
+        <div class="storage-status" id="storageStatus" style="display: none;">
+            <div class="status-content">
+                <span class="status-icon">💾</span>
+                <span class="status-text" id="statusText">正在載入保存的進度...</span>
+            </div>
+        </div>
+        
         <div class="main-content vertical-mode" id="mainContent">
             <!-- 左側：影片區域 -->
             <div class="left-section">
@@ -289,6 +297,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- 清除資料按鈕（隱藏，僅供調試用） -->
+        <div class="debug-controls" id="debugControls" style="display: none;">
+            <button class="debug-btn" onclick="clearAllData()" title="清除所有保存的資料">清除資料</button>
+            <button class="debug-btn" onclick="showStorageInfo()" title="顯示儲存資訊">儲存資訊</button>
         </div>
         
         <!-- 梵文發音說明區塊 -->        
