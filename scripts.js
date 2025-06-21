@@ -90,6 +90,19 @@ class LocalStorageManager {
         };
     }
 
+    // 檢查儲存空間是否可用
+    isStorageAvailable() {
+        try {
+            const test = '__storage_test__';
+            localStorage.setItem(test, test);
+            localStorage.removeItem(test);
+            return true;
+        } catch (error) {
+            console.warn('本機儲存不可用:', error);
+            return false;
+        }
+    }
+
     // 儲存計數器數值
     saveMantraCount(count) {
         try {
@@ -164,19 +177,6 @@ class LocalStorageManager {
             console.log('所有儲存資料已清除');
         } catch (error) {
             console.warn('清除儲存資料失敗:', error);
-        }
-    }
-
-    // 檢查儲存空間是否可用
-    isStorageAvailable() {
-        try {
-            const test = '__storage_test__';
-            localStorage.setItem(test, test);
-            localStorage.removeItem(test);
-            return true;
-        } catch (error) {
-            console.warn('本機儲存不可用:', error);
-            return false;
         }
     }
 
