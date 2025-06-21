@@ -1044,3 +1044,275 @@ body {
         padding: 6px 10px;
     }
 }
+
+/* 梵文發音說明區塊樣式 */
+.pronunciation-guide {
+    margin-top: 25px;
+    background: 
+        radial-gradient(ellipse 150px 90px at 25% 30%, rgba(139, 69, 19, 0.04) 0%, rgba(139, 69, 19, 0.008) 35%, transparent 60%),
+        radial-gradient(ellipse 120px 160px at 85% 70%, rgba(205, 133, 63, 0.035) 0%, rgba(205, 133, 63, 0.007) 30%, transparent 55%),
+        radial-gradient(ellipse 180px 80px at 55% 10%, rgba(160, 82, 45, 0.03) 0%, rgba(160, 82, 45, 0.006) 40%, transparent 65%),
+        linear-gradient(135deg, #fefefe 0%, #fdfdfd 25%, #fcfcfc 50%, #fbfbfb 75%, #fafafa 100%);
+    background-size: 
+        200px 140px, 160px 210px, 240px 120px,
+        100% 100%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid rgba(184, 134, 11, 0.25);
+    box-shadow: 
+        0 4px 16px rgba(139, 69, 19, 0.12),
+        inset 0 1px 3px rgba(255, 255, 255, 0.7);
+}
+
+.guide-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #8b4513;
+    background: 
+        linear-gradient(135deg, 
+            rgba(255, 248, 220, 0.95) 0%,
+            rgba(250, 235, 215, 0.95) 50%,
+            rgba(245, 222, 179, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 15px 20px;
+    border-radius: 30px;
+    border: 2px solid rgba(184, 134, 11, 0.4);
+    position: relative;
+    box-shadow: 
+        0 4px 15px rgba(139, 69, 19, 0.18),
+        inset 0 1px 3px rgba(255, 255, 255, 0.7);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.guide-title::before {
+    content: '॰';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(184, 134, 11, 0.7);
+    font-size: 18px;
+}
+
+.guide-title::after {
+    content: '॰';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(184, 134, 11, 0.7);
+    font-size: 18px;
+}
+
+.guide-content {
+    display: grid;
+    gap: 20px;
+}
+
+.guide-section {
+    background: 
+        linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.8) 0%,
+            rgba(255, 253, 250, 0.8) 50%,
+            rgba(250, 248, 245, 0.8) 100%);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(184, 134, 11, 0.2);
+    box-shadow: 
+        0 2px 10px rgba(139, 69, 19, 0.08),
+        inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.guide-section h3 {
+    color: #8b4513;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(184, 134, 11, 0.3);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.explanation {
+    line-height: 1.7;
+    color: #3d2914;
+}
+
+.explanation p {
+    margin: 0 0 12px 0;
+    text-align: justify;
+}
+
+.explanation p:last-child {
+    margin-bottom: 0;
+}
+
+.explanation strong {
+    color: #8b4513;
+    font-weight: 600;
+}
+
+.explanation ul {
+    margin: 12px 0;
+    padding-left: 20px;
+}
+
+.explanation li {
+    margin-bottom: 8px;
+    list-style-type: disc;
+    color: #3d2914;
+}
+
+.explanation .note {
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+    background: rgba(255, 248, 220, 0.5);
+    padding: 8px 12px;
+    border-radius: 6px;
+    border-left: 3px solid rgba(184, 134, 11, 0.4);
+    margin-top: 10px;
+}
+
+/* 顏色標示說明的樣式調整 */
+.explanation .voiceless {
+    color: #d2691e;
+    font-weight: bold;
+    padding: 2px 4px;
+    background: rgba(210, 105, 30, 0.1);
+    border-radius: 3px;
+}
+
+.explanation .voiced {
+    color: #4682b4;
+    font-weight: bold;
+    padding: 2px 4px;
+    background: rgba(70, 130, 180, 0.1);
+    border-radius: 3px;
+}
+
+.explanation .voiced-pronunciation {
+    color: #191970;
+    font-weight: bold;
+    padding: 2px 4px;
+    background: rgba(25, 25, 112, 0.1);
+    border-radius: 3px;
+}
+
+/* 響應式設計 - 手機版調整 */
+@media (max-width: 768px) {
+    .pronunciation-guide {
+        margin-top: 20px;
+        padding: 18px;
+    }
+    
+    .guide-title {
+        font-size: 18px;
+        padding: 12px 16px;
+        margin-bottom: 15px;
+    }
+    
+    .guide-title::before,
+    .guide-title::after {
+        font-size: 16px;
+    }
+    
+    .guide-content {
+        gap: 15px;
+    }
+    
+    .guide-section {
+        padding: 15px;
+    }
+    
+    .guide-section h3 {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+    
+    .explanation {
+        line-height: 1.6;
+    }
+    
+    .explanation p {
+        margin-bottom: 10px;
+    }
+    
+    .explanation ul {
+        padding-left: 16px;
+    }
+    
+    .explanation li {
+        margin-bottom: 6px;
+    }
+    
+    .explanation .note {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pronunciation-guide {
+        margin-top: 15px;
+        padding: 15px;
+    }
+    
+    .guide-title {
+        font-size: 16px;
+        padding: 10px 14px;
+        margin-bottom: 12px;
+    }
+    
+    .guide-title::before,
+    .guide-title::after {
+        font-size: 14px;
+        left: 15px;
+    }
+    
+    .guide-title::after {
+        right: 15px;
+    }
+    
+    .guide-content {
+        gap: 12px;
+    }
+    
+    .guide-section {
+        padding: 12px;
+    }
+    
+    .guide-section h3 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    
+    .explanation {
+        line-height: 1.5;
+    }
+    
+    .explanation p {
+        margin-bottom: 8px;
+    }
+    
+    .explanation ul {
+        padding-left: 14px;
+        margin: 8px 0;
+    }
+    
+    .explanation li {
+        margin-bottom: 5px;
+    }
+    
+    .explanation .note {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+}
