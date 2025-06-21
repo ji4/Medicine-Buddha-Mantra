@@ -1405,7 +1405,7 @@ strong, b, .guide-section h3 {
     color: #fff4e6;
     text-decoration: none;
     border-radius: 12px;
-    padding: 12px 24px;
+    padding: 8px 16px;
     transition: all 0.3s ease;
     box-shadow: 
         0 4px 12px rgba(139, 0, 0, 0.3),
@@ -1433,13 +1433,13 @@ strong, b, .guide-section h3 {
 .portaly-btn-content {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .portaly-icon {
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .portaly-text {
@@ -1506,7 +1506,7 @@ strong, b, .guide-section h3 {
 .contact-btn {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
     background: linear-gradient(135deg, 
         rgba(139, 69, 19, 0.95) 0%, 
         rgba(160, 82, 45, 0.95) 25%,
@@ -1515,9 +1515,9 @@ strong, b, .guide-section h3 {
         rgba(139, 69, 19, 0.95) 100%);
     color: #fff4e6;
     text-decoration: none;
-    padding: 12px 24px;
+    padding: 8px 16px;
     border-radius: 12px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 
@@ -1545,8 +1545,8 @@ strong, b, .guide-section h3 {
 }
 
 .contact-icon {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     fill: currentColor;
 }
 
@@ -1705,7 +1705,6 @@ strong, b, .guide-section h3 {
         width: 16px;
         height: 16px;
     }
-}
     
     .pronunciation-guide {
         padding: 10px;
