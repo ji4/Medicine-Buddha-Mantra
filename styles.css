@@ -160,7 +160,6 @@ strong, b, .guide-section h3 {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: none; /* 移除邊框，改用陰影效果 */
-    border-radius: 16px; /* 更圓潤的邊角 */
     padding: 15px; /* 減少內部間距 */
     box-shadow: 
         /* Material Design 紙質陰影效果 */
