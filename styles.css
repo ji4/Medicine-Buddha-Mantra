@@ -1967,3 +1967,32 @@ strong, b, .guide-section h3 {
         letter-spacing: 1px;
     }
 }
+
+.cta-shared-note {
+    display: inline-block;
+    color: #8b7355;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.7;
+    text-align: center;
+    background: rgba(255, 248, 220, 0.6);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(255, 165, 0, 0.4);
+    margin-top: 12px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .cta-shared-note {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-shared-note {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+}
