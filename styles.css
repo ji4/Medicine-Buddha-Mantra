@@ -1401,6 +1401,46 @@ strong, b, .guide-section h3 {
         font-size: 14px;
     }
     .explanation .note {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+}
+
+/* 聯絡資訊樣式 */
+.contact-info {
+    margin-top: 30px;
+    padding: 15px;
+    text-align: center;
+    border-top: 1px solid rgba(139, 69, 19, 0.2);
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+}
+
+.contact-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #8b4513;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .contact-info {
+        margin-top: 20px;
+        padding: 12px;
+    }
+    
+    .contact-info p {
         font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-info {
+        margin-top: 15px;
+        padding: 10px;
+    }
+    
+    .contact-info p {
+        font-size: 12px;
     }
 }
