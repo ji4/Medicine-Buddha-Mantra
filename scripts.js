@@ -957,6 +957,60 @@ class CounterManager {
 // ===== 事件管理器 =====
 class EventManager {
     init() {
+        // 設置 document.body 可以接收焦點，確保鍵盤事件正常工作
+        document.body.setAttribute('tabindex', '-1');
+        
+        // 確保焦點在 document.body 上
+        const ensureFocus = () => {
+            if (document.activeElement !== document.body) {
+                console.log('🔄 焦點轉移:', document.activeElement.tagName, '-> body');
+                document.body.focus();
+            }
+        };
+        
+        // 頁面載入時設置焦點
+        ensureFocus();
+        
+        // 點擊頁面時確保焦點在 document.body
+        document.addEventListener('click', (event) => {
+            // 如果點擊的是 iframe 或其內部元素，延遲設置焦點
+            if (event.target.closest('iframe')) {
+                setTimeout(ensureFocus, 50);
+            } else {
+                ensureFocus();
+            }
+        });
+        
+        // 處理 YouTube iframe 焦點問題
+        const youtubeIframe = document.getElementById('youtubePlayer');
+        if (youtubeIframe) {
+            // 當 iframe 獲得焦點時，將焦點轉移回 document.body
+            youtubeIframe.addEventListener('focus', () => {
+                console.log('🎬 iframe 獲得焦點，準備轉移');
+                setTimeout(ensureFocus, 10);
+            });
+            
+            // 當 iframe 失去焦點時，確保焦點在 document.body
+            youtubeIframe.addEventListener('blur', () => {
+                console.log('🎬 iframe 失去焦點');
+                setTimeout(ensureFocus, 10);
+            });
+            
+            // 當 iframe 被點擊時，也將焦點轉移回 document.body
+            youtubeIframe.addEventListener('click', () => {
+                console.log('🎬 iframe 被點擊');
+                setTimeout(ensureFocus, 50);
+            });
+            
+            // 定期檢查焦點狀態（作為備用方案）
+            setInterval(() => {
+                if (document.activeElement === youtubeIframe) {
+                    console.log('🔄 定期檢查：iframe 有焦點，轉移中...');
+                    ensureFocus();
+                }
+            }, 1000);
+        }
+        
         this.initControlButtons();
         this.initKeyboardShortcuts();
     }
@@ -1007,6 +1061,63 @@ class EventManager {
     }
 
     initKeyboardShortcuts() {
+        // 使用 window 事件監聽器來確保捕獲所有鍵盤事件
+        window.addEventListener('keydown', (event) => {
+            // 添加調試信息
+            console.log('🔍 鍵盤事件被捕獲:', {
+                code: event.code,
+                key: event.key,
+                target: event.target.tagName,
+                activeElement: document.activeElement.tagName
+            });
+            
+            // 忽略輸入框中的鍵盤事件
+            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName)) {
+                console.log('⚠️ 忽略輸入框中的鍵盤事件');
+                return;
+            }
+            
+            const code = event.code;
+            
+            switch (code) {
+                case CONFIG.KEYBOARD_SHORTCUTS.SPACE:
+                    console.log('🎯 空白鍵被觸發，執行播放/暫停');
+                    event.preventDefault();
+                    event.stopPropagation();
+                    youtubePlayer.togglePlayPause();
+                    break;
+                case CONFIG.KEYBOARD_SHORTCUTS.RESET:
+                    console.log('🎯 R鍵被觸發，執行重新播放');
+                    event.preventDefault();
+                    event.stopPropagation();
+                    youtubePlayer.resetAndPlay();
+                    break;
+            }
+            
+            if (CONFIG.KEYBOARD_SHORTCUTS.SEEK_BACK.includes(code)) {
+                event.preventDefault();
+                event.stopPropagation();
+                youtubePlayer.seekRelative(-CONFIG.SEEK_SECONDS);
+            } else if (CONFIG.KEYBOARD_SHORTCUTS.SEEK_FORWARD.includes(code)) {
+                event.preventDefault();
+                event.stopPropagation();
+                youtubePlayer.seekRelative(CONFIG.SEEK_SECONDS);
+            } else if (CONFIG.KEYBOARD_SHORTCUTS.SPEED_DOWN.includes(code) && !event.metaKey) {
+                event.preventDefault();
+                event.stopPropagation();
+                speedController.adjustSpeed('down');
+            } else if (CONFIG.KEYBOARD_SHORTCUTS.SPEED_UP.includes(code) && !event.metaKey) {
+                event.preventDefault();
+                event.stopPropagation();
+                speedController.adjustSpeed('up');
+            } else if (CONFIG.KEYBOARD_SHORTCUTS.SPEED_NORMAL.includes(code) && !event.metaKey) {
+                event.preventDefault();
+                event.stopPropagation();
+                speedController.setNormalSpeed();
+            }
+        });
+        
+        // 同時保留 document 事件監聽器作為備用
         document.addEventListener('keydown', (event) => {
             // 忽略輸入框中的鍵盤事件
             if (['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName)) {
@@ -1018,28 +1129,35 @@ class EventManager {
             switch (code) {
                 case CONFIG.KEYBOARD_SHORTCUTS.SPACE:
                     event.preventDefault();
+                    event.stopPropagation();
                     youtubePlayer.togglePlayPause();
                     break;
                 case CONFIG.KEYBOARD_SHORTCUTS.RESET:
                     event.preventDefault();
+                    event.stopPropagation();
                     youtubePlayer.resetAndPlay();
                     break;
             }
             
             if (CONFIG.KEYBOARD_SHORTCUTS.SEEK_BACK.includes(code)) {
                 event.preventDefault();
+                event.stopPropagation();
                 youtubePlayer.seekRelative(-CONFIG.SEEK_SECONDS);
             } else if (CONFIG.KEYBOARD_SHORTCUTS.SEEK_FORWARD.includes(code)) {
                 event.preventDefault();
+                event.stopPropagation();
                 youtubePlayer.seekRelative(CONFIG.SEEK_SECONDS);
             } else if (CONFIG.KEYBOARD_SHORTCUTS.SPEED_DOWN.includes(code) && !event.metaKey) {
                 event.preventDefault();
+                event.stopPropagation();
                 speedController.adjustSpeed('down');
             } else if (CONFIG.KEYBOARD_SHORTCUTS.SPEED_UP.includes(code) && !event.metaKey) {
                 event.preventDefault();
+                event.stopPropagation();
                 speedController.adjustSpeed('up');
             } else if (CONFIG.KEYBOARD_SHORTCUTS.SPEED_NORMAL.includes(code) && !event.metaKey) {
                 event.preventDefault();
+                event.stopPropagation();
                 speedController.setNormalSpeed();
             }
         });
