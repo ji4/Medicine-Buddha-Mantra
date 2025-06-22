@@ -490,9 +490,17 @@ class YouTubePlayerManager {
             if (appState.isPlaying) {
                 this.player.pauseVideo();
                 console.log('執行暫停');
+                // GA 追蹤暫停事件
+                if (window.GATracking) {
+                    window.GATracking.trackVideoEvent('pause', this.getCurrentTime());
+                }
             } else {
                 this.player.playVideo();
                 console.log('執行播放');
+                // GA 追蹤播放事件
+                if (window.GATracking) {
+                    window.GATracking.trackVideoEvent('play', this.getCurrentTime());
+                }
             }
         } catch (error) {
             console.error('播放/暫停操作失敗:', error);
@@ -551,6 +559,11 @@ class YouTubePlayerManager {
             appState.lastVideoTimeSave = 0;
             appState.hasStartedPlaying = false; // 重置播放狀態
             console.log('重置並開始播放，已儲存時間點為0');
+            
+            // GA 追蹤重置事件
+            if (window.GATracking) {
+                window.GATracking.trackVideoEvent('restart');
+            }
         } catch (error) {
             console.error('重置播放失敗:', error);
         }
@@ -567,6 +580,11 @@ class YouTubePlayerManager {
             // 儲存播放速度設定
             storageManager.savePlaybackSpeed(rate);
             console.log('播放速度已設為:', rate + 'x');
+            
+            // GA 追蹤速度變更事件
+            if (window.GATracking) {
+                window.GATracking.trackSpeedEvent(rate);
+            }
         } catch (error) {
             console.error('設定播放速度失敗:', error);
         }
@@ -876,6 +894,11 @@ class CounterManager {
         if (this.autoSaveEnabled) {
             storageManager.saveMantraCount(this.count);
         }
+        
+        // GA 追蹤計數器增加事件
+        if (window.GATracking) {
+            window.GATracking.trackCounterEvent('increment', this.count);
+        }
     }
 
     reset() {
@@ -885,6 +908,11 @@ class CounterManager {
         // 儲存重設狀態
         if (this.autoSaveEnabled) {
             storageManager.saveMantraCount(this.count);
+        }
+        
+        // GA 追蹤計數器重設事件
+        if (window.GATracking) {
+            window.GATracking.trackCounterEvent('reset', 0);
         }
     }
     
@@ -1151,6 +1179,11 @@ window.addEventListener('load', () => {
     const app = new App();
     app.init();
     window.app = app; // 為了調試方便
+    
+    // 初始化 GA 追蹤
+    if (window.GATracking) {
+        window.GATracking.initGATracking();
+    }
     
     // 檢查計數器元素
     const counterPanel = document.getElementById('counterPanel');
