@@ -2009,14 +2009,10 @@ strong, b, .guide-section h3 {
 .banner-scroll-fade::after {
     content: '';
     position: absolute;
-    left: 10%;
-    right: 10%;
-    height: 3px; /* 調整線條粗細 */
-    background: linear-gradient(to right, 
-        transparent, 
-        rgba(139, 69, 19, 0.7) 20%, 
-        rgba(139, 69, 19, 0.7) 80%, 
-        transparent);
+    left: 8%; /* 對齊裁切邊緣 */
+    right: 8%; /* 對齊裁切邊緣 */
+    height: 3px; /* 線條粗細 */
+    background: rgba(139, 69, 19, 0.7); /* 改回實色線條 */
 }
 
 .banner-scroll-fade::before {
