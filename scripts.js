@@ -1,3 +1,22 @@
+// ===== 版權年份自動更新 =====
+function updateCopyrightYear() {
+    const currentYear = new Date().getFullYear();
+    
+    // 更新頁面中的版權年份
+    const copyrightElements = document.querySelectorAll('[data-copyright-year]');
+    copyrightElements.forEach(element => {
+        element.textContent = currentYear;
+    });
+    
+    // 更新頁面標題中的年份（如果有的話）
+    const titleElement = document.querySelector('title');
+    if (titleElement && titleElement.textContent.includes('2024')) {
+        titleElement.textContent = titleElement.textContent.replace(/2024/g, currentYear);
+    }
+    
+    console.log(`版權年份已更新為: ${currentYear}`);
+}
+
 // ===== 輔助功能 =====
 
 // 顯示儲存狀態提示
@@ -1281,6 +1300,9 @@ function onYouTubeIframeAPIReady() {
 // ===== 頁面生命週期 =====
 window.addEventListener('load', () => {
     console.log('頁面完全載入，包括所有依賴項...');
+    
+    // 更新版權年份
+    updateCopyrightYear();
     
     // 檢查YouTube API狀態
     console.log('🔍 檢查YouTube API狀態:');

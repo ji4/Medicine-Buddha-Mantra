@@ -2059,8 +2059,8 @@ strong, b, .guide-section h3 {
 
 @media (max-width: 768px) {
     .banner-scroll-fade {
-        padding: 8px 40px;
         font-size: 16px;
+        padding: 8px 12px;
     }
 }
 
@@ -2154,15 +2154,80 @@ strong, b, .guide-section h3 {
     }
     
     .copyright-content p {
-        font-size: 12px;
+        font-size: 11px;
     }
     
     .copyright-content p:first-child {
-        font-size: 13px;
-        margin-bottom: 5px;
+        font-size: 12px;
+        margin-bottom: 4px;
     }
     
     .copyright-note {
         font-size: 11px !important;
+    }
+}
+
+/* 版權資訊區域 */
+.copyright-footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid rgba(139, 69, 19, 0.1);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.copyright-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.copyright-content p {
+    margin: 5px 0;
+    font-size: 13px;
+    color: #8b4513;
+    line-height: 1.6;
+}
+
+.copyright-content a {
+    color: #a0522d;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.copyright-content a:hover {
+    color: #8b4513;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .copyright-footer {
+        margin-top: 30px;
+        padding: 15px 0;
+    }
+    
+    .copyright-content {
+        padding: 0 15px;
+    }
+    
+    .copyright-content p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .copyright-footer {
+        margin-top: 25px;
+        padding: 12px 0;
+    }
+    
+    .copyright-content {
+        padding: 0 10px;
+    }
+    
+    .copyright-content p {
+        font-size: 11px;
     }
 }

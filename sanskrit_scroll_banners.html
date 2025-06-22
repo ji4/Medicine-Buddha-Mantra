@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梵文卷軸風格 Banner 設計</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Serif+Devanagari:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f9f6f0 0%, #f0ebe0 25%, #e8dcc0 50%, #e0d3a8 75%, #d4c5a0 100%);
+            font-family: 'Noto Sans TC', sans-serif;
+            color: #3d2914;
+        }
+
+        .demo-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .title-demo {
+            margin-bottom: 50px;
+            padding: 25px;
+            background: rgba(255, 248, 220, 0.3);
+            border-radius: 12px;
+            border-left: 6px solid #8b4513;
+        }
+
+        h1 {
+            color: #8b4513;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #8b4513;
+            margin-bottom: 25px;
+            border-bottom: 3px solid rgba(139, 69, 19, 0.3);
+            padding-bottom: 10px;
+            font-size: 20px;
+        }
+
+        /* 方案一：貝葉經卷軸 */
+        .banner-palm-leaf {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 22px 70px;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(139, 69, 19, 0.03) 0px,
+                    rgba(139, 69, 19, 0.03) 2px,
+                    rgba(160, 82, 45, 0.04) 2px,
+                    rgba(160, 82, 45, 0.04) 4px),
+                linear-gradient(90deg, 
+                    rgba(139, 69, 19, 0.08) 0%, 
+                    rgba(205, 133, 63, 0.12) 50%, 
+                    rgba(139, 69, 19, 0.08) 100%),
+                linear-gradient(135deg, 
+                    rgba(248, 245, 235, 0.95) 0%,
+                    rgba(240, 235, 220, 0.95) 100%);
+            border-top: 3px solid rgba(139, 69, 19, 0.5);
+            border-bottom: 3px solid rgba(139, 69, 19, 0.5);
+            border-radius: 8px;
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.25),
+                inset 0 3px 8px rgba(255, 255, 255, 0.6);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-palm-leaf::before {
+            content: 'ॐ';
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Noto Sans Devanagari', serif;
+            font-size: 22px;
+            color: rgba(139, 69, 19, 0.6);
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-palm-leaf::after {
+            content: 'ॐ';
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Noto Sans Devanagari', serif;
+            font-size: 22px;
+            color: rgba(139, 69, 19, 0.6);
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+        }
+
+        /* 方案二：咒輪邊框卷軸 */
+        .banner-mantra-wheel {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 20px 80px;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(248, 245, 235, 0.9) 0px,
+                    rgba(248, 245, 235, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 2px),
+                linear-gradient(90deg, 
+                    rgba(139, 69, 19, 0.06) 0%, 
+                    rgba(205, 133, 63, 0.15) 50%, 
+                    rgba(139, 69, 19, 0.06) 100%);
+            border-top: 4px solid rgba(139, 69, 19, 0.6);
+            border-bottom: 4px solid rgba(139, 69, 19, 0.6);
+            border-radius: 12px;
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-mantra-wheel::before,
+        .banner-mantra-wheel::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: 
+                conic-gradient(from 0deg at 50% 50%,
+                    rgba(139, 69, 19, 0.4) 0deg,
+                    rgba(160, 82, 45, 0.3) 72deg,
+                    rgba(205, 133, 63, 0.2) 144deg,
+                    rgba(160, 82, 45, 0.3) 216deg,
+                    rgba(139, 69, 19, 0.4) 288deg,
+                    rgba(139, 69, 19, 0.4) 360deg);
+            border-radius: 50%;
+            border: 2px solid rgba(139, 69, 19, 0.3);
+            box-shadow: 
+                0 3px 8px rgba(139, 69, 19, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5);
+        }
+
+        .banner-mantra-wheel::before {
+            left: 20px;
+        }
+
+        .banner-mantra-wheel::after {
+            right: 20px;
+        }
+
+        /* 方案三：梵文邊飾卷軸 */
+        .banner-sanskrit-border {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 20px 90px;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(248, 245, 235, 0.9) 0px,
+                    rgba(248, 245, 235, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 2px),
+                linear-gradient(90deg, 
+                    rgba(139, 69, 19, 0.05) 0%, 
+                    rgba(205, 133, 63, 0.12) 50%, 
+                    rgba(139, 69, 19, 0.05) 100%);
+            border: 3px solid rgba(139, 69, 19, 0.5);
+            border-radius: 6px;
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-sanskrit-border::before {
+            content: 'स्वाहा';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-family: 'Noto Sans Devanagari', serif;
+            font-size: 14px;
+            color: rgba(139, 69, 19, 0.5);
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+            writing-mode: vertical-rl;
+        }
+
+        .banner-sanskrit-border::after {
+            content: 'स्वाहा';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            font-family: 'Noto Sans Devanagari', serif;
+            font-size: 14px;
+            color: rgba(139, 69, 19, 0.5);
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+            writing-mode: vertical-rl;
+        }
+
+        /* 方案四：蓮花梵音卷軸 */
+        .banner-lotus-mantra {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 22px 75px;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 60%),
+                repeating-linear-gradient(0deg, 
+                    rgba(248, 245, 235, 0.9) 0px,
+                    rgba(248, 245, 235, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 2px),
+                linear-gradient(90deg, 
+                    rgba(139, 69, 19, 0.06) 0%, 
+                    rgba(205, 133, 63, 0.12) 50%, 
+                    rgba(139, 69, 19, 0.06) 100%);
+            border-top: 4px solid rgba(139, 69, 19, 0.6);
+            border-bottom: 4px solid rgba(139, 69, 19, 0.6);
+            border-radius: 25px;
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-lotus-mantra::before {
+            content: '❋';
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: rgba(255, 165, 0, 0.6);
+            text-shadow: 
+                0 0 8px rgba(255, 215, 0, 0.4),
+                0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-lotus-mantra::after {
+            content: '❋';
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: rgba(255, 165, 0, 0.6);
+            text-shadow: 
+                0 0 8px rgba(255, 215, 0, 0.4),
+                0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        /* 方案五：藏文轉經輪 */
+        .banner-prayer-wheel {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 20px 85px;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(248, 245, 235, 0.9) 0px,
+                    rgba(248, 245, 235, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 2px),
+                linear-gradient(90deg, 
+                    rgba(139, 69, 19, 0.06) 0%, 
+                    rgba(205, 133, 63, 0.15) 50%, 
+                    rgba(139, 69, 19, 0.06) 100%);
+            border-top: 4px solid rgba(139, 69, 19, 0.6);
+            border-bottom: 4px solid rgba(139, 69, 19, 0.6);
+            border-radius: 8px;
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-prayer-wheel::before,
+        .banner-prayer-wheel::after {
+            content: '☸';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: rgba(139, 69, 19, 0.5);
+            text-shadow: 
+                0 0 6px rgba(255, 215, 0, 0.3),
+                0 2px 4px rgba(255, 255, 255, 0.8);
+            animation: rotate 20s linear infinite;
+        }
+
+        .banner-prayer-wheel::before {
+            left: 25px;
+        }
+
+        .banner-prayer-wheel::after {
+            right: 25px;
+            animation-direction: reverse;
+        }
+
+        @keyframes rotate {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        /* 方案六：金剛杵邊飾 */
+        .banner-vajra {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 20px 80px;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(248, 245, 235, 0.9) 0px,
+                    rgba(248, 245, 235, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 2px),
+                linear-gradient(90deg, 
+                    rgba(139, 69, 19, 0.06) 0%, 
+                    rgba(205, 133, 63, 0.15) 50%, 
+                    rgba(139, 69, 19, 0.06) 100%);
+            border-top: 4px solid rgba(139, 69, 19, 0.6);
+            border-bottom: 4px solid rgba(139, 69, 19, 0.6);
+            border-radius: 10px;
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-vajra::before {
+            content: '🔱';
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: rgba(139, 69, 19, 0.6);
+            text-shadow: 
+                0 0 6px rgba(255, 215, 0, 0.3),
+                0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-vajra::after {
+            content: '🔱';
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: rgba(139, 69, 19, 0.6);
+            text-shadow: 
+                0 0 6px rgba(255, 215, 0, 0.3),
+                0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        /* 方案七：經文包邊 */
+        .banner-sutra-edge {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 30px 0;
+            padding: 25px 60px;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(248, 245, 235, 0.9) 0px,
+                    rgba(248, 245, 235, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 2px),
+                linear-gradient(90deg, 
+                    rgba(139, 69, 19, 0.06) 0%, 
+                    rgba(205, 133, 63, 0.12) 50%, 
+                    rgba(139, 69, 19, 0.06) 100%);
+            border: 6px solid rgba(139, 69, 19, 0.4);
+            border-radius: 15px;
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-sutra-edge::before {
+            content: 'गते गते पारगते पारसंगते बोधि स्वाहा';
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(139, 69, 19, 0.8);
+            color: rgba(255, 248, 220, 0.9);
+            padding: 2px 20px;
+            border-radius: 0 0 8px 8px;
+            font-family: 'Noto Sans Devanagari', serif;
+            font-size: 10px;
+            text-shadow: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 80%;
+        }
+
+        /* 方案八：寶石鑲邊卷軸 */
+        .banner-jeweled-scroll {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 20px 90px;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(248, 245, 235, 0.9) 0px,
+                    rgba(248, 245, 235, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 2px),
+                linear-gradient(90deg, 
+                    rgba(139, 69, 19, 0.06) 0%, 
+                    rgba(205, 133, 63, 0.15) 50%, 
+                    rgba(139, 69, 19, 0.06) 100%);
+            border-top: 4px solid rgba(139, 69, 19, 0.6);
+            border-bottom: 4px solid rgba(139, 69, 19, 0.6);
+            border-radius: 12px;
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-jeweled-scroll::before,
+        .banner-jeweled-scroll::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            background: 
+                conic-gradient(from 0deg at 50% 50%,
+                    rgba(255, 215, 0, 0.8) 0deg,
+                    rgba(255, 165, 0, 0.9) 60deg,
+                    rgba(255, 140, 0, 1) 120deg,
+                    rgba(255, 165, 0, 0.9) 180deg,
+                    rgba(255, 215, 0, 0.8) 240deg,
+                    rgba(255, 140, 0, 1) 300deg,
+                    rgba(255, 215, 0, 0.8) 360deg);
+            border-radius: 50%;
+            border: 2px solid rgba(139, 69, 19, 0.4);
+            box-shadow: 
+                0 0 12px rgba(255, 215, 0, 0.5),
+                0 3px 8px rgba(139, 69, 19, 0.3),
+                inset 0 1px 3px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-jeweled-scroll::before {
+            left: 30px;
+        }
+
+        .banner-jeweled-scroll::after {
+            right: 30px;
+        }
+
+        .description {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .demo-pair {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .demo-container {
+                padding: 20px 15px;
+            }
+            
+            .title-demo {
+                padding: 20px 15px;
+            }
+            
+            .banner-palm-leaf, .banner-mantra-wheel, .banner-sanskrit-border,
+            .banner-lotus-mantra, .banner-prayer-wheel, .banner-vajra,
+            .banner-sutra-edge, .banner-jeweled-scroll {
+                font-size: 16px;
+                padding: 16px 50px;
+                margin: 20px 0;
+            }
+            
+            .banner-sutra-edge::before {
+                font-size: 8px;
+                padding: 1px 10px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>梵文卷軸風格 Banner 設計</h1>
+        
+        <div class="title-demo">
+            <h2>方案一：貝葉經卷軸</h2>
+            <div class="demo-pair">
+                <div class="banner-palm-leaf">護持網站</div>
+                <div class="banner-palm-leaf">聯絡我們</div>
+            </div>
+            <div class="description">模仿古代貝葉經書，兩側有ॐ（唵）字梵文，象徵神聖開始</div>
+        </div>
+
+        <div class="title-demo">
+            <h2>方案二：咒輪邊框卷軸</h2>
+            <div class="demo-pair">
+                <div class="banner-mantra-wheel">護持網站</div>
+                <div class="banner-mantra-wheel">聯絡我們</div>
+            </div>
+            <div class="description">兩側為五色咒輪圖案，代表佛教五方佛智慧</div>
+        </div>
+
+        <div class="title-demo">
+            <h2>方案三：梵文邊飾卷軸</h2>
+            <div class="demo-pair">
+                <div class="banner-sanskrit-border">護持網站</div>
+                <div class="banner-sanskrit-border">聯絡我們</div>
+            </div>
+            <div class="description">兩側直立梵文स्वाहा（娑婆訶），常見的咒語結語</div>
+        </div>
+
+        <div class="title-demo">
+            <h2>方案四：蓮花梵音卷軸</h2>
+            <div class="demo-pair">
+                <div class="banner-lotus-mantra">護持網站</div>
+                <div class="banner-lotus-mantra">聯絡我們</div>
+            </div>
+            <div class="description">兩側蓮花符號配金色光暈，象徵佛法清淨智慧</div>
+        </div>
+
+        <div class="title-demo">
+            <h2>方案五：轉經輪卷軸</h2>
+            <div class="demo-pair">
+                <div class="banner-prayer-wheel">護持網站</div>
+                <div class="banner-prayer-wheel">聯絡我們</div>
+            </div>
+            <div class="description">兩側法輪緩慢旋轉，象徵法輪常轉，具有動態禪意</div>
+        </div>
+
+        <div class="title-demo">
+            <h2>方案六：金剛杵邊飾</h2>
+            <div class="demo-pair">
+                <div class="banner-vajra">護持網站</div>
+                <div class="banner-vajra">聯絡我們</div>
+            </div>
+            <div class="description">兩側金剛杵象徵堅固不壞的智慧與慈悲</div>
+        </div>
+
+        <div class="title-demo">
+            <h2>方案七：經文包邊</h2>
+            <div class="demo-pair">
+                <div class="banner-sutra-edge">護持網站</div>
+                <div class="banner-sutra-edge">聯絡我們</div>
+            </div>
+            <div class="description">頂部顯示心經咒語「揭諦揭諦，波羅揭諦，波羅僧揭諦，菩提薩婆訶」</div>
+        </div>
+
+        <div class="title-demo">
+            <h2>方案八：寶石鑲邊卷軸</h2>
+            <div class="demo-pair">
+                <div class="banner-jeweled-scroll">護持網站</div>
+                <div class="banner-jeweled-scroll">聯絡我們</div>
+            </div>
+            <div class="description">兩側鑲嵌金色寶石，象徵佛法三寶的珍貴</div>
+        </div>
+    </div>
+</body>
+</html>

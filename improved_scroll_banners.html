@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>改良版卷軸 Banner 設計</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f9f6f0 0%, #f0ebe0 25%, #e8dcc0 50%, #e0d3a8 75%, #d4c5a0 100%);
+            font-family: 'Noto Sans TC', sans-serif;
+            color: #3d2914;
+        }
+
+        .demo-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .title-demo {
+            margin-bottom: 50px;
+            padding: 25px;
+            background: rgba(255, 248, 220, 0.3);
+            border-radius: 12px;
+            border-left: 6px solid #8b4513;
+        }
+
+        h1 {
+            color: #8b4513;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #8b4513;
+            margin-bottom: 25px;
+            border-bottom: 3px solid rgba(139, 69, 19, 0.3);
+            padding-bottom: 10px;
+            font-size: 20px;
+        }
+
+        /* 方案一：圓形卷軸端點 */
+        .banner-scroll-round {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 20px 50px;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(248, 245, 235, 0.9) 0px,
+                    rgba(248, 245, 235, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 2px),
+                linear-gradient(90deg, 
+                    transparent 0%, 
+                    rgba(139, 69, 19, 0.1) 10%, 
+                    rgba(205, 133, 63, 0.2) 50%, 
+                    rgba(139, 69, 19, 0.1) 90%, 
+                    transparent 100%);
+            border-radius: 25px;
+            border-top: 4px solid rgba(139, 69, 19, 0.6);
+            border-bottom: 4px solid rgba(139, 69, 19, 0.6);
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-scroll-round::before,
+        .banner-scroll-round::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: 
+                radial-gradient(circle, 
+                    rgba(139, 69, 19, 0.8) 0%, 
+                    rgba(160, 82, 45, 0.6) 40%, 
+                    rgba(205, 133, 63, 0.4) 80%, 
+                    transparent 100%);
+            border-radius: 50%;
+            box-shadow: 
+                inset 0 2px 4px rgba(139, 69, 19, 0.4),
+                0 2px 6px rgba(139, 69, 19, 0.3);
+        }
+
+        .banner-scroll-round::before {
+            left: 15px;
+        }
+
+        .banner-scroll-round::after {
+            right: 15px;
+        }
+
+        /* 方案二：漸隱式卷軸 */
+        .banner-scroll-fade {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 20px 60px;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(248, 245, 235, 0.9) 0px,
+                    rgba(248, 245, 235, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 2px),
+                linear-gradient(90deg, 
+                    rgba(139, 69, 19, 0.05) 0%, 
+                    rgba(139, 69, 19, 0.1) 15%, 
+                    rgba(205, 133, 63, 0.2) 50%, 
+                    rgba(139, 69, 19, 0.1) 85%, 
+                    rgba(139, 69, 19, 0.05) 100%);
+            border-top: 4px solid rgba(139, 69, 19, 0.6);
+            border-bottom: 4px solid rgba(139, 69, 19, 0.6);
+            clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        /* 方案三：竹簡風格 */
+        .banner-bamboo {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 20px 50px;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(160, 82, 45, 0.1) 0px,
+                    rgba(160, 82, 45, 0.1) 3px,
+                    rgba(139, 69, 19, 0.05) 3px,
+                    rgba(139, 69, 19, 0.05) 6px),
+                linear-gradient(90deg, 
+                    rgba(248, 245, 235, 0.9) 0%,
+                    rgba(245, 240, 225, 0.9) 100%);
+            border-radius: 8px;
+            border: 2px solid rgba(139, 69, 19, 0.3);
+            box-shadow: 
+                0 6px 18px rgba(139, 69, 19, 0.25),
+                inset 0 2px 6px rgba(255, 255, 255, 0.6);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-bamboo::before,
+        .banner-bamboo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: 
+                linear-gradient(180deg, 
+                    rgba(139, 69, 19, 0.6) 0%,
+                    rgba(160, 82, 45, 0.4) 50%,
+                    rgba(139, 69, 19, 0.6) 100%);
+            border-radius: 2px;
+        }
+
+        .banner-bamboo::before {
+            left: 20px;
+        }
+
+        .banner-bamboo::after {
+            right: 20px;
+        }
+
+        /* 方案四：絲帶捲邊 */
+        .banner-ribbon-roll {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 20px 55px;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(248, 245, 235, 0.9) 0px,
+                    rgba(248, 245, 235, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 2px),
+                linear-gradient(90deg, 
+                    rgba(139, 69, 19, 0.08) 0%, 
+                    rgba(205, 133, 63, 0.15) 50%, 
+                    rgba(139, 69, 19, 0.08) 100%);
+            border-top: 4px solid rgba(139, 69, 19, 0.6);
+            border-bottom: 4px solid rgba(139, 69, 19, 0.6);
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-ribbon-roll::before,
+        .banner-ribbon-roll::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            bottom: -2px;
+            width: 25px;
+            background: 
+                conic-gradient(from 0deg at 50% 50%,
+                    rgba(139, 69, 19, 0.6) 0deg,
+                    rgba(160, 82, 45, 0.5) 90deg,
+                    rgba(205, 133, 63, 0.4) 180deg,
+                    rgba(160, 82, 45, 0.5) 270deg,
+                    rgba(139, 69, 19, 0.6) 360deg);
+            border-radius: 50px;
+            box-shadow: 
+                inset 2px 0 6px rgba(139, 69, 19, 0.3),
+                0 2px 8px rgba(139, 69, 19, 0.2);
+        }
+
+        .banner-ribbon-roll::before {
+            left: 10px;
+            transform: perspective(50px) rotateY(-15deg);
+        }
+
+        .banner-ribbon-roll::after {
+            right: 10px;
+            transform: perspective(50px) rotateY(15deg);
+        }
+
+        /* 方案五：古樸繩結 */
+        .banner-rope {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 20px 50px;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(248, 245, 235, 0.9) 0px,
+                    rgba(248, 245, 235, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 2px),
+                linear-gradient(90deg, 
+                    rgba(139, 69, 19, 0.08) 0%, 
+                    rgba(205, 133, 63, 0.15) 50%, 
+                    rgba(139, 69, 19, 0.08) 100%);
+            border-top: 4px solid rgba(139, 69, 19, 0.6);
+            border-bottom: 4px solid rgba(139, 69, 19, 0.6);
+            border-radius: 6px;
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .banner-rope::before,
+        .banner-rope::after {
+            content: '⚬';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: rgba(139, 69, 19, 0.7);
+            background: 
+                radial-gradient(circle,
+                    rgba(160, 82, 45, 0.3) 0%,
+                    rgba(139, 69, 19, 0.2) 50%,
+                    transparent 80%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 2px 6px rgba(139, 69, 19, 0.3),
+                inset 0 1px 3px rgba(255, 255, 255, 0.5);
+        }
+
+        .banner-rope::before {
+            left: 15px;
+        }
+
+        .banner-rope::after {
+            right: 15px;
+        }
+
+        /* 方案六：水墨暈染 */
+        .banner-ink {
+            position: relative;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4e37;
+            margin: 25px 0;
+            padding: 20px 60px;
+            background: 
+                radial-gradient(ellipse 40px 60px at 15% 50%, rgba(139, 69, 19, 0.1) 0%, transparent 70%),
+                radial-gradient(ellipse 40px 60px at 85% 50%, rgba(139, 69, 19, 0.1) 0%, transparent 70%),
+                repeating-linear-gradient(0deg, 
+                    rgba(248, 245, 235, 0.9) 0px,
+                    rgba(248, 245, 235, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 1px,
+                    rgba(245, 240, 225, 0.9) 2px),
+                linear-gradient(90deg, 
+                    transparent 0%, 
+                    rgba(205, 133, 63, 0.15) 50%, 
+                    transparent 100%);
+            border-top: 4px solid rgba(139, 69, 19, 0.6);
+            border-bottom: 4px solid rgba(139, 69, 19, 0.6);
+            border-radius: 30px;
+            box-shadow: 
+                0 8px 24px rgba(139, 69, 19, 0.3),
+                inset 0 4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .description {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .demo-pair {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .demo-container {
+                padding: 20px 15px;
+            }
+            
+            .title-demo {
+                padding: 20px 15px;
+            }
+            
+            .banner-scroll-round, .banner-scroll-fade, .banner-bamboo, 
+            .banner-ribbon-roll, .banner-rope, .banner-ink {
+                font-size: 16px;
+                padding: 16px 35px;
+                margin: 20px 0;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>改良版卷軸 Banner 設計</h1>
+        
+        <div class="title-demo">
+            <h2>方案一：圓形卷軸端點</h2>
+            <div class="demo-pair">
+                <div class="banner-scroll-round">護持網站</div>
+                <div class="banner-scroll-round">聯絡我們</div>
+            </div>
+            <div class="description">將兩側改為圓形端點，像古代卷軸的軸心，更加自然協調</div>
+        </div>
+
+        <div class="title-demo">
+            <h2>方案二：漸隱式卷軸</h2>
+            <div class="demo-pair">
+                <div class="banner-scroll-fade">護持網站</div>
+                <div class="banner-scroll-fade">聯絡我們</div>
+            </div>
+            <div class="description">使用多邊形裁切，兩側自然漸隱，營造展開感</div>
+        </div>
+
+        <div class="title-demo">
+            <h2>方案三：竹簡風格</h2>
+            <div class="demo-pair">
+                <div class="banner-bamboo">護持網站</div>
+                <div class="banner-bamboo">聯絡我們</div>
+            </div>
+            <div class="description">模仿古代竹簡，兩側細線代表繩索綁定，古樸典雅</div>
+        </div>
+
+        <div class="title-demo">
+            <h2>方案四：絲帶捲邊</h2>
+            <div class="demo-pair">
+                <div class="banner-ribbon-roll">護持網站</div>
+                <div class="banner-ribbon-roll">聯絡我們</div>
+            </div>
+            <div class="description">兩側如絲帶捲邊，有立體透視效果，增加層次感</div>
+        </div>
+
+        <div class="title-demo">
+            <h2>方案五：古樸繩結</h2>
+            <div class="demo-pair">
+                <div class="banner-rope">護持網站</div>
+                <div class="banner-rope">聯絡我們</div>
+            </div>
+            <div class="description">兩側為圓形繩結裝飾，象徵綁定經文的傳統做法</div>
+        </div>
+
+        <div class="title-demo">
+            <h2>方案六：水墨暈染</h2>
+            <div class="demo-pair">
+                <div class="banner-ink">護持網站</div>
+                <div class="banner-ink">聯絡我們</div>
+            </div>
+            <div class="description">兩側有水墨暈染效果，如筆墨在宣紙上的自然渲染</div>
+        </div>
+    </div>
+</body>
+</html>
