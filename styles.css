@@ -1974,3 +1974,40 @@ strong, b, .guide-section h3 {
         padding: 6px 10px;
     }
 }
+
+/* 方案二：漸隱式卷軸 Banner */
+.banner-scroll-fade {
+    position: relative;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #5d4e37;
+    margin: 25px 0;
+    padding: 12px 60px;
+    background: 
+        repeating-linear-gradient(0deg, 
+            rgba(248, 245, 235, 0.9) 0px,
+            rgba(248, 245, 235, 0.9) 1px,
+            rgba(245, 240, 225, 0.9) 1px,
+            rgba(245, 240, 225, 0.9) 2px),
+        linear-gradient(90deg, 
+            rgba(139, 69, 19, 0.5) 0%,   /* 整體色調加深 */
+            rgba(139, 69, 19, 0.55) 15%, 
+            rgba(205, 133, 63, 0.3) 50%, 
+            rgba(139, 69, 19, 0.4) 85%, 
+            rgba(139, 69, 19, 0.35) 100%);
+    border-top: 4px solid rgba(139, 69, 19, 0.7); /* 加深邊框 */
+    border-bottom: 4px solid rgba(139, 69, 19, 0.7); /* 加深邊框 */
+    clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+    box-shadow: 
+        0 8px 24px rgba(139, 69, 19, 0.3),
+        inset 0 4px 8px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+    .banner-scroll-fade {
+        padding: 8px 40px;
+        font-size: 16px;
+    }
+}
