@@ -21,11 +21,70 @@ const GA_CONFIG = {
     }
 };
 
+// 檢測是否為本地開發環境
+function isLocalDevelopment() {
+    const hostname = window.location.hostname;
+    const isLocal = hostname === 'localhost' || 
+                   hostname === '127.0.0.1' || 
+                   hostname === '0.0.0.0' ||
+                   hostname.startsWith('192.168.') ||
+                   hostname.startsWith('10.') ||
+                   hostname.startsWith('172.');
+    
+    // 也可以通過 URL 參數強制啟用/停用
+    const urlParams = new URLSearchParams(window.location.search);
+    const forceGA = urlParams.get('ga');
+    
+    if (forceGA === 'true') {
+        console.log('🔍 GA 追蹤已強制啟用（通過 URL 參數）');
+        return false;
+    } else if (forceGA === 'false') {
+        console.log('🔍 GA 追蹤已強制停用（通過 URL 參數）');
+        return true;
+    }
+    
+    return isLocal;
+}
+
+// 初始化 Google Analytics
+function initGoogleAnalytics() {
+    if (isLocalDevelopment()) {
+        // 在本地開發環境中，創建一個假的 gtag 函數
+        window.gtag = function() {
+            console.log('🔍 [本地開發] GA 追蹤已停用:', arguments);
+        };
+        console.log('🔍 [本地開發] Google Analytics 已停用');
+        return;
+    }
+    
+    // 在生產環境中載入 GA
+    const gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_CONFIG.measurementId}`;
+    document.head.appendChild(gaScript);
+    
+    // 初始化 GA
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', GA_CONFIG.measurementId);
+    
+    console.log('✅ Google Analytics 已載入');
+}
+
 // GA 事件追蹤函數
 function trackEvent(eventName, parameters = {}) {
+    // 在本地開發環境中不進行追蹤
+    if (isLocalDevelopment()) {
+        console.log('🔍 [本地開發] GA Event 已跳過:', eventName, parameters);
+        return;
+    }
+    
     if (typeof gtag !== 'undefined') {
         gtag('event', eventName, parameters);
         console.log('GA Event tracked:', eventName, parameters);
+    } else {
+        console.warn('GA 函數未載入，無法追蹤事件:', eventName);
     }
 }
 
