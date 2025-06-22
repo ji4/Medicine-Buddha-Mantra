@@ -1898,6 +1898,31 @@ strong, b, .guide-section h3 {
     backdrop-filter: blur(6px);
 }
 
+.cta-symbol-container {
+    text-align: center;
+    margin: 10px 0 15px 0;
+}
+
+.cta-symbol {
+    color: rgba(184, 134, 11, 0.7);
+    font-size: 14px;
+    animation: symbolGlow 3s ease-in-out infinite;
+    letter-spacing: 3px;
+}
+
+@keyframes symbolGlow {
+    0%, 100% { 
+        opacity: 0.7; 
+        transform: scale(1);
+        text-shadow: 0 0 5px rgba(184, 134, 11, 0.3);
+    }
+    50% { 
+        opacity: 1; 
+        transform: scale(1.1);
+        text-shadow: 0 0 10px rgba(184, 134, 11, 0.6);
+    }
+}
+
 .support-section .cta-title {
     color: #7a4a13;
     background: 
@@ -1916,11 +1941,24 @@ strong, b, .guide-section h3 {
         0 0 0 1.5px rgba(205, 133, 63, 0.18);
 }
 
+.support-section .cta-symbol {
+    color: rgba(205, 133, 63, 0.8);
+}
+
+.contact-section .cta-symbol {
+    color: rgba(139, 69, 19, 0.8);
+}
+
 @media (max-width: 768px) {
     .cta-title {
         font-size: 16px;
         padding: 28px 12px;
         margin: 14px 4px 12px 4px;
+    }
+    
+    .cta-symbol {
+        font-size: 12px;
+        letter-spacing: 2px;
     }
 }
 
@@ -1929,5 +1967,10 @@ strong, b, .guide-section h3 {
         font-size: 14px;
         padding: 24px 4px;
         margin: 8px 1px 7px 1px;
+    }
+    
+    .cta-symbol {
+        font-size: 10px;
+        letter-spacing: 1px;
     }
 }
