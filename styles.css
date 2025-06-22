@@ -1410,25 +1410,20 @@ strong, b, .guide-section h3 {
 }
 
 .support-section::before {
-    content: '';
+    content: '✨';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        /* 佛教蓮花圖案風格的裝飾 */
-        radial-gradient(circle at 25% 25%, rgba(255, 215, 0, 0.05) 0%, rgba(255, 215, 0, 0.02) 15%, transparent 25%),
-        radial-gradient(circle at 75% 75%, rgba(184, 134, 11, 0.04) 0%, rgba(184, 134, 11, 0.015) 15%, transparent 25%),
-        radial-gradient(circle at 75% 25%, rgba(255, 165, 0, 0.03) 0%, rgba(255, 165, 0, 0.01) 15%, transparent 25%),
-        radial-gradient(circle at 25% 75%, rgba(255, 215, 0, 0.035) 0%, rgba(255, 215, 0, 0.012) 15%, transparent 25%);
-    background-size: 150px 150px, 120px 120px, 100px 100px, 130px 130px;
+    top: -10px;
+    left: 10px;
+    font-size: 40px;
+    opacity: 0.08;
+    transform: rotate(-15deg);
     pointer-events: none;
-    z-index: 0;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .support-section::after {
-    content: '☸';
+    content: '';
+    display: none;
     position: absolute;
     top: 15px;
     left: 50%;
@@ -1445,7 +1440,7 @@ strong, b, .guide-section h3 {
     align-items: center;
     gap: 20px;
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
 .support-text {
@@ -1581,18 +1576,6 @@ strong, b, .guide-section h3 {
     background-size: 240px 80px, 180px 100px, 220px 50px;
     pointer-events: none;
     z-index: 0;
-}
-
-.contact-section::after {
-    content: '✉';
-    position: absolute;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 18px;
-    color: rgba(139, 69, 19, 0.5);
-    text-shadow: 0 2px 4px rgba(160, 82, 45, 0.3);
-    z-index: 1;
 }
 
 .contact-content {
