@@ -1996,13 +1996,35 @@ strong, b, .guide-section h3 {
             rgba(205, 133, 63, 0.3) 50%, 
             rgba(139, 69, 19, 0.4) 85%, 
             rgba(139, 69, 19, 0.35) 100%);
-    border-top: 4px solid rgba(139, 69, 19, 0.7); /* 加深邊框 */
-    border-bottom: 4px solid rgba(139, 69, 19, 0.7); /* 加深邊框 */
+    border-top: none; /* 移除原本的 border */
+    border-bottom: none; /* 移除原本的 border */
     clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
     box-shadow: 
         0 8px 24px rgba(139, 69, 19, 0.3),
         inset 0 4px 8px rgba(255, 255, 255, 0.5);
     text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.banner-scroll-fade::before,
+.banner-scroll-fade::after {
+    content: '';
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    height: 3px; /* 調整線條粗細 */
+    background: linear-gradient(to right, 
+        transparent, 
+        rgba(139, 69, 19, 0.7) 20%, 
+        rgba(139, 69, 19, 0.7) 80%, 
+        transparent);
+}
+
+.banner-scroll-fade::before {
+    top: 0;
+}
+
+.banner-scroll-fade::after {
+    bottom: 0;
 }
 
 @media (max-width: 768px) {
