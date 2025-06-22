@@ -1875,8 +1875,8 @@ strong, b, .guide-section h3 {
     font-size: 20px;
     font-weight: bold;
     color: #5d4e37;
-    margin: 15px 16px 10px 16px;
-    padding: 15px 28px;
+    margin: 15px auto 10px auto; /* 改為auto讓寬度緊貼內容 */
+    padding: 15px 56px; /* 左右padding調整為兩倍 (28px * 2 = 56px) */
     background: 
         linear-gradient(45deg, 
             rgba(139, 69, 19, 0.1) 0%, 
@@ -1896,6 +1896,10 @@ strong, b, .guide-section h3 {
         0 0 0 1px rgba(139, 69, 19, 0.3);
     text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(6px);
+    display: block; /* 改為block以便設置寬度 */
+    width: 33.333%; /* 父容器的三分之一 */
+    max-width: 400px; /* 設置最大寬度防止在大螢幕上過寬 */
+    min-width: 250px; /* 設置最小寬度確保在小螢幕上不會太窄 */
 }
 
 .cta-symbol-container {
@@ -1952,8 +1956,11 @@ strong, b, .guide-section h3 {
 @media (max-width: 768px) {
     .cta-title {
         font-size: 16px;
-        padding: 20px 12px;
-        margin: 10px 4px 8px 4px;
+        padding: 20px 24px; /* 左右padding調整為兩倍 (12px * 2 = 24px) */
+        margin: 10px auto 8px auto; /* 改為auto讓寬度緊貼內容 */
+        width: 50%; /* 手機版調整為父容器的二分之一 */
+        max-width: 300px; /* 手機版最大寬度 */
+        min-width: 200px; /* 手機版最小寬度 */
     }
     
     .cta-symbol {
@@ -1965,8 +1972,11 @@ strong, b, .guide-section h3 {
 @media (max-width: 480px) {
     .cta-title {
         font-size: 14px;
-        padding: 18px 4px;
-        margin: 8px 1px 6px 1px;
+        padding: 18px 8px; /* 左右padding調整為兩倍 (4px * 2 = 8px) */
+        margin: 8px auto 6px auto; /* 改為auto讓寬度緊貼內容 */
+        width: 70%; /* 小螢幕調整為父容器的70% */
+        max-width: 250px; /* 小螢幕最大寬度 */
+        min-width: 180px; /* 小螢幕最小寬度 */
     }
     
     .cta-symbol {
