@@ -1875,8 +1875,8 @@ strong, b, .guide-section h3 {
     font-size: 20px;
     font-weight: bold;
     color: #5d4e37;
-    margin: 22px 16px 18px 16px;
-    padding: 20px 28px;
+    margin: 15px 16px 10px 16px;
+    padding: 15px 28px;
     background: 
         linear-gradient(45deg, 
             rgba(139, 69, 19, 0.1) 0%, 
@@ -1952,8 +1952,8 @@ strong, b, .guide-section h3 {
 @media (max-width: 768px) {
     .cta-title {
         font-size: 16px;
-        padding: 28px 12px;
-        margin: 14px 4px 12px 4px;
+        padding: 20px 12px;
+        margin: 10px 4px 8px 4px;
     }
     
     .cta-symbol {
@@ -1965,8 +1965,8 @@ strong, b, .guide-section h3 {
 @media (max-width: 480px) {
     .cta-title {
         font-size: 14px;
-        padding: 24px 4px;
-        margin: 8px 1px 7px 1px;
+        padding: 18px 4px;
+        margin: 8px 1px 6px 1px;
     }
     
     .cta-symbol {
