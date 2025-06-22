@@ -3,7 +3,7 @@
 
 const GA_CONFIG = {
     // 在這裡填入您的 GA 測量 ID（格式：G-XXXXXXXXXX）
-    measurementId: 'GA_MEASUREMENT_ID', // 請替換為您的實際 ID
+    measurementId: 'G-SWBENZ34HE', // 請替換為您的實際 ID
     
     // 進階追蹤功能開關
     trackingOptions: {
