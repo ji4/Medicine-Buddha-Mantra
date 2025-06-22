@@ -119,23 +119,6 @@
 - Edge 79+
 - 支援 ES6+ 和現代 CSS 功能
 
-## 本地開發
-
-1. 克隆專案
-```bash
-git clone [repository-url]
-cd Medicine-Buddha-Mantra
-```
-
-2. 啟動本地伺服器
-```bash
-python3 -m http.server 8000
-# 或
-npx serve .
-```
-
-3. 開啟瀏覽器訪問 `http://localhost:8000`
-
 ## 注意事項
 
 - 需要網路連線以載入YouTube影片
