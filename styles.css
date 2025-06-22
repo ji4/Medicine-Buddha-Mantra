@@ -1454,16 +1454,6 @@ strong, b, .guide-section h3 {
     text-align: center;
 }
 
-.support-text .support-note {
-    font-size: 13px;
-    color: #8b7355;
-    font-style: italic;
-    background: rgba(255, 248, 220, 0.6);
-    padding: 10px 15px;
-    border-radius: 8px;
-    border-left: 3px solid rgba(255, 165, 0, 0.4);
-    margin-top: 10px;
-}
 
 .portaly-container {
     display: flex;
@@ -1598,16 +1588,6 @@ strong, b, .guide-section h3 {
     text-align: center;
 }
 
-.contact-text .contact-note {
-    font-size: 13px;
-    color: #8b7355;
-    font-style: italic;
-    background: rgba(255, 248, 220, 0.6);
-    padding: 10px 15px;
-    border-radius: 8px;
-    border-left: 3px solid rgba(255, 165, 0, 0.4);
-    margin-top: 10px;
-}
 
 .contact-button-container {
     display: flex;
@@ -1681,10 +1661,6 @@ strong, b, .guide-section h3 {
         font-size: 14px;
     }
     
-    .support-text .support-note {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
     
     .portaly-btn {
         padding: 10px 20px;
@@ -1708,10 +1684,6 @@ strong, b, .guide-section h3 {
         font-size: 14px;
     }
     
-    .contact-text .contact-note {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
     
     .contact-btn {
         padding: 10px 20px;
@@ -1776,10 +1748,6 @@ strong, b, .guide-section h3 {
         font-size: 13px;
     }
     
-    .support-text .support-note {
-        font-size: 11px;
-        padding: 6px 10px;
-    }
     
     .portaly-btn {
         padding: 8px 16px;
@@ -1804,10 +1772,6 @@ strong, b, .guide-section h3 {
         font-size: 13px;
     }
     
-    .contact-text .contact-note {
-        font-size: 11px;
-        padding: 6px 10px;
-    }
     
     .contact-btn {
         padding: 8px 16px;
